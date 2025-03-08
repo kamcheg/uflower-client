@@ -1,3 +1,5 @@
+import {recipients} from "~/mock";
+
 export interface IBouquet {
     id: number
     name: string
@@ -10,6 +12,11 @@ export interface IFlowerType {
 }
 
 export interface IReason {
+    id: number
+    name: string
+}
+
+export interface IRecipient {
     id: number
     name: string
 }

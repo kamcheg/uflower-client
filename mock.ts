@@ -1,4 +1,4 @@
-import type {IBouquet, IFlowerType, IReason} from "~/types/types";
+import type {IBouquet, IFlowerType, IReason, IRecipient} from "~/types/types";
 
 export const products: IBouquet[] = [
     {
@@ -328,4 +328,19 @@ export const reasons: IReason[] = [
     {"id": 6, "name": "День рождения"},
     {"id": 3, "name": "Выписка - Мальчик"},
     {"id": 7, "name": "Выписка - Девочка"}
+]
+
+export const recipients: IRecipient[] = [
+    {"id": 1, "name": "Маме"},
+    {"id": 2, "name": "Ребёнку"},
+    {"id": 3, "name": "Руководителю - Мужчине"},
+    {"id": 4, "name": "Девушке"},
+    {"id": 5, "name": "Семье"},
+    {"id": 6, "name": "Учителю"},
+    {"id": 7, "name": "Женщине"},
+    {"id": 8, "name": "Коллективу"},
+    {"id": 9, "name": "Классный руководитель"},
+    {"id": 10, "name": "Мужчине"},
+    {"id": 11, "name": "Руководителю - Женщине"},
+    {"id": 12, "name": "Маме и дочке"}
 ]
