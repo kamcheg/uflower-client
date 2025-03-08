@@ -5,6 +5,7 @@ import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
+import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 </script>
 
 <template>
@@ -19,9 +20,7 @@ import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 
         <ButtonReason />
 
-        <ElButton>
-            Кому<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-        </ElButton>
+        <ButtonRecipient />
 
         <ElButton>
             Размер<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
