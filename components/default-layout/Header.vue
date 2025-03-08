@@ -39,8 +39,13 @@ import {ShoppingCart, StarFilled} from '@element-plus/icons-vue'
                 <div class="number">+7(999)-666-88-77</div>
                 <ElButton>Заказать звонок</ElButton>
             </div>
-            <ElButton :icon="StarFilled" circle size="large" />
-            <ElButton :icon="ShoppingCart" circle size="large" />
+
+            <NuxtLink to="/favorite">
+                <ElButton :icon="StarFilled" circle size="large" />
+            </NuxtLink>
+            <NuxtLink to="/cart" style="margin-left: 12px;">
+                <ElButton :icon="ShoppingCart" circle size="large" />
+            </NuxtLink>
         </div>
     </div>
 </template>

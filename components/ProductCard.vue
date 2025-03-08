@@ -26,7 +26,7 @@ defineProps<{
         <div class="price">{{ data.price }} ₽</div>
 
         <div class="btns">
-            <ElButton class="btns__item">Оформить заказать</ElButton>
+            <ElButton class="btns__item">Заказать</ElButton>
             <ElButton class="btns__item">Подробнее</ElButton>
         </div>
     </div>
@@ -46,6 +46,8 @@ defineProps<{
             align-items: center;
             overflow: hidden;
             border-radius: 8px;
+            height: 100%;
+            width: 100%;
 
             img {
                 display: block;
