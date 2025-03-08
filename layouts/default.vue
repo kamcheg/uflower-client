@@ -3,11 +3,18 @@ import Header from "~/components/default-layout/Header.vue";
 </script>
 
 <template>
-    <div>
+    <div class="default-layout">
         <Header />
-        <slot />
+        <div class="default-layout__content">
+            <slot />
+        </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+.default-layout {
+    &__content {
+        padding: 24px;
+    }
+}
 </style>

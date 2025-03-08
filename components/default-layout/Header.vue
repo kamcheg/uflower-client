@@ -48,6 +48,7 @@ import {ShoppingCart, StarFilled} from '@element-plus/icons-vue'
 <style scoped lang="scss">
 
 .header {
+    border-bottom: 1px solid #eee;
     background: #fff;
     height: 80px;
     display: flex;
@@ -72,8 +73,11 @@ import {ShoppingCart, StarFilled} from '@element-plus/icons-vue'
 
         .phone {
             margin-right: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
             .number {
-                text-align: center;
                 margin-bottom: 4px;
             }
         }
