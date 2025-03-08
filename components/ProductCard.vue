@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type {IBouquet} from "~/types/types";
+import {ShoppingCart, StarFilled} from "@element-plus/icons-vue";
+import {ElButton} from "element-plus";
 
 defineProps<{
     data: IBouquet
@@ -9,32 +11,54 @@ defineProps<{
 <template>
     <div class="product-card">
         <div class="image-place">
-            <img :src="data.image" alt="">
+            <div class="image-place__inner">
+                <img :src="data.image" alt="">
+            </div>
+
+            <div class="image-place__btns">
+                <ElButton :icon="StarFilled" circle />
+                <ElButton :icon="ShoppingCart" circle />
+            </div>
         </div>
 
         <div class="title">{{ data.name }}</div>
 
         <div class="price">{{ data.price }} ₽</div>
+
+        <div class="btns">
+            <ElButton class="btns__item">Оформить заказать</ElButton>
+            <ElButton class="btns__item">Подробнее</ElButton>
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 .product-card {
-    border: 1px solid red;
     .image-place {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        width: 250px;
-        height: 250px;
-        border-radius: 8px;
+        width: 100%;
+        padding-bottom: 100%;
+        position: relative;
 
-        img {
-            display: block;
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
+        &__inner {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 8px;
+
+            img {
+                display: block;
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        &__btns {
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
     }
 
@@ -46,6 +70,15 @@ defineProps<{
         font-size: 18px;
         font-weight: 600;
         margin-top: 16px;
+    }
+
+    .btns {
+        margin-top: 16px;
+        display: flex;
+
+        &__item {
+            flex-grow: 1;
+        }
     }
 }
 </style>

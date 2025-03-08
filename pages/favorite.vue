@@ -1,9 +1,11 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-    <div></div>
+    <h1>Favorite</h1>
 </template>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
+
 </style>
