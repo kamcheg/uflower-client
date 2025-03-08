@@ -3,7 +3,7 @@ import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElCheckbox} from "element-plus";
 import {flowerTypes} from "~/mock";
 
-const open = ref(true)
+const open = ref(false)
 </script>
 
 <template>
