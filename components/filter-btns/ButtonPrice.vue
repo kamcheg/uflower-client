@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElCheckbox, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
+import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
 
 interface IOption {
     min: number | null
@@ -12,7 +12,7 @@ const current = ref<IOption>({
     max: null
 })
 
-const open = ref(true)
+const open = ref(false)
 
 const options: IOption[] = [
     { min: null, max: 3000 },

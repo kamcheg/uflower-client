@@ -4,6 +4,7 @@ import {ArrowDown, DCaret} from "@element-plus/icons-vue";
 import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
+import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 </script>
 
 <template>
@@ -16,9 +17,7 @@ import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 
         <ButtonPrice />
 
-        <ElButton>
-            Повод<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-        </ElButton>
+        <ButtonReason />
 
         <ElButton>
             Кому<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>

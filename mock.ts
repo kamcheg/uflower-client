@@ -322,10 +322,10 @@ export const flowerTypes: IFlowerType[] = [
 
 export const reasons: IReason[] = [
     {"id": 1, "name": "Свадьба"},
-    {"id": 2, "name": "Кобилей"},
-    {"id": 3, "name": "Выписка - Мальчик"},
+    {"id": 2, "name": "Юбилей"},
     {"id": 4, "name": "Свидание"},
     {"id": 5, "name": "Годовщина свадьбы"},
     {"id": 6, "name": "День рождения"},
+    {"id": 3, "name": "Выписка - Мальчик"},
     {"id": 7, "name": "Выписка - Девочка"}
 ]
