@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {ElButton, ElIcon, ElDrawer} from "element-plus";
+import {ElButton, ElIcon} from "element-plus";
 import {ArrowDown, DCaret} from "@element-plus/icons-vue";
 import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
+import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 </script>
 
 <template>
@@ -13,9 +14,7 @@ import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 
         <ButtonComposition />
 
-        <ElButton>
-            Цена<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-        </ElButton>
+        <ButtonPrice />
 
         <ElButton>
             Повод<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
@@ -37,14 +36,6 @@ import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
             :data="i"
         />
     </div>
-
-    <ElDrawer
-        :modelValue="false"
-        title="I am the title"
-        direction="btt"
-    >
-        <span>Hi, there!</span>
-    </ElDrawer>
 </template>
 
 <style scoped lang="scss">
