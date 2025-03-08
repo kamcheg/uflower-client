@@ -2,6 +2,7 @@
 import {ElButton, ElIcon, ElDrawer} from "element-plus";
 import {ArrowDown, DCaret} from "@element-plus/icons-vue";
 import {products} from "~/mock";
+import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 </script>
 
 <template>
@@ -10,9 +11,7 @@ import {products} from "~/mock";
             <ElIcon class="el-icon--left"><DCaret /></ElIcon>Новинки
         </ElButton>
 
-        <ElButton>
-            Цветы<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-        </ElButton>
+        <ButtonComposition />
 
         <ElButton>
             Цена<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>

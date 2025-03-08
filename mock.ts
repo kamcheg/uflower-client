@@ -1,4 +1,4 @@
-import type {IBouquet} from "~/types/types";
+import type {IBouquet, IFlowerType} from "~/types/types";
 
 export const products: IBouquet[] = [
     {
@@ -291,3 +291,31 @@ export const products: IBouquet[] = [
     }
     // Добавьте остальные объекты по аналогии
 ];
+
+export const flowerTypes: IFlowerType[] = [
+    {"id": 1, "name": "Розы"},
+    {"id": 2, "name": "Гипсофила"},
+    {"id": 3, "name": "Ранункулюс"},
+    {"id": 4, "name": "Роза кустовая"},
+    {"id": 5, "name": "Ирис"},
+    {"id": 6, "name": "Сирень"},
+    {"id": 7, "name": "Роза пионовидная"},
+    {"id": 8, "name": "Лилии"},
+    {"id": 9, "name": "Тюльпаны"},
+    {"id": 10, "name": "Альстромерия"},
+    {"id": 11, "name": "Лизиантусы"},
+    {"id": 12, "name": "Тюльпаны пионовидные"},
+    {"id": 13, "name": "Анемоны"},
+    {"id": 14, "name": "Ландыши"},
+    {"id": 15, "name": "Фрезия"},
+    {"id": 16, "name": "Гиацинт"},
+    {"id": 17, "name": "Мимозы"},
+    {"id": 18, "name": "Хризантемы"},
+    {"id": 19, "name": "Герберы"},
+    {"id": 20, "name": "Орхидея"},
+    {"id": 21, "name": "Эустома"},
+    {"id": 22, "name": "Гвоздики"},
+    {"id": 23, "name": "Подсолнух"},
+    {"id": 24, "name": "Гортензия"},
+    {"id": 25, "name": "Ромашки"}
+]

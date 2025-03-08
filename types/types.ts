@@ -4,3 +4,7 @@ export interface IBouquet {
     image: string
     price: number
 }
+export interface IFlowerType {
+    id: number
+    name: string
+}
