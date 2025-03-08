@@ -8,3 +8,8 @@ export interface IFlowerType {
     id: number
     name: string
 }
+
+export interface IReason {
+    id: number
+    name: string
+}

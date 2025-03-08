@@ -1,4 +1,4 @@
-import type {IBouquet, IFlowerType} from "~/types/types";
+import type {IBouquet, IFlowerType, IReason} from "~/types/types";
 
 export const products: IBouquet[] = [
     {
@@ -318,4 +318,14 @@ export const flowerTypes: IFlowerType[] = [
     {"id": 23, "name": "Подсолнух"},
     {"id": 24, "name": "Гортензия"},
     {"id": 25, "name": "Ромашки"}
+]
+
+export const reasons: IReason[] = [
+    {"id": 1, "name": "Свадьба"},
+    {"id": 2, "name": "Кобилей"},
+    {"id": 3, "name": "Выписка - Мальчик"},
+    {"id": 4, "name": "Свидание"},
+    {"id": 5, "name": "Годовщина свадьбы"},
+    {"id": 6, "name": "День рождения"},
+    {"id": 7, "name": "Выписка - Девочка"}
 ]
