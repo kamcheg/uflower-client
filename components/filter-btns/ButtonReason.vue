@@ -3,9 +3,7 @@ import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElCheckbox, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
 import {reasons} from "~/mock";
 
-const open = ref(true)
-
-
+const open = ref(false)
 </script>
 
 <template>
