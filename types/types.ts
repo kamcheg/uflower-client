@@ -20,3 +20,9 @@ export interface IRecipient {
     id: number
     name: string
 }
+
+export interface ISize {
+    id: number
+    name: string
+    image: string
+}

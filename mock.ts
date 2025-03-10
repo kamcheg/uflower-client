@@ -1,4 +1,4 @@
-import type {IBouquet, IFlowerType, IReason, IRecipient} from "~/types/types";
+import type {IBouquet, IFlowerType, IReason, IRecipient, ISize} from "~/types/types";
 
 export const products: IBouquet[] = [
     {
@@ -343,4 +343,27 @@ export const recipients: IRecipient[] = [
     {"id": 10, "name": "Мужчине"},
     {"id": 11, "name": "Руководителю - Женщине"},
     {"id": 12, "name": "Маме и дочке"}
+]
+
+export const sizes: ISize[] = [
+    {
+        "id": 1,
+        "name": "Стандарт",
+        image: 'https://uflor.ru/upload/uf/99d/7r1i43d0ct21y03e81bfkl3u6bhali1j.svg'
+    },
+    {
+        "id": 2,
+        "name": "Стандарт +",
+        image: 'https://uflor.ru/upload/uf/b7f/592vaa3hmhmdx42havleol3a484d46ps.svg'
+    },
+    {
+        "id": 3,
+        "name": "Большой",
+        image: 'https://uflor.ru/upload/uf/04a/bzz1i3vkvec0pwelj6p0m9wloz1n2rt3.svg'
+    },
+    {
+        "id": 4,
+        "name": "Огромный",
+        image: 'https://uflor.ru/upload/uf/442/p0uxdb675op0xnac0jdv9mf0zcgzimik.svg'
+    },
 ]

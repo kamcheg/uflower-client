@@ -6,6 +6,7 @@ import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
+import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 </script>
 
 <template>
@@ -22,9 +23,7 @@ import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 
         <ButtonRecipient />
 
-        <ElButton>
-            Размер<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-        </ElButton>
+        <ButtonSize />
     </div>
 
     <div class="catalog">
