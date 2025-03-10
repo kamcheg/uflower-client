@@ -1,19 +1,22 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
+import {useFilterStore} from "~/stores/useFilterStore";
 
 interface IOption {
     min: number | null
     max: number | null
 }
 
+/* STORE */
+const filterStore = useFilterStore()
+
+/* DATA */
 const current = ref<IOption>({
     min: null,
     max: null
 })
-
 const open = ref(false)
-
 const options: IOption[] = [
     { min: null, max: 3000 },
     { min: 3000, max: 7000 },
@@ -23,9 +26,26 @@ const options: IOption[] = [
     { min: 20000, max: null },
 ]
 
+/* METHODS */
 function onCheck(event: IOption) {
     current.value.min = event.min
     current.value.max = event.max
+}
+
+function onApply() {
+    filterStore.price = {...current.value}
+    open.value = false
+}
+function onReset() {
+    filterStore.price = {
+        min: null,
+        max: null
+    }
+    current.value = {
+        min: null,
+        max: null
+    }
+    open.value = false
 }
 </script>
 
@@ -73,8 +93,8 @@ function onCheck(event: IOption) {
 
             <template #footer>
                 <div>
-                    <ElButton>Очистить</ElButton>
-                    <ElButton>Применить</ElButton>
+                    <ElButton @click="onReset">Очистить</ElButton>
+                    <ElButton @click="onApply">Применить</ElButton>
                 </div>
             </template>
         </ElDrawer>

@@ -29,7 +29,7 @@ const filterStore = useFilterStore()
         <ButtonSize style="margin-right: 10px;" />
     </div>
 
-    <pre>{{filterStore.composition}}</pre>
+    <pre>{{filterStore.price}}</pre>
 
     <div class="catalog">
         <ProductCard
