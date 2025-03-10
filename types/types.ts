@@ -1,5 +1,3 @@
-import {recipients} from "~/mock";
-
 export interface IBouquet {
     id: number
     name: string
