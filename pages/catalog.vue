@@ -7,6 +7,9 @@ import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
+import {useFilterStore} from "~/stores/useFilterStore";
+
+const filterStore = useFilterStore()
 </script>
 
 <template>
@@ -25,6 +28,8 @@ import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 
         <ButtonSize style="margin-right: 10px;" />
     </div>
+
+    <pre>{{filterStore.composition}}</pre>
 
     <div class="catalog">
         <ProductCard

@@ -1,9 +1,10 @@
-export function useFilter() {
-    const composition = ref([])
+
+export const useFilterStore = defineStore('filterStore', () => {
     const price = ref<{min: number | null, max: number | null}>({
         min: null,
         max: null
     })
+    const composition = ref<number[]>([])
     const reasons = ref([])
     const recipients = ref([])
     const sizes = ref([])
@@ -15,4 +16,4 @@ export function useFilter() {
         recipients,
         sizes
     }
-}
+})

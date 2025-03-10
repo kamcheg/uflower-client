@@ -1,9 +1,26 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElDrawer, ElIcon, ElCheckbox} from "element-plus";
+import {ElButton, ElDrawer, ElIcon, ElCheckbox, ElCheckboxGroup} from "element-plus";
 import {flowerTypes} from "~/mock";
+import {useFilterStore} from "~/stores/useFilterStore";
 
+
+const filterStore = useFilterStore()
+
+/* DATA */
 const open = ref(false)
+const selected = ref<number[]>([])
+
+/* METHODS */
+function onApply() {
+    filterStore.composition = [...selected.value]
+    open.value = false
+}
+function onReset() {
+    filterStore.composition = []
+    selected.value = []
+    open.value = false
+}
 </script>
 
 <template>
@@ -18,18 +35,19 @@ const open = ref(false)
             size="400px"
             direction="btt"
         >
-            <div class="flower-types">
+            <ElCheckboxGroup class="flower-types" v-model="selected">
                 <ElCheckbox
                     v-for="type of flowerTypes"
                     :key="type.id"
                     :label="type.name"
+                    :value="type.id"
                 />
-            </div>
+            </ElCheckboxGroup>
 
             <template #footer>
                 <div>
-                    <ElButton>Очистить</ElButton>
-                    <ElButton>Применить</ElButton>
+                    <ElButton @click="onReset">Очистить</ElButton>
+                    <ElButton @click="onApply">Применить</ElButton>
                 </div>
             </template>
         </ElDrawer>
