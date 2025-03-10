@@ -29,8 +29,6 @@ const filterStore = useFilterStore()
         <ButtonSize style="margin-right: 10px;" />
     </div>
 
-    <pre>{{filterStore.sizes}}</pre>
-
     <div class="catalog">
         <ProductCard
             v-for="i of products"
