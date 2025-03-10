@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ElButton, ElIcon} from "element-plus";
-import {DCaret} from "@element-plus/icons-vue";
+// import {ElButton, ElIcon} from "element-plus";
+// import {DCaret} from "@element-plus/icons-vue";
 import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
@@ -11,19 +11,19 @@ import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 
 <template>
     <div>
-        <ElButton>
-            <ElIcon class="el-icon--left"><DCaret /></ElIcon>Новинки
-        </ElButton>
+<!--        <ElButton>-->
+<!--            <ElIcon class="el-icon&#45;&#45;left"><DCaret /></ElIcon>Новинки-->
+<!--        </ElButton>-->
 
-        <ButtonComposition />
+        <ButtonComposition style="margin-right: 16px;" />
 
-        <ButtonPrice />
+        <ButtonPrice style="margin-right: 16px;" />
 
-        <ButtonReason />
+        <ButtonReason style="margin-right: 16px;" />
 
-        <ButtonRecipient />
+        <ButtonRecipient style="margin-right: 16px;" />
 
-        <ButtonSize />
+        <ButtonSize style="margin-right: 16px;" />
     </div>
 
     <div class="catalog">

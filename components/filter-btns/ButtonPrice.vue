@@ -30,7 +30,7 @@ function onCheck(event: IOption) {
 </script>
 
 <template>
-    <ElButton @click="open = true">
+    <ElButton v-bind="$attrs" @click="open = true">
         Цена<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
     </ElButton>
 
