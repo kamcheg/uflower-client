@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+
   app: {
     head: {
       link: [
@@ -10,5 +11,7 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap' }
       ]
     }
-  }
+  },
+
+  modules: ['@pinia/nuxt']
 })
