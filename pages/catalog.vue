@@ -15,15 +15,15 @@ import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 <!--            <ElIcon class="el-icon&#45;&#45;left"><DCaret /></ElIcon>Новинки-->
 <!--        </ElButton>-->
 
-        <ButtonComposition style="margin-right: 16px;" />
+        <ButtonComposition style="margin-right: 10px;" />
 
-        <ButtonPrice style="margin-right: 16px;" />
+        <ButtonPrice style="margin-right: 10px;" />
 
-        <ButtonReason style="margin-right: 16px;" />
+        <ButtonReason style="margin-right: 10px;" />
 
-        <ButtonRecipient style="margin-right: 16px;" />
+        <ButtonRecipient style="margin-right: 10px;" />
 
-        <ButtonSize style="margin-right: 16px;" />
+        <ButtonSize style="margin-right: 10px;" />
     </div>
 
     <div class="catalog">
