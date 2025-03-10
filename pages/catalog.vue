@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ElButton, ElIcon} from "element-plus";
-import {ArrowDown, DCaret} from "@element-plus/icons-vue";
+import {DCaret} from "@element-plus/icons-vue";
 import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";

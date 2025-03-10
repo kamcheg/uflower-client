@@ -21,7 +21,7 @@ defineProps<{
             </div>
         </div>
 
-        <div class="title">{{ data.name }}</div>
+        <div class="title" :title="data.name">{{ data.name }}</div>
 
         <div class="price">{{ data.price }} ₽</div>
 
