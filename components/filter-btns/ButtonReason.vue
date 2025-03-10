@@ -11,27 +11,29 @@ const open = ref(false)
         Повод<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
     </ElButton>
 
-    <ElDrawer
-        v-model="open"
-        title="Фильтр: цена"
-        size="400px"
-        direction="btt"
-    >
-        <div class="options-list">
-            <ElCheckbox
-                v-for="reason of reasons"
-                :key="reason.id"
-                :label="reason.name"
-            />
-        </div>
-
-        <template #footer>
-            <div>
-                <ElButton>Очистить</ElButton>
-                <ElButton>Применить</ElButton>
+    <ClientOnly>
+        <ElDrawer
+            v-model="open"
+            title="Фильтр: цена"
+            size="400px"
+            direction="btt"
+        >
+            <div class="options-list">
+                <ElCheckbox
+                    v-for="reason of reasons"
+                    :key="reason.id"
+                    :label="reason.name"
+                />
             </div>
-        </template>
-    </ElDrawer>
+
+            <template #footer>
+                <div>
+                    <ElButton>Очистить</ElButton>
+                    <ElButton>Применить</ElButton>
+                </div>
+            </template>
+        </ElDrawer>
+    </ClientOnly>
 </template>
 
 <style scoped lang="scss">

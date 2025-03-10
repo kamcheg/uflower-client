@@ -11,27 +11,29 @@ const open = ref(false)
         Цветы<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
     </ElButton>
 
-    <ElDrawer
-        v-model="open"
-        title="Фильтр: цветы"
-        size="400px"
-        direction="btt"
-    >
-        <div class="flower-types">
-            <ElCheckbox
-                v-for="type of flowerTypes"
-                :key="type.id"
-                :label="type.name"
-            />
-        </div>
-
-        <template #footer>
-            <div>
-                <ElButton>Очистить</ElButton>
-                <ElButton>Применить</ElButton>
+    <ClientOnly>
+        <ElDrawer
+            v-model="open"
+            title="Фильтр: цветы"
+            size="400px"
+            direction="btt"
+        >
+            <div class="flower-types">
+                <ElCheckbox
+                    v-for="type of flowerTypes"
+                    :key="type.id"
+                    :label="type.name"
+                />
             </div>
-        </template>
-    </ElDrawer>
+
+            <template #footer>
+                <div>
+                    <ElButton>Очистить</ElButton>
+                    <ElButton>Применить</ElButton>
+                </div>
+            </template>
+        </ElDrawer>
+    </ClientOnly>
 </template>
 
 <style scoped lang="scss">
