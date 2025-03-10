@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElCheckbox, ElDrawer, ElIcon} from "element-plus";
+import {ElButton, ElDrawer, ElIcon} from "element-plus";
 import {sizes} from "~/mock";
 
-const open = ref(true)
+const open = ref(false)
 </script>
 
 <template>
