@@ -2,8 +2,34 @@
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon} from "element-plus";
 import {sizes} from "~/mock";
+import type {ISize} from "~/types/types";
 
+/* STORE */
+const filterStore = useFilterStore()
+
+/* DATA */
 const open = ref(false)
+const selected = ref<ISize['id'][]>([])
+
+/* METHODS */
+function onApply() {
+    filterStore.sizes = [...selected.value]
+    open.value = false
+}
+
+function onReset() {
+    filterStore.sizes = []
+    selected.value = []
+    open.value = false
+}
+
+function onCheck(id: ISize['id']) {
+    if (selected.value.includes(id)) {
+        selected.value = selected.value.filter(i => i !== id)
+    } else {
+        selected.value.push(id)
+    }
+}
 </script>
 
 <template>
@@ -20,19 +46,23 @@ const open = ref(false)
         >
             <div class="options-list">
                 <div
-                    v-for="reason of sizes"
-                    :key="reason.id"
+                    v-for="size of sizes"
+                    :key="size.id"
                     class="option-item"
+                    :class="{
+                        'option-item_active': selected.includes(size.id),
+                    }"
+                    @click="onCheck(size.id)"
                 >
-                    <img :src="reason.image" class="option-item__image">
-                    <div class="option-item__label">{{ reason.name }}</div>
+                    <img :src="size.image" class="option-item__image">
+                    <div class="option-item__label">{{ size.name }}</div>
                 </div>
             </div>
 
             <template #footer>
                 <div>
-                    <ElButton>Очистить</ElButton>
-                    <ElButton>Применить</ElButton>
+                    <ElButton @click="onReset">Очистить</ElButton>
+                    <ElButton @click="onApply">Применить</ElButton>
                 </div>
             </template>
         </ElDrawer>
@@ -55,6 +85,10 @@ const open = ref(false)
         justify-content: center;
         align-items: center;
         border-radius: 10px;
+
+        &_active {
+            border-color: red;
+        }
 
         &__label {
             margin-left: 12px;
