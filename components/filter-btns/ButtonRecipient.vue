@@ -1,9 +1,26 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElCheckbox, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
+import {ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
 import {recipients} from "~/mock";
+import type {IRecipient} from "~/types/types";
 
+/* STORE */
+const filterStore = useFilterStore()
+
+/* DATA */
 const open = ref(false)
+const selected = ref<IRecipient['id'][]>([])
+
+/* METHODS */
+function onApply() {
+    filterStore.recipients = [...selected.value]
+    open.value = false
+}
+function onReset() {
+    filterStore.recipients = []
+    selected.value = []
+    open.value = false
+}
 </script>
 
 <template>
@@ -14,22 +31,23 @@ const open = ref(false)
     <ClientOnly>
         <ElDrawer
             v-model="open"
-            title="Фильтр: цена"
+            title="Фильтр: кому"
             size="400px"
             direction="btt"
         >
-            <div class="options-list">
+            <ElCheckboxGroup v-model="selected" class="options-list">
                 <ElCheckbox
                     v-for="reason of recipients"
                     :key="reason.id"
+                    :value="reason.id"
                     :label="reason.name"
                 />
-            </div>
+            </ElCheckboxGroup>
 
             <template #footer>
                 <div>
-                    <ElButton>Очистить</ElButton>
-                    <ElButton>Применить</ElButton>
+                    <ElButton @click="onReset">Очистить</ElButton>
+                    <ElButton @click="onApply">Применить</ElButton>
                 </div>
             </template>
         </ElDrawer>

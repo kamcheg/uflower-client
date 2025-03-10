@@ -36,7 +36,7 @@ function onReset() {
             size="400px"
             direction="btt"
         >
-            <ElCheckboxGroup class="flower-types" v-model="selected">
+            <ElCheckboxGroup v-model="selected" class="flower-types">
                 <ElCheckbox
                     v-for="type of flowerTypes"
                     :key="type.id"
