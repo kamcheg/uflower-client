@@ -1,9 +1,27 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElCheckbox, ElDrawer, ElIcon} from "element-plus";
+import {ElButton, ElCheckbox, ElDrawer, ElIcon, ElCheckboxGroup} from "element-plus";
 import {reasons} from "~/mock";
+import {useFilterStore} from "~/stores/useFilterStore";
+import type {IFlowerType} from "~/types/types";
 
+/* STORE */
+const filterStore = useFilterStore()
+
+/* DATA */
 const open = ref(false)
+const selected = ref<IFlowerType['id'][]>([])
+
+/* METHODS */
+function onApply() {
+    filterStore.reasons = [...selected.value]
+    open.value = false
+}
+function onReset() {
+    filterStore.reasons = []
+    selected.value = []
+    open.value = false
+}
 </script>
 
 <template>
@@ -14,22 +32,25 @@ const open = ref(false)
     <ClientOnly>
         <ElDrawer
             v-model="open"
-            title="Фильтр: цена"
+            title="Фильтр: повод"
             size="400px"
             direction="btt"
         >
-            <div class="options-list">
+
+            <pre>{{selected}}</pre>
+            <ElCheckboxGroup v-model="selected" class="options-list">
                 <ElCheckbox
                     v-for="reason of reasons"
                     :key="reason.id"
+                    :value="reason.id"
                     :label="reason.name"
                 />
-            </div>
+            </ElCheckboxGroup>
 
             <template #footer>
                 <div>
-                    <ElButton>Очистить</ElButton>
-                    <ElButton>Применить</ElButton>
+                    <ElButton @click="onReset">Очистить</ElButton>
+                    <ElButton @click="onApply">Применить</ElButton>
                 </div>
             </template>
         </ElDrawer>

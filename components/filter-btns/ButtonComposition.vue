@@ -5,7 +5,7 @@ import {flowerTypes} from "~/mock";
 import {useFilterStore} from "~/stores/useFilterStore";
 import type {IFlowerType} from "~/types/types";
 
-
+/* STORE */
 const filterStore = useFilterStore()
 
 /* DATA */
