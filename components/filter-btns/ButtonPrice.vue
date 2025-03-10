@@ -2,22 +2,18 @@
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
 import {useFilterStore} from "~/stores/useFilterStore";
-
-interface IOption {
-    min: number | null
-    max: number | null
-}
+import type {IPrice} from "~/types/types";
 
 /* STORE */
 const filterStore = useFilterStore()
 
 /* DATA */
-const current = ref<IOption>({
+const current = ref<IPrice>({
     min: null,
     max: null
 })
 const open = ref(false)
-const options: IOption[] = [
+const options: IPrice[] = [
     { min: null, max: 3000 },
     { min: 3000, max: 7000 },
     { min: 7000, max: 10000 },
@@ -27,7 +23,7 @@ const options: IOption[] = [
 ]
 
 /* METHODS */
-function onCheck(event: IOption) {
+function onCheck(event: IPrice) {
     current.value.min = event.min
     current.value.max = event.max
 }

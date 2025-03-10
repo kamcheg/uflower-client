@@ -3,13 +3,14 @@ import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElCheckbox, ElCheckboxGroup} from "element-plus";
 import {flowerTypes} from "~/mock";
 import {useFilterStore} from "~/stores/useFilterStore";
+import type {IFlowerType} from "~/types/types";
 
 
 const filterStore = useFilterStore()
 
 /* DATA */
 const open = ref(false)
-const selected = ref<number[]>([])
+const selected = ref<IFlowerType['id'][]>([])
 
 /* METHODS */
 function onApply() {

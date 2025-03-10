@@ -24,3 +24,8 @@ export interface ISize {
     name: string
     image: string
 }
+
+export interface IPrice {
+    min: number | null
+    max: number | null
+}

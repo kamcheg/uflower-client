@@ -1,10 +1,11 @@
+import type {IFlowerType, IPrice} from "~/types/types";
 
 export const useFilterStore = defineStore('filterStore', () => {
-    const price = ref<{min: number | null, max: number | null}>({
+    const price = ref<IPrice>({
         min: null,
         max: null
     })
-    const composition = ref<number[]>([])
+    const composition = ref<IFlowerType['id'][]>([])
     const reasons = ref([])
     const recipients = ref([])
     const sizes = ref([])
