@@ -16,4 +16,8 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt'],
 
   srcDir: 'src',
+
+  dir: {
+    public: 'app/public'
+  }
 })
