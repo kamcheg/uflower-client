@@ -1,6 +1,29 @@
 <script setup lang="ts">
-import { ProductCard } from '~/entities/product'
-import { products } from '~/mock'
+import { useLocalStorage } from '@vueuse/core'
+import axios from 'axios'
+import { type IProduct, ProductCard } from '~/entities/product'
+
+/* DATA */
+const favorite = useLocalStorage('favorite', [2, 3])
+const products = ref<IProduct[]>([])
+
+async function fetch() {
+  try {
+    products.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
+      params: {
+        id: favorite.value.length ? favorite.value : undefined,
+      },
+    })
+      .then(e => e.data)
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
+onMounted(() => {
+  fetch()
+})
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: ['@pinia/nuxt', '@nuxt/eslint', '@element-plus/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/eslint', '@element-plus/nuxt', '@vueuse/nuxt'],
   devtools: { enabled: true },
 
   app: {
