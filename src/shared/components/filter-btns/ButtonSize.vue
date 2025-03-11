@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElDrawer, ElIcon} from "element-plus";
-import {sizes} from "~/mock";
-import type {ISize} from "~/shared/types";
-import {useFilter} from "~/shared/composables/useFilter";
+import { ArrowDown } from '@element-plus/icons-vue'
+import { ElButton, ElDrawer, ElIcon } from 'element-plus'
+import { sizes } from '~/mock'
+import type { ISize } from '~/shared/types'
+import type { useFilter } from '~/shared/composables/useFilter'
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>('filter')!
@@ -14,60 +14,75 @@ const selected = ref<ISize['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filter.sizes.value = [...selected.value]
-    open.value = false
+  filter.sizes.value = [...selected.value]
+  open.value = false
 }
 
 function onReset() {
-    filter.sizes.value = []
-    selected.value = []
-    open.value = false
+  filter.sizes.value = []
+  selected.value = []
+  open.value = false
 }
 
 function onCheck(id: ISize['id']) {
-    if (selected.value.includes(id)) {
-        selected.value = selected.value.filter(i => i !== id)
-    } else {
-        selected.value.push(id)
-    }
+  if (selected.value.includes(id)) {
+    selected.value = selected.value.filter(i => i !== id)
+  }
+  else {
+    selected.value.push(id)
+  }
 }
 </script>
 
 <template>
-    <ElButton v-bind="$attrs" @click="open = true">
-        Размер<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-    </ElButton>
+  <ElButton
+    v-bind="$attrs"
+    @click="open = true"
+  >
+    Размер<ElIcon class="el-icon--right">
+      <ArrowDown />
+    </ElIcon>
+  </ElButton>
 
-    <ClientOnly>
-        <ElDrawer
-            v-model="open"
-            title="Фильтр: размер"
-            size="400px"
-            direction="btt"
+  <ClientOnly>
+    <ElDrawer
+      v-model="open"
+      title="Фильтр: размер"
+      size="400px"
+      direction="btt"
+    >
+      <div class="options-list">
+        <div
+          v-for="size of sizes"
+          :key="size.id"
+          class="option-item"
+          :class="{
+            'option-item_active': selected.includes(size.id),
+          }"
+          @click="onCheck(size.id)"
         >
-            <div class="options-list">
-                <div
-                    v-for="size of sizes"
-                    :key="size.id"
-                    class="option-item"
-                    :class="{
-                        'option-item_active': selected.includes(size.id),
-                    }"
-                    @click="onCheck(size.id)"
-                >
-                    <img :src="size.image" class="option-item__image">
-                    <div class="option-item__label">{{ size.name }}</div>
-                </div>
-            </div>
+          <img
+            :src="size.image"
+            class="option-item__image"
+          >
+          <div class="option-item__label">
+            {{ size.name }}
+          </div>
+        </div>
+      </div>
 
-            <template #footer>
-                <div>
-                    <ElButton @click="onReset">Очистить</ElButton>
-                    <ElButton @click="onApply">Применить</ElButton>
-                </div>
-            </template>
-        </ElDrawer>
-    </ClientOnly>
+      <template #footer>
+        <div>
+          <ElButton @click="onReset">
+            Очистить
+          </ElButton>
+          <ElButton @click="onApply">
+            Применить
+          </ElButton>
+        </div>
+      </template>
+    </ElDrawer>
+  </ClientOnly>
 </template>
 
 <style scoped lang="scss">

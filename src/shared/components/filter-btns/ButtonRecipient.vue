@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon} from "element-plus";
-import {recipients} from "~/mock";
-import type {IRecipient} from "~/shared/types";
-import {useFilter} from "~/shared/composables/useFilter";
+import { ArrowDown } from '@element-plus/icons-vue'
+import { ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon } from 'element-plus'
+import { recipients } from '~/mock'
+import type { IRecipient } from '~/shared/types'
+import type { useFilter } from '~/shared/composables/useFilter'
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>('filter')!
@@ -14,45 +14,57 @@ const selected = ref<IRecipient['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filter.recipients.value = [...selected.value]
-    open.value = false
+  filter.recipients.value = [...selected.value]
+  open.value = false
 }
 function onReset() {
-    filter.recipients.value = []
-    selected.value = []
-    open.value = false
+  filter.recipients.value = []
+  selected.value = []
+  open.value = false
 }
 </script>
 
 <template>
-    <ElButton v-bind="$attrs" @click="open = true">
-        Кому<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-    </ElButton>
+  <ElButton
+    v-bind="$attrs"
+    @click="open = true"
+  >
+    Кому<ElIcon class="el-icon--right">
+      <ArrowDown />
+    </ElIcon>
+  </ElButton>
 
-    <ClientOnly>
-        <ElDrawer
-            v-model="open"
-            title="Фильтр: кому"
-            size="400px"
-            direction="btt"
-        >
-            <ElCheckboxGroup v-model="selected" class="options-list">
-                <ElCheckbox
-                    v-for="reason of recipients"
-                    :key="reason.id"
-                    :value="reason.id"
-                    :label="reason.name"
-                />
-            </ElCheckboxGroup>
+  <ClientOnly>
+    <ElDrawer
+      v-model="open"
+      title="Фильтр: кому"
+      size="400px"
+      direction="btt"
+    >
+      <ElCheckboxGroup
+        v-model="selected"
+        class="options-list"
+      >
+        <ElCheckbox
+          v-for="reason of recipients"
+          :key="reason.id"
+          :value="reason.id"
+          :label="reason.name"
+        />
+      </ElCheckboxGroup>
 
-            <template #footer>
-                <div>
-                    <ElButton @click="onReset">Очистить</ElButton>
-                    <ElButton @click="onApply">Применить</ElButton>
-                </div>
-            </template>
-        </ElDrawer>
-    </ClientOnly>
+      <template #footer>
+        <div>
+          <ElButton @click="onReset">
+            Очистить
+          </ElButton>
+          <ElButton @click="onApply">
+            Применить
+          </ElButton>
+        </div>
+      </template>
+    </ElDrawer>
+  </ClientOnly>
 </template>
 
 <style scoped lang="scss">

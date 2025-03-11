@@ -1,1 +1,1 @@
-export {default} from './PageCart.vue'
+export { default } from './PageCart.vue'

@@ -1,1 +1,1 @@
-export {default} from './PageHome.vue'
+export { default } from './PageHome.vue'

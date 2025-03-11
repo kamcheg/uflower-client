@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
-import {useFilter} from "~/shared/composables/useFilter";
-import type {IPrice} from "~/shared/types";
+import { ArrowDown } from '@element-plus/icons-vue'
+import { ElButton, ElDrawer, ElIcon, ElFormItem, ElInput } from 'element-plus'
+import type { useFilter } from '~/shared/composables/useFilter'
+import type { IPrice } from '~/shared/types'
 
 const emit = defineEmits<{
-    (name: 'apply'): void
+  (name: 'apply'): void
 }>()
 
 /* INIT */
@@ -13,94 +13,109 @@ const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const current = ref<IPrice>({
-    min: null,
-    max: null
+  min: null,
+  max: null,
 })
 const open = ref(false)
 const options: IPrice[] = [
-    { min: null, max: 3000 },
-    { min: 3000, max: 7000 },
-    { min: 7000, max: 10000 },
-    { min: 10000, max: 15000 },
-    { min: 15000, max: 20000 },
-    { min: 20000, max: null },
+  { min: null, max: 3000 },
+  { min: 3000, max: 7000 },
+  { min: 7000, max: 10000 },
+  { min: 10000, max: 15000 },
+  { min: 15000, max: 20000 },
+  { min: 20000, max: null },
 ]
 
 /* METHODS */
 function onCheck(event: IPrice) {
-    current.value.min = event.min
-    current.value.max = event.max
+  current.value.min = event.min
+  current.value.max = event.max
 }
 
 function onApply() {
-    filter.price.value = {...current.value}
-    open.value = false
-    emit('apply')
+  filter.price.value = { ...current.value }
+  open.value = false
+  emit('apply')
 }
 function onReset() {
-    filter.price.value = {
-        min: null,
-        max: null
-    }
-    current.value = {
-        min: null,
-        max: null
-    }
-    open.value = false
-    emit('apply')
+  filter.price.value = {
+    min: null,
+    max: null,
+  }
+  current.value = {
+    min: null,
+    max: null,
+  }
+  open.value = false
+  emit('apply')
 }
 </script>
 
 <template>
-    <ElButton v-bind="$attrs" @click="open = true">
-        Цена<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
-    </ElButton>
+  <ElButton
+    v-bind="$attrs"
+    @click="open = true"
+  >
+    Цена<ElIcon class="el-icon--right">
+      <ArrowDown />
+    </ElIcon>
+  </ElButton>
 
-    <ClientOnly>
-        <ElDrawer
-            v-model="open"
-            title="Фильтр: цена"
-            size="400px"
-            direction="btt"
+  <ClientOnly>
+    <ElDrawer
+      v-model="open"
+      title="Фильтр: цена"
+      size="400px"
+      direction="btt"
+    >
+      <div class="options-list">
+        <div
+          v-for="(opt, index) of options"
+          :key="index"
+          class="options-list__item"
+          @click="onCheck(opt)"
         >
-            <div class="options-list">
-                <div
-                    v-for="(opt, index) of options"
-                    :key="index"
-                    class="options-list__item"
-                    @click="onCheck(opt)"
-                >
-                    <span v-if="opt.min">От {{ opt.min }}</span>
-                    <span v-if="opt.max"> до {{ opt.max }}</span>
-                </div>
-            </div>
+          <span v-if="opt.min">От {{ opt.min }}</span>
+          <span v-if="opt.max"> до {{ opt.max }}</span>
+        </div>
+      </div>
 
-            <div class="price-range">
-                <ElFormItem label-position="top" label="От">
-                    <ElInput
-                        v-model.number="current.min"
-                        type="number"
-                        @update:modelValue="e => current.min = e === '' ? null : +e"
-                    />
-                </ElFormItem>
+      <div class="price-range">
+        <ElFormItem
+          label-position="top"
+          label="От"
+        >
+          <ElInput
+            v-model.number="current.min"
+            type="number"
+            @update:model-value="e => current.min = e === '' ? null : +e"
+          />
+        </ElFormItem>
 
-                <ElFormItem label-position="top" label="До">
-                    <ElInput
-                        v-model.number="current.max"
-                        type="number"
-                        @update:modelValue="e => current.max = e === '' ? null : +e"
-                    />
-                </ElFormItem>
-            </div>
+        <ElFormItem
+          label-position="top"
+          label="До"
+        >
+          <ElInput
+            v-model.number="current.max"
+            type="number"
+            @update:model-value="e => current.max = e === '' ? null : +e"
+          />
+        </ElFormItem>
+      </div>
 
-            <template #footer>
-                <div>
-                    <ElButton @click="onReset">Очистить</ElButton>
-                    <ElButton @click="onApply">Применить</ElButton>
-                </div>
-            </template>
-        </ElDrawer>
-    </ClientOnly>
+      <template #footer>
+        <div>
+          <ElButton @click="onReset">
+            Очистить
+          </ElButton>
+          <ElButton @click="onApply">
+            Применить
+          </ElButton>
+        </div>
+      </template>
+    </ElDrawer>
+  </ClientOnly>
 </template>
 
 <style scoped lang="scss">

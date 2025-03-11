@@ -1,1 +1,1 @@
-export {default} from './ui/DefaultLayout.vue'
+export { default } from './ui/DefaultLayout.vue'

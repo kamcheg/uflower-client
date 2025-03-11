@@ -1,35 +1,55 @@
 <script setup lang="ts">
-import type {IProduct} from "~/shared/types";
-import {ShoppingCart, StarFilled} from "@element-plus/icons-vue";
-import {ElButton} from "element-plus";
+import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
+import { ElButton } from 'element-plus'
+import type { IProduct } from '~/shared/types'
 
 defineProps<{
-    data: IProduct
+  data: IProduct
 }>()
 </script>
 
 <template>
-    <div class="product-card">
-        <div class="image-place">
-            <div class="image-place__inner">
-                <img :src="data.image" alt="">
-            </div>
+  <div class="product-card">
+    <div class="image-place">
+      <div class="image-place__inner">
+        <img
+          :src="data.image"
+          alt=""
+        >
+      </div>
 
-            <div class="image-place__btns">
-                <ElButton :icon="StarFilled" circle />
-                <ElButton :icon="ShoppingCart" circle />
-            </div>
-        </div>
-
-        <div class="title" :title="data.name">{{ data.name }}</div>
-
-        <div class="price">{{ data.price }} ₽</div>
-
-        <div class="btns">
-            <ElButton class="btns__item">Заказать</ElButton>
-            <ElButton class="btns__item">Подробнее</ElButton>
-        </div>
+      <div class="image-place__btns">
+        <ElButton
+          :icon="StarFilled"
+          circle
+        />
+        <ElButton
+          :icon="ShoppingCart"
+          circle
+        />
+      </div>
     </div>
+
+    <div
+      class="title"
+      :title="data.name"
+    >
+      {{ data.name }}
+    </div>
+
+    <div class="price">
+      {{ data.price }} ₽
+    </div>
+
+    <div class="btns">
+      <ElButton class="btns__item">
+        Заказать
+      </ElButton>
+      <ElButton class="btns__item">
+        Подробнее
+      </ElButton>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

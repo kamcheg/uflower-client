@@ -1,1 +1,1 @@
-export {default} from './PageCatalog.vue'
+export { default } from './PageCatalog.vue'

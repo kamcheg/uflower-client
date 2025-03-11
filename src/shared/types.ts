@@ -1,31 +1,31 @@
 export interface IProduct {
-    id: number
-    name: string
-    image: string
-    price: number
+  id: number
+  name: string
+  image: string
+  price: number
 }
 export interface IFlowerType {
-    id: number
-    name: string
+  id: number
+  name: string
 }
 
 export interface IReason {
-    id: number
-    name: string
+  id: number
+  name: string
 }
 
 export interface IRecipient {
-    id: number
-    name: string
+  id: number
+  name: string
 }
 
 export interface ISize {
-    id: number
-    name: string
-    image: string
+  id: number
+  name: string
+  image: string
 }
 
 export interface IPrice {
-    min: number | null
-    max: number | null
+  min: number | null
+  max: number | null
 }
