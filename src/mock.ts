@@ -1,4 +1,4 @@
-import type { IFlowerType, IReason, IRecipient, ISize } from '~/shared/types'
+import type { IFlowerType, IReason, IRecipient, ISize } from '~/pages/catalog/model'
 import type { IProduct } from '~/entities/product'
 
 export const products: IProduct[] = [

@@ -2,8 +2,8 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
+import type { IFlowerType } from '../../model'
 import { flowerTypes } from '~/mock'
-import type { IFlowerType } from '~/shared/types'
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!

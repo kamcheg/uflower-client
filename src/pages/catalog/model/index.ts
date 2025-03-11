@@ -1,1 +1,1 @@
-export { IPrice } from './types'
+export * from './types'
