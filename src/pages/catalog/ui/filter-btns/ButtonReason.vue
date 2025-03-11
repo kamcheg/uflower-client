@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
+import type { useFilter } from '../../model/composables'
 import { reasons } from '~/mock'
-import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IReason } from '~/shared/types'
 
 /* INIT */
