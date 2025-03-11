@@ -1,1 +1,1 @@
-export {default} from './ui/PageFavorite.vue'
+export {default} from './ui'
