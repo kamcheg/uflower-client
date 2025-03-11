@@ -9,9 +9,7 @@ export default createConfigForNuxt({
     },
   },
 })
-  .override('nuxt/rules', {
-    rules: {
-      // Разрешается называть компонент одним словом
-      'vue/multi-word-component-names': 'off',
-    },
-  })
+// .override('nuxt/rules', {
+//   rules: {
+//   },
+// })
