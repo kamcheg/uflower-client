@@ -4,7 +4,11 @@ import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
 import {useFilterStore} from "~/stores/useFilterStore";
 import type {IPrice} from "~/types/types";
 
-/* STORE */
+const emit = defineEmits<{
+    (name: 'apply'): void
+}>()
+
+/* INIT */
 const filterStore = useFilterStore()
 
 /* DATA */
@@ -31,6 +35,7 @@ function onCheck(event: IPrice) {
 function onApply() {
     filterStore.price = {...current.value}
     open.value = false
+    emit('apply')
 }
 function onReset() {
     filterStore.price = {
@@ -42,6 +47,7 @@ function onReset() {
         max: null
     }
     open.value = false
+    emit('apply')
 }
 </script>
 

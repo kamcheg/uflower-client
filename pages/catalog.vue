@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // import {ElButton, ElIcon} from "element-plus";
 // import {DCaret} from "@element-plus/icons-vue";
-// import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
@@ -9,16 +8,31 @@ import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 import {useFilterStore} from "~/stores/useFilterStore";
 import type {IBouquet} from "~/types/types";
+import axios from "axios";
 
-/* HOOKS */
+/* INIT */
 const filterStore = useFilterStore()
 
 /* DATA */
 const products = ref<IBouquet[]>([])
 
-/* METHODS */
-function fetchProducts() {
+onMounted(() => {
+    fetchProducts()
+})
 
+/* METHODS */
+async function fetchProducts() {
+    try {
+        products.value = await axios.get<IBouquet[]>('http://localhost:4000/products', {
+            params: {
+                price_gte: filterStore.price.min || undefined,
+                price_lte: filterStore.price.max || undefined,
+            }
+        })
+            .then(e => e.data)
+    } catch (e) {
+        console.log('err')
+    }
 }
 </script>
 
