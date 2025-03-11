@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import type { useFilter } from '~/shared/composables/useFilter'
+import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IPrice } from '~/shared/types'
 
 const emit = defineEmits<{

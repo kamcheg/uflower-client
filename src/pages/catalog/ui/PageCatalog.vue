@@ -3,12 +3,12 @@
 // import {DCaret} from "@element-plus/icons-vue";
 import axios from 'axios'
 import { ProductCard } from '~/entities/product'
-import ButtonComposition from '~/shared/components/filter-btns/ButtonComposition.vue'
-import ButtonPrice from '~/shared/components/filter-btns/ButtonPrice.vue'
-import ButtonReason from '~/shared/components/filter-btns/ButtonReason.vue'
-import ButtonRecipient from '~/shared/components/filter-btns/ButtonRecipient.vue'
-import ButtonSize from '~/shared/components/filter-btns/ButtonSize.vue'
-import { useFilter } from '~/shared/composables/useFilter'
+import ButtonComposition from '~/pages/catalog/ui/filter-btns/ButtonComposition.vue'
+import ButtonPrice from '~/pages/catalog/ui/filter-btns/ButtonPrice.vue'
+import ButtonReason from '~/pages/catalog/ui/filter-btns/ButtonReason.vue'
+import ButtonRecipient from '~/pages/catalog/ui/filter-btns/ButtonRecipient.vue'
+import ButtonSize from '~/pages/catalog/ui/filter-btns/ButtonSize.vue'
+import { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IProduct } from '~/shared/types'
 
 /* INIT */

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
 import { flowerTypes } from '~/mock'
-import type { useFilter } from '~/shared/composables/useFilter'
+import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IFlowerType } from '~/shared/types'
 
 /* INIT */

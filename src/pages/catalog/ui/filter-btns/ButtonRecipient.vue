@@ -2,7 +2,7 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { recipients } from '~/mock'
 import type { IRecipient } from '~/shared/types'
-import type { useFilter } from '~/shared/composables/useFilter'
+import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>('filter')!
