@@ -1,12 +1,13 @@
 <script setup lang="ts">
 // import {ElButton, ElIcon} from "element-plus";
 // import {DCaret} from "@element-plus/icons-vue";
-import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
-import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
-import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
-import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
-import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
-import {useFilter} from "~/composables/useFilter";
+import ProductCard from "~/shared/components/ProductCard.vue";
+import ButtonComposition from "~/shared/components/filter-btns/ButtonComposition.vue";
+import ButtonPrice from "~/shared/components/filter-btns/ButtonPrice.vue";
+import ButtonReason from "~/shared/components/filter-btns/ButtonReason.vue";
+import ButtonRecipient from "~/shared/components/filter-btns/ButtonRecipient.vue";
+import ButtonSize from "~/shared/components/filter-btns/ButtonSize.vue";
+import {useFilter} from "~/shared/composables/useFilter";
 import type {IProduct} from "~/shared/types";
 import axios from "axios";
 

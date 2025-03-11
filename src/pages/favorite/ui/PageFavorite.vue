@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ProductCard from "~/shared/components/ProductCard.vue";
 import {products} from "~/mock";
 </script>
 

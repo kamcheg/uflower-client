@@ -3,7 +3,7 @@ import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon} from "element-plus";
 import {recipients} from "~/mock";
 import type {IRecipient} from "~/shared/types";
-import {useFilter} from "~/composables/useFilter";
+import {useFilter} from "~/shared/composables/useFilter";
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>('filter')!

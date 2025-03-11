@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElDrawer, ElIcon, ElCheckbox, ElCheckboxGroup} from "element-plus";
-import {flowerTypes} from "~/mock";
-import {useFilter} from "~/composables/useFilter";
-import type {IFlowerType} from "~/shared/types";
+import {ElButton, ElCheckbox, ElDrawer, ElIcon, ElCheckboxGroup} from "element-plus";
+import {reasons} from "~/mock";
+import {useFilter} from "~/shared/composables/useFilter";
+import type {IReason} from "~/shared/types";
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const open = ref(false)
-const selected = ref<IFlowerType['id'][]>([])
+const selected = ref<IReason['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filter.composition.value = [...selected.value]
+    filter.reasons.value = [...selected.value]
     open.value = false
 }
 function onReset() {
-    filter.composition.value = []
+    filter.reasons.value = []
     selected.value = []
     open.value = false
 }
@@ -26,22 +26,22 @@ function onReset() {
 
 <template>
     <ElButton v-bind="$attrs" @click="open = true">
-        Цветы<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
+        Повод<ElIcon class="el-icon--right"><ArrowDown /></ElIcon>
     </ElButton>
 
     <ClientOnly>
         <ElDrawer
             v-model="open"
-            title="Фильтр: цветы"
+            title="Фильтр: повод"
             size="400px"
             direction="btt"
         >
-            <ElCheckboxGroup v-model="selected" class="flower-types">
+            <ElCheckboxGroup v-model="selected" class="options-list">
                 <ElCheckbox
-                    v-for="type of flowerTypes"
-                    :key="type.id"
-                    :label="type.name"
-                    :value="type.id"
+                    v-for="reason of reasons"
+                    :key="reason.id"
+                    :value="reason.id"
+                    :label="reason.name"
                 />
             </ElCheckboxGroup>
 
@@ -56,8 +56,16 @@ function onReset() {
 </template>
 
 <style scoped lang="scss">
-.flower-types {
+.options-list {
+    width: 400px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 24px;
+    grid-row-gap: 12px;
+
+    &__item {
+        cursor: pointer;
+    }
 }
 </style>

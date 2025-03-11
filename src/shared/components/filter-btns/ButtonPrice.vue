@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
-import {useFilter} from "~/composables/useFilter";
+import {useFilter} from "~/shared/composables/useFilter";
 import type {IPrice} from "~/shared/types";
 
 const emit = defineEmits<{
