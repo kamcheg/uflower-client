@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   srcDir: 'src',
 
   dir: {
-    public: 'app/public'
+    public: 'app/public',
+    layouts: 'app/layouts',
   }
 })
