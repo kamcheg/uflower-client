@@ -1,6 +1,6 @@
-import type {IBouquet, IFlowerType, IReason, IRecipient, ISize} from "~/types/types";
+import type {IProduct, IFlowerType, IReason, IRecipient, ISize} from "~/types/types";
 
-export const products: IBouquet[] = [
+export const products: IProduct[] = [
     {
         id: 1,
         name: "Мимоза итальяно",

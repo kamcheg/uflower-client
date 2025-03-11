@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type {IBouquet} from "~/types/types";
+import type {IProduct} from "~/types/types";
 import {ShoppingCart, StarFilled} from "@element-plus/icons-vue";
 import {ElButton} from "element-plus";
 
 defineProps<{
-    data: IBouquet
+    data: IProduct
 }>()
 </script>
 
