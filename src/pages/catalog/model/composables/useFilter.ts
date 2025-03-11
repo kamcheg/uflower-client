@@ -1,4 +1,5 @@
-import type { IFlowerType, IPrice, IReason, IRecipient, ISize } from '~/shared/types'
+import type { IPrice } from '../'
+import type { IFlowerType, IReason, IRecipient, ISize } from '~/shared/types'
 
 export function useFilter() {
   const price = ref<IPrice>({

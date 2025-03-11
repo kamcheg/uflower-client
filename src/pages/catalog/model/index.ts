@@ -1,0 +1,1 @@
+export { IPrice } from './types'
