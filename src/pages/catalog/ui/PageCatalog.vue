@@ -34,7 +34,7 @@ async function fetchProducts() {
       .then(e => e.data)
   }
   catch (e) {
-    console.log('err')
+    console.log('err', e)
   }
 }
 </script>
