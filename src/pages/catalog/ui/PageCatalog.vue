@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import {ElButton, ElIcon} from "element-plus";
 // import {DCaret} from "@element-plus/icons-vue";
 import axios from 'axios'
 import { ProductCard } from '~/entities/product'
@@ -10,10 +9,11 @@ import ButtonRecipient from '~/pages/catalog/ui/filter-btns/ButtonRecipient.vue'
 import ButtonSize from '~/pages/catalog/ui/filter-btns/ButtonSize.vue'
 import { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IProduct } from '~/shared/types'
+import { filterInjectionKey } from '~/pages/catalog/config/filterSymbol'
 
 /* INIT */
 const filter = useFilter()
-provide('filter', filter)
+provide(filterInjectionKey, filter)
 
 /* DATA */
 const products = ref<IProduct[]>([])

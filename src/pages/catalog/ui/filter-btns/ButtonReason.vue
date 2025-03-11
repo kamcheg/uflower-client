@@ -3,9 +3,10 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { reasons } from '~/mock'
 import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IReason } from '~/shared/types'
+import { filterInjectionKey } from '~/pages/catalog/config/filterSymbol'
 
 /* INIT */
-const filter = inject<ReturnType<typeof useFilter>>('filter')!
+const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
 
 /* DATA */
 const open = ref(false)

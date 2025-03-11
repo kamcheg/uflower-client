@@ -2,13 +2,14 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IPrice } from '~/shared/types'
+import { filterInjectionKey } from '~/pages/catalog/config/filterSymbol'
 
 const emit = defineEmits<{
   (name: 'apply'): void
 }>()
 
 /* INIT */
-const filter = inject<ReturnType<typeof useFilter>>('filter')!
+const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
 
 /* DATA */
 const current = ref<IPrice>({
