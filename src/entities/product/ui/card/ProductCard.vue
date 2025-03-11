@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
+import ModalOrder from '~/entities/product/ui/card/ModalOrder.vue'
 
 defineProps<{
   data: IProduct
 }>()
+
+/* DATA */
+const dialogVisible = ref(false)
 </script>
 
 <template>
@@ -41,13 +45,20 @@ defineProps<{
     </div>
 
     <div class="btns">
-      <ElButton class="btns__item">
+      <ElButton
+        class="btns__item"
+        @click="dialogVisible = true"
+      >
         Заказать
       </ElButton>
-      <ElButton class="btns__item">
-        Подробнее
-      </ElButton>
     </div>
+
+    <ClientOnly>
+      <ModalOrder
+        v-model="dialogVisible"
+        :data="data"
+      />
+    </ClientOnly>
   </div>
 </template>
 
