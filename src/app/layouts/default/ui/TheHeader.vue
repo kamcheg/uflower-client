@@ -5,12 +5,15 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
 <template>
   <div class="header">
     <div class="left">
-      <div class="logo-place">
+      <NuxtLink
+        to="/"
+        class="logo-place"
+      >
         <img
           src="/images/logo.svg"
           alt="logo"
         >
-      </div>
+      </NuxtLink>
     </div>
 
     <div class="center">
@@ -84,6 +87,12 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
             }
         }
     }
+
+  .left {
+    .logo-place {
+      display: block;
+    }
+  }
 
     .right {
         margin-left: auto;
