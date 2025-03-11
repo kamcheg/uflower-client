@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
-import { ElButton } from 'element-plus'
 import type { IProduct } from '~/shared/types'
 
 defineProps<{

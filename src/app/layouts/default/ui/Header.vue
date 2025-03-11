@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ElButton } from 'element-plus'
 import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
 </script>
 

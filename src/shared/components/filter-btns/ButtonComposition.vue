@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { ElButton, ElDrawer, ElIcon, ElCheckbox, ElCheckboxGroup } from 'element-plus'
 import { flowerTypes } from '~/mock'
 import type { useFilter } from '~/shared/composables/useFilter'
 import type { IFlowerType } from '~/shared/types'

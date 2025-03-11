@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { ElButton, ElDrawer, ElIcon } from 'element-plus'
 import { sizes } from '~/mock'
 import type { ISize } from '~/shared/types'
 import type { useFilter } from '~/shared/composables/useFilter'
