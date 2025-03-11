@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { useLocalStorage } from '@vueuse/core'
 import axios from 'axios'
 import { type IProduct, ProductCard } from '~/entities/product'
+import { AddToFavorites } from '~/features/product'
+import { useFavoritesStore } from '~/entities/favorites'
+
+const favoritesStore = useFavoritesStore()
 
 /* DATA */
-const favorite = useLocalStorage('favorite', [2, 3])
 const products = ref<IProduct[]>([])
 
 async function fetch() {
   try {
     products.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
       params: {
-        id: favorite.value.length ? favorite.value : undefined,
+        id: favoritesStore.list.length ? favoritesStore.list : [-1],
       },
     })
       .then(e => e.data)
@@ -31,10 +33,14 @@ onMounted(() => {
 
   <div class="catalog">
     <ProductCard
-      v-for="i of products.slice(0, 4)"
+      v-for="i of products"
       :key="i.id"
       :data="i"
-    />
+    >
+      <template #favorite-button>
+        <AddToFavorites :id="i.id" />
+      </template>
+    </ProductCard>
   </div>
 </template>
 

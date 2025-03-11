@@ -10,6 +10,7 @@ import ButtonReason from '~/pages/catalog/ui/filter-btns/ButtonReason.vue'
 import ButtonRecipient from '~/pages/catalog/ui/filter-btns/ButtonRecipient.vue'
 import ButtonSize from '~/pages/catalog/ui/filter-btns/ButtonSize.vue'
 import type { IProduct } from '~/entities/product'
+import { AddToFavorites } from '~/features/product'
 
 /* INIT */
 const filter = useFilter()
@@ -76,7 +77,11 @@ async function fetchProducts() {
       v-for="i of products"
       :key="i.id"
       :data="i"
-    />
+    >
+      <template #favorite-button>
+        <AddToFavorites :id="i.id" />
+      </template>
+    </ProductCard>
   </div>
 </template>
 

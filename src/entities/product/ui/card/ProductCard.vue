@@ -22,10 +22,7 @@ const dialogVisible = ref(false)
       </div>
 
       <div class="image-place__btns">
-        <ElButton
-          :icon="StarFilled"
-          circle
-        />
+        <slot name="favorite-button" />
         <ElButton
           :icon="ShoppingCart"
           circle
