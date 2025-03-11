@@ -13,5 +13,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['@pinia/nuxt']
+  modules: ['@pinia/nuxt'],
+
+  srcDir: 'src',
 })
