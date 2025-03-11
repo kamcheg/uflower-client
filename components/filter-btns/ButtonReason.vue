@@ -36,8 +36,6 @@ function onReset() {
             size="400px"
             direction="btt"
         >
-
-            <pre>{{selected}}</pre>
             <ElCheckboxGroup v-model="selected" class="options-list">
                 <ElCheckbox
                     v-for="reason of reasons"
