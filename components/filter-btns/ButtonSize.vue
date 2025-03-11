@@ -3,9 +3,10 @@ import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon} from "element-plus";
 import {sizes} from "~/mock";
 import type {ISize} from "~/types/types";
+import {useFilter} from "~/composables/useFilter";
 
-/* STORE */
-const filterStore = useFilterStore()
+/* INIT */
+const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const open = ref(false)
@@ -13,12 +14,12 @@ const selected = ref<ISize['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filterStore.sizes = [...selected.value]
+    filter.sizes.value = [...selected.value]
     open.value = false
 }
 
 function onReset() {
-    filterStore.sizes = []
+    filter.sizes.value = []
     selected.value = []
     open.value = false
 }

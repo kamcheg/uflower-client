@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
-import {useFilterStore} from "~/stores/useFilterStore";
+import {useFilter} from "~/composables/useFilter";
 import type {IPrice} from "~/types/types";
 
 const emit = defineEmits<{
@@ -9,7 +9,7 @@ const emit = defineEmits<{
 }>()
 
 /* INIT */
-const filterStore = useFilterStore()
+const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const current = ref<IPrice>({
@@ -33,12 +33,12 @@ function onCheck(event: IPrice) {
 }
 
 function onApply() {
-    filterStore.price = {...current.value}
+    filter.price.value = {...current.value}
     open.value = false
     emit('apply')
 }
 function onReset() {
-    filterStore.price = {
+    filter.price.value = {
         min: null,
         max: null
     }

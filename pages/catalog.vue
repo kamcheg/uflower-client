@@ -6,12 +6,13 @@ import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
-import {useFilterStore} from "~/stores/useFilterStore";
+import {useFilter} from "~/composables/useFilter";
 import type {IProduct} from "~/types/types";
 import axios from "axios";
 
 /* INIT */
-const filterStore = useFilterStore()
+const filter = useFilter()
+provide('filter', filter)
 
 /* DATA */
 const products = ref<IProduct[]>([])
@@ -25,8 +26,8 @@ async function fetchProducts() {
     try {
         products.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
             params: {
-                price_gte: filterStore.price.min || undefined,
-                price_lte: filterStore.price.max || undefined,
+                price_gte: filter.price.value.min || undefined,
+                price_lte: filter.price.value.max || undefined,
             }
         })
             .then(e => e.data)

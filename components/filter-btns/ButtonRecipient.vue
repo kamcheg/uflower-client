@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import {ArrowDown} from "@element-plus/icons-vue";
-import {ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon, ElFormItem, ElInput} from "element-plus";
+import {ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon} from "element-plus";
 import {recipients} from "~/mock";
 import type {IRecipient} from "~/types/types";
+import {useFilter} from "~/composables/useFilter";
 
-/* STORE */
-const filterStore = useFilterStore()
+/* INIT */
+const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const open = ref(false)
@@ -13,11 +14,11 @@ const selected = ref<IRecipient['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filterStore.recipients = [...selected.value]
+    filter.recipients.value = [...selected.value]
     open.value = false
 }
 function onReset() {
-    filterStore.recipients = []
+    filter.recipients.value = []
     selected.value = []
     open.value = false
 }

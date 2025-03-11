@@ -2,11 +2,11 @@
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElCheckbox, ElDrawer, ElIcon, ElCheckboxGroup} from "element-plus";
 import {reasons} from "~/mock";
-import {useFilterStore} from "~/stores/useFilterStore";
+import {useFilter} from "~/composables/useFilter";
 import type {IReason} from "~/types/types";
 
-/* STORE */
-const filterStore = useFilterStore()
+/* INIT */
+const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const open = ref(false)
@@ -14,11 +14,11 @@ const selected = ref<IReason['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filterStore.reasons = [...selected.value]
+    filter.reasons.value = [...selected.value]
     open.value = false
 }
 function onReset() {
-    filterStore.reasons = []
+    filter.reasons.value = []
     selected.value = []
     open.value = false
 }

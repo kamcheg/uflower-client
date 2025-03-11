@@ -2,11 +2,11 @@
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElDrawer, ElIcon, ElCheckbox, ElCheckboxGroup} from "element-plus";
 import {flowerTypes} from "~/mock";
-import {useFilterStore} from "~/stores/useFilterStore";
+import {useFilter} from "~/composables/useFilter";
 import type {IFlowerType} from "~/types/types";
 
-/* STORE */
-const filterStore = useFilterStore()
+/* INIT */
+const filter = inject<ReturnType<typeof useFilter>>('filter')!
 
 /* DATA */
 const open = ref(false)
@@ -14,11 +14,11 @@ const selected = ref<IFlowerType['id'][]>([])
 
 /* METHODS */
 function onApply() {
-    filterStore.composition = [...selected.value]
+    filter.composition.value = [...selected.value]
     open.value = false
 }
 function onReset() {
-    filterStore.composition = []
+    filter.composition.value = []
     selected.value = []
     open.value = false
 }
