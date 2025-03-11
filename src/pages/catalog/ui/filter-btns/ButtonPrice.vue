@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
+import { filterInjectionKey } from '../../config'
 import type { useFilter } from '~/pages/catalog/model/composables/useFilter'
 import type { IPrice } from '~/shared/types'
-import { filterInjectionKey } from '~/pages/catalog/config/filterSymbol'
 
 const emit = defineEmits<{
   (name: 'apply'): void
