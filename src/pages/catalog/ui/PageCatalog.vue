@@ -39,9 +39,9 @@ async function fetchProducts() {
 
 <template>
     <div>
-<!--        <ElButton>-->
-<!--            <ElIcon class="el-icon&#45;&#45;left"><DCaret /></ElIcon>Новинки-->
-<!--        </ElButton>-->
+        <!--        <ElButton>-->
+        <!--            <ElIcon class="el-icon&#45;&#45;left"><DCaret /></ElIcon>Новинки-->
+        <!--        </ElButton>-->
 
         <ButtonComposition
             style="margin-right: 10px;"
