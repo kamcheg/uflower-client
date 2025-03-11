@@ -2,7 +2,7 @@
 // import {ElButton, ElIcon} from "element-plus";
 // import {DCaret} from "@element-plus/icons-vue";
 import axios from 'axios'
-import ProductCard from '~/shared/components/ProductCard.vue'
+import { ProductCard } from '~/entities/product'
 import ButtonComposition from '~/shared/components/filter-btns/ButtonComposition.vue'
 import ButtonPrice from '~/shared/components/filter-btns/ButtonPrice.vue'
 import ButtonReason from '~/shared/components/filter-btns/ButtonReason.vue'
