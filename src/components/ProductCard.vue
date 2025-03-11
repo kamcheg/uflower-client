@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {IProduct} from "~/types/types";
+import type {IProduct} from "~/shared/types";
 import {ShoppingCart, StarFilled} from "@element-plus/icons-vue";
 import {ElButton} from "element-plus";
 

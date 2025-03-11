@@ -7,7 +7,7 @@ import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 import {useFilter} from "~/composables/useFilter";
-import type {IProduct} from "~/types/types";
+import type {IProduct} from "~/shared/types";
 import axios from "axios";
 
 /* INIT */

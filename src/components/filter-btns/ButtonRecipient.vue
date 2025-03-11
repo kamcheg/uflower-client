@@ -2,7 +2,7 @@
 import {ArrowDown} from "@element-plus/icons-vue";
 import {ElButton, ElCheckboxGroup, ElCheckbox, ElDrawer, ElIcon} from "element-plus";
 import {recipients} from "~/mock";
-import type {IRecipient} from "~/types/types";
+import type {IRecipient} from "~/shared/types";
 import {useFilter} from "~/composables/useFilter";
 
 /* INIT */

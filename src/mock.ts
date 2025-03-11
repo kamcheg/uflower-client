@@ -1,4 +1,4 @@
-import type {IProduct, IFlowerType, IReason, IRecipient, ISize} from "~/types/types";
+import type {IProduct, IFlowerType, IReason, IRecipient, ISize} from "~/shared/types";
 
 export const products: IProduct[] = [
     {
