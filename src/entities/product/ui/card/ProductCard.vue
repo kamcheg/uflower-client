@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
-import type { IProduct } from '~/shared/types'
+import type { IProduct } from '~/entities/product'
 
 defineProps<{
   data: IProduct

@@ -9,7 +9,7 @@ import ButtonPrice from '~/pages/catalog/ui/filter-btns/ButtonPrice.vue'
 import ButtonReason from '~/pages/catalog/ui/filter-btns/ButtonReason.vue'
 import ButtonRecipient from '~/pages/catalog/ui/filter-btns/ButtonRecipient.vue'
 import ButtonSize from '~/pages/catalog/ui/filter-btns/ButtonSize.vue'
-import type { IProduct } from '~/shared/types'
+import type { IProduct } from '~/entities/product'
 
 /* INIT */
 const filter = useFilter()
