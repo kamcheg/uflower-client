@@ -10,3 +10,8 @@ export default createConfigForNuxt({
     },
   },
 })
+  .override('nuxt/rules', {
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  })
