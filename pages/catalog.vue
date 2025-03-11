@@ -1,15 +1,25 @@
 <script setup lang="ts">
 // import {ElButton, ElIcon} from "element-plus";
 // import {DCaret} from "@element-plus/icons-vue";
-import {products} from "~/mock";
+// import {products} from "~/mock";
 import ButtonComposition from "~/components/filter-btns/ButtonComposition.vue";
 import ButtonPrice from "~/components/filter-btns/ButtonPrice.vue";
 import ButtonReason from "~/components/filter-btns/ButtonReason.vue";
 import ButtonRecipient from "~/components/filter-btns/ButtonRecipient.vue";
 import ButtonSize from "~/components/filter-btns/ButtonSize.vue";
 import {useFilterStore} from "~/stores/useFilterStore";
+import type {IBouquet} from "~/types/types";
 
+/* HOOKS */
 const filterStore = useFilterStore()
+
+/* DATA */
+const products = ref<IBouquet[]>([])
+
+/* METHODS */
+function fetchProducts() {
+
+}
 </script>
 
 <template>
@@ -18,15 +28,30 @@ const filterStore = useFilterStore()
 <!--            <ElIcon class="el-icon&#45;&#45;left"><DCaret /></ElIcon>Новинки-->
 <!--        </ElButton>-->
 
-        <ButtonComposition style="margin-right: 10px;" />
+        <ButtonComposition
+            style="margin-right: 10px;"
+            @apply="fetchProducts"
+        />
 
-        <ButtonPrice style="margin-right: 10px;" />
+        <ButtonPrice
+            style="margin-right: 10px;"
+            @apply="fetchProducts"
+        />
 
-        <ButtonReason style="margin-right: 10px;" />
+        <ButtonReason
+            style="margin-right: 10px;"
+            @apply="fetchProducts"
+        />
 
-        <ButtonRecipient style="margin-right: 10px;" />
+        <ButtonRecipient
+            style="margin-right: 10px;"
+            @apply="fetchProducts"
+        />
 
-        <ButtonSize style="margin-right: 10px;" />
+        <ButtonSize
+            style="margin-right: 10px;"
+            @apply="fetchProducts"
+        />
     </div>
 
     <div class="catalog">
