@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
+import { ShoppingCart } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
 import ModalOrder from '~/entities/product/ui/card/ModalOrder.vue'
 
@@ -24,6 +24,7 @@ const dialogVisible = ref(false)
       <div class="image-place__btns">
         <slot name="favorite-button" />
         <ElButton
+          v-if="false"
           :icon="ShoppingCart"
           circle
         />
@@ -43,10 +44,17 @@ const dialogVisible = ref(false)
 
     <div class="btns">
       <ElButton
+        v-if="false"
         class="btns__item"
         @click="dialogVisible = true"
       >
-        Заказать
+        Купить
+      </ElButton>
+
+      <ElButton
+        class="btns__item"
+      >
+        Добавить в корзину
       </ElButton>
     </div>
 
