@@ -10,12 +10,6 @@
 
 <style scoped lang="scss">
 .loader-wrapper {
-  position: absolute;
-  z-index: 9999;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: rgba(255, 255, 255, 0.85);
   display: flex;
   justify-content: center;
