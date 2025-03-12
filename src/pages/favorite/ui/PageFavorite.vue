@@ -10,10 +10,14 @@ const favoritesStore = useFavoritesStore()
 const products = ref<IProduct[]>([])
 
 async function fetch() {
+  if (favoritesStore.list.length === 0) {
+    return
+  }
+
   try {
     products.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
       params: {
-        id: favoritesStore.list.length ? favoritesStore.list : [-1],
+        id: favoritesStore.list,
       },
     })
       .then(e => e.data)
