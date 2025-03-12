@@ -2,6 +2,9 @@
 import 'vue-loading-overlay/dist/css/index.css'
 import TheHeader from './TheHeader.vue'
 import AppLoading from '~/shared/components/AppLoading.vue'
+import { useLoadingStore } from '~/shared/stores/useLoadingStore'
+
+const loadingStore = useLoadingStore()
 </script>
 
 <template>
@@ -9,7 +12,7 @@ import AppLoading from '~/shared/components/AppLoading.vue'
     <TheHeader class="default-layout__header" />
 
     <div class="default-layout__content">
-      <AppLoading />
+      <AppLoading v-if="loadingStore.isLoading" />
       <slot />
     </div>
   </div>
