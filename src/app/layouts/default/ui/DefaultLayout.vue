@@ -2,14 +2,8 @@
 import TheHeader from './TheHeader.vue'
 import AppLoading from '~/shared/components/AppLoading.vue'
 import { useLoadingStore } from '~/shared/stores/useLoadingStore'
-import { useCartStore } from '~/entities/cart'
 
 const loadingStore = useLoadingStore()
-const cartStore = useCartStore()
-
-onMounted(() => {
-  cartStore.fetchCartProducts()
-})
 </script>
 
 <template>
