@@ -36,9 +36,16 @@ function onToggle() {
 </template>
 
 <style scoped lang="scss">
+// TODO
 .active {
   color: #fff;
   background: rgb(255, 134, 116);
   border-color: rgb(255, 134, 116);
+
+  &:hover {
+    color: #fff;
+    background: rgb(255, 180, 169);
+    border-color: rgb(255, 180, 169);
+  }
 }
 </style>
