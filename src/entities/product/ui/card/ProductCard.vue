@@ -2,10 +2,14 @@
 import { ShoppingCart } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
 import ModalOrder from '~/entities/product/ui/card/ModalOrder.vue'
+import { useCartStore } from '~/entities/cart'
 
 defineProps<{
   data: IProduct
 }>()
+
+/* CART */
+const cartStore = useCartStore()
 
 /* DATA */
 const dialogVisible = ref(false)
@@ -53,6 +57,7 @@ const dialogVisible = ref(false)
 
       <ElButton
         class="btns__item"
+        @click="cartStore.onAddProduct(data.id)"
       >
         Добавить в корзину
       </ElButton>

@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ProductCard } from '~/entities/product'
-import { products } from '~/mock'
+import { useCartStore } from '~/entities/cart'
+
+/* CART */
+const cartStore = useCartStore()
+
+onMounted(async () => {
+  await cartStore.fetchCartProducts()
+})
 </script>
 
 <template>
@@ -8,7 +15,7 @@ import { products } from '~/mock'
 
   <div class="catalog">
     <ProductCard
-      v-for="i of products.slice(2, 4)"
+      v-for="i of cartStore.products"
       :key="i.id"
       :data="i"
     />
