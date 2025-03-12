@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import 'vue-loading-overlay/dist/css/index.css'
 import TheHeader from './TheHeader.vue'
 import AppLoading from '~/shared/components/AppLoading.vue'
 import { useLoadingStore } from '~/shared/stores/useLoadingStore'
