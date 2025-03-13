@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ShoppingCart } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
-import ModalOrder from '~/entities/product/ui/card/ModalOrder.vue'
 import { useCartStore } from '~/entities/cart'
 
 defineProps<{
@@ -10,9 +9,6 @@ defineProps<{
 
 /* CART */
 const cartStore = useCartStore()
-
-/* DATA */
-const dialogVisible = ref(false)
 </script>
 
 <template>
@@ -46,15 +42,10 @@ const dialogVisible = ref(false)
       {{ data.price }} ₽
     </div>
 
-    <div class="btns">
-      <ElButton
-        v-if="false"
-        class="btns__item"
-        @click="dialogVisible = true"
-      >
-        Купить
-      </ElButton>
-
+    <div
+      v-if="false"
+      class="btns"
+    >
       <ElButton
         class="btns__item"
         @click="cartStore.onAddProduct(data.id)"
@@ -62,13 +53,6 @@ const dialogVisible = ref(false)
         Добавить в корзину
       </ElButton>
     </div>
-
-    <ClientOnly>
-      <ModalOrder
-        v-model="dialogVisible"
-        :data="data"
-      />
-    </ClientOnly>
   </div>
 </template>
 
