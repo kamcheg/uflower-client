@@ -25,9 +25,11 @@ function onReset() {
 </script>
 
 <template>
-  <ElBadge :is-dot="!!filter.composition.value.length">
+  <ElBadge
+    v-bind="$attrs"
+    :is-dot="!!filter.composition.value.length"
+  >
     <ElButton
-      v-bind="$attrs"
       @click="open = true"
     >
       Цветы<ElIcon class="el-icon--right">

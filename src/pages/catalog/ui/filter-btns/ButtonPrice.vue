@@ -52,9 +52,11 @@ function onReset() {
 </script>
 
 <template>
-  <ElBadge :is-dot="!!filter.price.value.min || !!filter.price.value.max">
+  <ElBadge
+    v-bind="$attrs"
+    :is-dot="!!filter.price.value.min || !!filter.price.value.max"
+  >
     <ElButton
-      v-bind="$attrs"
       @click="open = true"
     >
       Цена<ElIcon class="el-icon--right">

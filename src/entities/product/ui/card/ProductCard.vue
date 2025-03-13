@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ShoppingCart } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
 import { useCartStore } from '~/entities/cart'
+import IconCart from '~/shared/components/icons/IconCart.vue'
 
 defineProps<{
   data: IProduct
@@ -24,10 +24,11 @@ const cartStore = useCartStore()
       <div class="image-place__btns">
         <slot name="favorite-button" />
         <ElButton
-          v-if="false"
-          :icon="ShoppingCart"
           circle
-        />
+          @click="cartStore.onAddProduct(data.id)"
+        >
+          <IconCart style="width: 16px;" />
+        </ElButton>
       </div>
     </div>
 

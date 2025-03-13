@@ -35,9 +35,11 @@ function onCheck(id: ISize['id']) {
 </script>
 
 <template>
-  <ElBadge :is-dot="!!filter.sizes.value.length">
+  <ElBadge
+    v-bind="$attrs"
+    :is-dot="!!filter.sizes.value.length"
+  >
     <ElButton
-      v-bind="$attrs"
       @click="open = true"
     >
       Размер<ElIcon class="el-icon--right">
