@@ -17,21 +17,42 @@
         </div>
       </div>
 
-      <iframe
-        src="https://yandex.ru/map-widget/v1/?um=constructor%3Af26f7f9677c3bf56bf7ff7bdd8aebe714daedb8a3acd07f38d717e11b8b49e36&amp;source=constructor"
-        width="100%"
-        height="400"
-        frameborder="0"
-      />
+      <div
+        class="preview contact-info"
+      >
+        <div class="map">
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3Af26f7f9677c3bf56bf7ff7bdd8aebe714daedb8a3acd07f38d717e11b8b49e36&amp;source=constructor"
+            width="100%"
+            height="100%"
+            frameborder="0"
+          />
+        </div>
 
-      <ul>
-        <li>Название компании</li>
-        <li>График работы</li>
-        <li>Карта</li>
-        <li>Адрес</li>
-        <li>Контакты</li>
-        <li>ссылки на соц сети</li>
-      </ul>
+        <div class="desc">
+          <p class="desc__item">
+            <b>Наш адрес:</b> г. Махачкала, Улица Титова, 144 к3
+          </p>
+
+          <p class="desc__item">
+            <b>Номер телефона:</b> +7 (999) 666-88-77
+          </p>
+
+          <p class="desc__item">
+            <b>Электронный адрес:</b> myflower@mail.ru
+          </p>
+
+          <p class="desc__item">
+            <b>График работы:</b>  ежедневно с 09:00 до 21:00
+          </p>
+
+          <div class="social">
+            <div class="social__title">
+              Наши соц. сети
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -64,6 +85,40 @@
       font-size: 24px;
       margin: 0 auto;
       max-width: 788px;
+    }
+  }
+
+  .contact-info {
+    margin-top: 24px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .map {
+    }
+
+    .desc {
+      padding: 32px;
+
+      &__item {
+        &:not(:first-child) {
+          margin-top: 12px;
+        }
+
+        b {
+          font-weight: 600;
+        }
+      }
+
+      .social {
+        display: none;
+        margin-top: 100px;
+
+        &__title {
+          font-size: 20px;
+          font-weight: 700;
+        }
+      }
     }
   }
 }
