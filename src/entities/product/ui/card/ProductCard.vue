@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import type { IProduct } from '~/entities/product'
 import { useCartStore } from '~/entities/cart'
-import IconCart from '~/shared/components/icons/IconCart.vue'
 
 defineProps<{
   data: IProduct
 }>()
 
-/* CART */
+/* INIT */
 const cartStore = useCartStore()
 </script>
 
@@ -23,12 +22,7 @@ const cartStore = useCartStore()
 
       <div class="image-place__btns">
         <slot name="favorite-button" />
-        <ElButton
-          circle
-          @click="cartStore.onAddProduct(data.id)"
-        >
-          <IconCart style="width: 16px;" />
-        </ElButton>
+        <slot name="cart-button" />
       </div>
     </div>
 

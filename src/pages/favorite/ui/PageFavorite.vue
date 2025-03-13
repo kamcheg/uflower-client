@@ -3,6 +3,7 @@ import axios from 'axios'
 import { type IProduct, ProductCard } from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { useFavoritesStore } from '~/entities/favorites'
+import { AddToCart } from '~/features/product/addToCart'
 
 /* INIT */
 const favoritesStore = useFavoritesStore()
@@ -44,6 +45,9 @@ onMounted(() => {
     >
       <template #favorite-button>
         <AddToFavorites :id="i.id" />
+      </template>
+      <template #cart-button>
+        <AddToCart :id="i.id" />
       </template>
     </ProductCard>
   </div>
