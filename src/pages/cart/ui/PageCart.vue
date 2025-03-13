@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ProductCard } from '~/entities/product'
-import { useCartStore } from '~/entities/cart'
+import { CartProductCard, useCartStore } from '~/entities/cart'
 
 /* CART */
 const cartStore = useCartStore()
@@ -14,19 +13,24 @@ onMounted(async () => {
   <h1>Корзина</h1>
 
   <div class="catalog">
-    <ProductCard
+    <CartProductCard
       v-for="i of cartStore.products"
       :key="i.id"
       :data="i"
+      class="catalog__card"
     />
   </div>
 </template>
 
 <style scoped lang="scss">
 .catalog {
-    margin-top: 24px;
-    display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-    grid-gap: 24px;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 24px;
+
+    &__card {
+        width: 700px;
+    }
 }
 </style>

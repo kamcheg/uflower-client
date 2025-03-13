@@ -25,7 +25,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
         return {
           ...currentProduct,
-          quantity: 11,
+          quantity: item.quantity,
         }
       })
       .filter(i => !!i)
@@ -45,17 +45,10 @@ export const useCartStore = defineStore('cartStore', () => {
     items.value = items.value.filter(i => i.productId !== id)
   }
 
-  function onIncrement(id: ICartItem['productId']) {
+  function changeQuantity(id: ICartItem['productId'], quantity: number) {
     const current = items.value.find(i => i.productId === id)
     if (current) {
-      current.quantity++
-    }
-  }
-
-  function onDecrement(id: ICartItem['productId']) {
-    const current = items.value.find(i => i.productId === id)
-    if (current) {
-      current.quantity--
+      current.quantity = quantity
     }
   }
 
@@ -95,7 +88,6 @@ export const useCartStore = defineStore('cartStore', () => {
     fetchCartProducts,
     onAddProduct,
     onRemoveProduct,
-    onIncrement,
-    onDecrement,
+    changeQuantity,
   }
 })
