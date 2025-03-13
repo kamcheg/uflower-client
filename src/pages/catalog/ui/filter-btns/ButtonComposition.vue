@@ -25,14 +25,16 @@ function onReset() {
 </script>
 
 <template>
-  <ElButton
-    v-bind="$attrs"
-    @click="open = true"
-  >
-    Цветы<ElIcon class="el-icon--right">
-      <ArrowDown />
-    </ElIcon>
-  </ElButton>
+  <ElBadge :is-dot="!!filter.composition.value.length">
+    <ElButton
+      v-bind="$attrs"
+      @click="open = true"
+    >
+      Цветы<ElIcon class="el-icon--right">
+        <ArrowDown />
+      </ElIcon>
+    </ElButton>
+  </ElBadge>
 
   <ClientOnly>
     <ElDrawer
