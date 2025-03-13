@@ -50,7 +50,7 @@ export const useCartStore = defineStore('cartStore', () => {
       quantity: 1,
     })
 
-    fetchProduct(id)
+    await fetchProduct(id)
   }
 
   function onRemoveProduct(id: ICartItem['productId']) {

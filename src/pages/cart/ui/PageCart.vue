@@ -20,7 +20,6 @@ onMounted(async () => {
             v-for="i of cartStore.products"
             :key="i.id"
             :data="i"
-            class="catalog__card"
           />
         </div>
 
@@ -41,9 +40,6 @@ onMounted(async () => {
       display: grid;
       grid-template-columns: 1fr;
       grid-gap: 24px;
-
-      &__card {
-      }
     }
   }
 
