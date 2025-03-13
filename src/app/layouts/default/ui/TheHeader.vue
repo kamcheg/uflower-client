@@ -18,24 +18,24 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
 
     <div class="center">
       <div class="nav">
-        <NuxtLink
-          to="/"
+        <ElLink
+          href="/"
           class="nav__item"
         >
           Главная
-        </NuxtLink>
-        <NuxtLink
-          to="/catalog"
+        </ElLink>
+        <ElLink
+          href="/catalog"
           class="nav__item"
         >
           Каталог
-        </NuxtLink>
-        <NuxtLink
-          to="/about"
+        </ElLink>
+        <ElLink
+          href="/about"
           class="nav__item"
         >
           О нас
-        </NuxtLink>
+        </ElLink>
       </div>
     </div>
 
@@ -44,7 +44,9 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
         <div class="number">
           +7(999)-666-88-77
         </div>
-        <ElButton>Заказать звонок</ElButton>
+        <div class="schedule">
+          Ежедневно с 09:00 до 21:00
+        </div>
       </div>
 
       <NuxtLink to="/favorite">
@@ -70,23 +72,26 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
 
 <style scoped lang="scss">
 .header {
-    border-bottom: 1px solid #eee;
-    background: #fff;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
 
-    .center {
-        .nav {
-            margin-left: 120px;
-            &__item {
-                &:not(:first-child) {
-                    margin-left: 20px;
-                }
-            }
+  .center {
+    .nav {
+      margin-left: 120px;
+
+      &__item {
+        font-weight: 500;
+
+        &:not(:first-child) {
+          margin-left: 20px;
         }
+      }
     }
+  }
 
   .left {
     .logo-place {
@@ -95,20 +100,24 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
   }
 
     .right {
-        margin-left: auto;
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+
+      .phone {
+        margin-right: 24px;
         display: flex;
+        flex-direction: column;
         align-items: center;
 
-        .phone {
-            margin-right: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .number {}
 
-            .number {
-                margin-bottom: 4px;
-            }
+        .schedule {
+          margin-bottom: 2px;
+          font-size: 10px;
+          color: #8f8f8f;
         }
+      }
     }
 }
 </style>
