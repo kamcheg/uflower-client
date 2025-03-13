@@ -2,6 +2,7 @@
 import { StarFilled } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
 import { useFavoritesStore } from '~/entities/favorites'
+import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
 
 const props = defineProps<{
   id: IProduct['id']
@@ -28,11 +29,12 @@ function onToggle() {
 
 <template>
   <ElButton
-    :icon="StarFilled"
     circle
     :class="{ active: isInFavorite }"
     @click="onToggle"
-  />
+  >
+    <IconFavorite style="width: 16px;" />
+  </ElButton>
 </template>
 
 <style scoped lang="scss">

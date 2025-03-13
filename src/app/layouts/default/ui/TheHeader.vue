@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
 import { useCartStore } from '~/entities/cart'
 import { useFavoritesStore } from '~/entities/favorites'
+import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
+import IconCart from '~/shared/components/icons/IconCart.vue'
 
 /* INIT */
 const cartStore = useCartStore()
@@ -15,10 +16,7 @@ const favoritesStore = useFavoritesStore()
         to="/"
         class="logo-place"
       >
-        <img
-          src="/images/logo.svg"
-          alt="logo"
-        >
+        MyFlower
       </NuxtLink>
     </div>
 
@@ -61,10 +59,11 @@ const favoritesStore = useFavoritesStore()
           :value="favoritesStore.list.length"
         >
           <ElButton
-            :icon="StarFilled"
             circle
             size="large"
-          />
+          >
+            <IconFavorite style="width: 16px;" />
+          </ElButton>
         </ElBadge>
       </NuxtLink>
 
@@ -77,10 +76,11 @@ const favoritesStore = useFavoritesStore()
           :value="cartStore.productsCounter"
         >
           <ElButton
-            :icon="ShoppingCart"
             circle
             size="large"
-          />
+          >
+            <IconCart style="width: 16px;" />
+          </ElButton>
         </ElBadge>
       </NuxtLink>
     </div>
@@ -113,28 +113,31 @@ const favoritesStore = useFavoritesStore()
   .left {
     .logo-place {
       display: block;
+      font-size: 30px;
+      font-weight: 700;
     }
   }
 
-    .right {
-      margin-left: auto;
+  .right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+
+    .phone {
+      margin-right: 24px;
       display: flex;
+      flex-direction: column;
       align-items: center;
 
-      .phone {
-        margin-right: 24px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      .number {
+      }
 
-        .number {}
-
-        .schedule {
-          margin-bottom: 2px;
-          font-size: 10px;
-          color: #8f8f8f;
-        }
+      .schedule {
+        margin-bottom: 2px;
+        font-size: 10px;
+        color: #8f8f8f;
       }
     }
+  }
 }
 </style>
