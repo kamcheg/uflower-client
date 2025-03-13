@@ -31,6 +31,18 @@ export const useCartStore = defineStore('cartStore', () => {
       .filter(i => !!i)
   })
 
+  const totalPrice = computed(() => {
+    return products.value.reduce((acc, item) => {
+      return acc + item.quantity * item.price
+    }, 0)
+  })
+
+  const productsCounter = computed(() => {
+    return items.value.reduce((acc, item) => {
+      return acc + item.quantity
+    }, 0)
+  })
+
   /* METHODS */
   async function onAddProduct(id: ICartItem['productId']) {
     items.value.push({
@@ -83,7 +95,10 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     items,
+
     products,
+    totalPrice,
+    productsCounter,
 
     fetchCartProducts,
     onAddProduct,

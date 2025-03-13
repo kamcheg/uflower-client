@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
+import { useCartStore } from '~/entities/cart'
+import { useFavoritesStore } from '~/entities/favorites'
+
+/* INIT */
+const cartStore = useCartStore()
+const favoritesStore = useFavoritesStore()
 </script>
 
 <template>
@@ -50,21 +56,32 @@ import { ShoppingCart, StarFilled } from '@element-plus/icons-vue'
       </div>
 
       <NuxtLink to="/favorite">
-        <ElButton
-          :icon="StarFilled"
-          circle
-          size="large"
-        />
+        <ElBadge
+          :offset="[-10, 5]"
+          :value="favoritesStore.list.length"
+        >
+          <ElButton
+            :icon="StarFilled"
+            circle
+            size="large"
+          />
+        </ElBadge>
       </NuxtLink>
+
       <NuxtLink
         to="/cart"
         style="margin-left: 12px;"
       >
-        <ElButton
-          :icon="ShoppingCart"
-          circle
-          size="large"
-        />
+        <ElBadge
+          :offset="[-10, 5]"
+          :value="cartStore.productsCounter"
+        >
+          <ElButton
+            :icon="ShoppingCart"
+            circle
+            size="large"
+          />
+        </ElBadge>
       </NuxtLink>
     </div>
   </div>

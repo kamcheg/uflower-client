@@ -6,7 +6,7 @@ const props = defineProps<{
   data: ICartProduct
 }>()
 
-/* CART */
+/* INIT */
 const cartStore = useCartStore()
 
 function onUpdateQuantity(e: number | undefined) {
@@ -29,7 +29,7 @@ function onUpdateQuantity(e: number | undefined) {
 
     <div class="info">
       <div class="info__title">
-        {{ data.name }} - {{ data.quantity }}
+        {{ data.name }}
       </div>
 
       <ElInputNumber
@@ -40,8 +40,13 @@ function onUpdateQuantity(e: number | undefined) {
       />
     </div>
 
-    <div class="total">
-      12 200 ₽
+    <div class="right">
+      <div class="total">
+        {{ data.price * data.quantity }} ₽
+      </div>
+      <div class="detail">
+        {{ data.quantity }} x {{ data.price }} ₽
+      </div>
     </div>
   </div>
 </template>
@@ -80,11 +85,20 @@ function onUpdateQuantity(e: number | undefined) {
     }
   }
 
-  .total {
+  .right {
     margin-left: auto;
     width: 100px;
     flex-shrink: 0;
     text-align: right;
+
+    .total {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .detail {
+      font-size: 12px;
+      color: #888888;
+    }
   }
 }
 </style>

@@ -4,6 +4,7 @@ import { type IProduct, ProductCard } from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { useFavoritesStore } from '~/entities/favorites'
 
+/* INIT */
 const favoritesStore = useFavoritesStore()
 
 /* DATA */
