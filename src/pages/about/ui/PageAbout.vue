@@ -22,7 +22,7 @@
       >
         <div class="map">
           <iframe
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3Af26f7f9677c3bf56bf7ff7bdd8aebe714daedb8a3acd07f38d717e11b8b49e36&amp;source=constructor"
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A8dccaf7729aa6b7b9839c17e51ccbe03378e9b51c1eeff705e198282357e5896&amp;source=constructor"
             width="100%"
             height="100%"
             frameborder="0"
