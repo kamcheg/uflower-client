@@ -47,27 +47,26 @@ async function fetchProducts() {
     <!--        </ElButton> -->
 
     <ButtonComposition
-      style="margin-right: 10px;"
       @apply="fetchProducts"
     />
 
     <ButtonPrice
-      style="margin-right: 10px;"
+      style="margin-left: 10px;"
       @apply="fetchProducts"
     />
 
     <ButtonReason
-      style="margin-right: 10px;"
+      style="margin-left: 10px;"
       @apply="fetchProducts"
     />
 
     <ButtonRecipient
-      style="margin-right: 10px;"
+      style="margin-left: 10px;"
       @apply="fetchProducts"
     />
 
     <ButtonSize
-      style="margin-right: 10px;"
+      style="margin-left: 10px;"
       @apply="fetchProducts"
     />
   </div>
