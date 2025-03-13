@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useCartStore } from '~/entities/cart'
 
+const emit = defineEmits<{
+  (name: 'order'): void
+}>()
+
+/* INIT */
 const cartStore = useCartStore()
 </script>
 
@@ -9,7 +14,7 @@ const cartStore = useCartStore()
     <div class="price">
       Итого {{ cartStore.totalPrice }} ₽
     </div>
-    <ElButton>
+    <ElButton @click="emit('order')">
       Оформить заказ
     </ElButton>
   </div>

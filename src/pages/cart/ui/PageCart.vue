@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { CartProductCard, CartTotal, useCartStore } from '~/entities/cart'
+import ModalMakeOrder from '~/entities/cart/ui/ModalMakeOrder.vue'
 
-/* CART */
+/* INIT */
 const cartStore = useCartStore()
+
+/* INIT */
+const isModalVisible = ref(false)
 
 onMounted(async () => {
   await cartStore.fetchCartProducts()
@@ -23,9 +27,14 @@ onMounted(async () => {
           />
         </div>
 
-        <CartTotal class="page-cart__total" />
+        <CartTotal
+          class="page-cart__total"
+          @order="isModalVisible = true"
+        />
       </div>
     </div>
+
+    <ModalMakeOrder v-model="isModalVisible" />
   </div>
 </template>
 
