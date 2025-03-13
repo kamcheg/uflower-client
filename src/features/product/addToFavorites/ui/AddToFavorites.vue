@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { StarFilled } from '@element-plus/icons-vue'
 import type { IProduct } from '~/entities/product'
 import { useFavoritesStore } from '~/entities/favorites'
 import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
