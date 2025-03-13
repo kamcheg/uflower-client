@@ -29,15 +29,13 @@ function onSubmit() {
 </script>
 
 <template>
-  <ElDialog
+  <ElDrawer
     v-model="model"
-    title=""
-    width="500"
+    title="Заполните данные. Менеджер свяжется с вами для подтверждения заказа в течении 5 минут."
+    size="500px"
+    direction="rtl"
   >
-    <template #header>
-      <p>Заполните данные. Менеджер свяжется с вами для подтверждения заказа в течении 5 минут.</p>
-    </template>
-    <ElForm @submit.prevent="onSubmit">
+    <ElForm @submit.prevent>
       <ElFormItem
         label-position="top"
         label="Ваше имя"
@@ -107,16 +105,17 @@ function onSubmit() {
           :rows="4"
         />
       </ElFormItem>
+    </ElForm>
 
+    <template #footer>
       <ElButton
         type="primary"
-        style="width: 100%"
         @click="onSubmit"
       >
         Оформить заказ
       </ElButton>
-    </ElForm>
-  </ElDialog>
+    </template>
+  </ElDrawer>
 </template>
 
 <style scoped lang="scss">
