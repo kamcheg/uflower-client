@@ -87,9 +87,9 @@ async function fetchProducts() {
 
 <style scoped lang="scss">
 .catalog {
-    margin-top: 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 24px;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: 24px;
 }
 </style>

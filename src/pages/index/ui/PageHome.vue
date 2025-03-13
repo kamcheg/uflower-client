@@ -26,11 +26,11 @@ import { products } from '~/mock'
     </TemplateCatalog>
 
     <TemplateCatalog
-      title="Букеты до 5000"
+      title="Букеты до 10000"
       style="margin-top: 48px;"
     >
       <ProductCard
-        v-for="p of products.slice(14, 19)"
+        v-for="p of products.filter(i => i.price <= 10000).slice(14, 19)"
         :key="p.id"
         :data="p"
       />

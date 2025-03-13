@@ -26,7 +26,7 @@ onMounted(async () => {
 .catalog {
     margin-top: 24px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
     grid-gap: 24px;
 }
 </style>
