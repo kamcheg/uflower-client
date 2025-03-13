@@ -50,5 +50,4 @@ import { products } from '~/mock'
 </template>
 
 <style lang="scss" scoped>
-.page-home {}
 </style>
