@@ -56,7 +56,7 @@ const favoritesStore = useFavoritesStore()
       <NuxtLink to="/favorite">
         <ElBadge
           :offset="[-10, 5]"
-          :value="favoritesStore.list.length"
+          :value="favoritesStore.list.length || undefined"
         >
           <ElButton
             circle
@@ -73,7 +73,7 @@ const favoritesStore = useFavoritesStore()
       >
         <ElBadge
           :offset="[-10, 5]"
-          :value="cartStore.productsCounter"
+          :value="cartStore.productsCounter || undefined"
         >
           <ElButton
             circle
