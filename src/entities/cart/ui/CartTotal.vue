@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 import { useCartStore } from '~/entities/cart'
 
 const emit = defineEmits<{
@@ -12,7 +13,7 @@ const cartStore = useCartStore()
 <template>
   <div class="cart-total">
     <div class="price">
-      Итого {{ cartStore.totalPrice }} ₽
+      Итого {{ toReadableNumber(cartStore.totalPrice) }} ₽
     </div>
     <ElButton @click="emit('order')">
       Оформить заказ

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 import type { ICartProduct } from '~/entities/cart/model/types'
 import { useCartStore } from '~/entities/cart'
 
@@ -42,10 +43,10 @@ function onUpdateQuantity(e: number | undefined) {
 
     <div class="right">
       <div class="total">
-        {{ data.price * data.quantity }} ₽
+        {{ toReadableNumber(data.price * data.quantity) }} ₽
       </div>
       <div class="detail">
-        {{ data.quantity }} x {{ data.price }} ₽
+        {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽
       </div>
     </div>
   </div>
