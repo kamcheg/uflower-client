@@ -1,19 +1,13 @@
 <template>
-  <div class="text-4xl font-bold">
-    {{ toReadableNumber(displayedNumber) }}
-  </div>
+  <span>{{ toReadableNumber(displayedNumber) }}</span>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber.js'
+import { toReadableNumber } from '../lib/utils/toReadableNumber.js'
 
 const props = defineProps({
-  to: {
-    type: Number,
-    required: true,
-  },
-  from: {
+  counter: {
     type: Number,
     required: true,
   },
@@ -23,12 +17,12 @@ const props = defineProps({
   },
 })
 
-const displayedNumber = ref(props.from) // начальное значение из пропса
+const displayedNumber = ref(props.counter)
 
 const animateNumber = () => {
   const start = performance.now()
-  const from = props.from
-  const to = props.to
+  const from = 0
+  const to = props.counter
 
   const step = (timestamp) => {
     const progress = Math.min((timestamp - start) / props.duration, 1)
@@ -46,8 +40,8 @@ onMounted(() => {
   animateNumber()
 })
 
-// Чтобы обновлять, если targetNumber изменится:
-watch(() => props.to, () => {
+// Чтобы обновлять, если counter изменится:
+watch(() => props.counter, () => {
   animateNumber()
 })
 </script>
