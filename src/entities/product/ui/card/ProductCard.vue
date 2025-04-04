@@ -53,6 +53,8 @@ const cartStore = useCartStore()
 
 <style scoped lang="scss">
 .product-card {
+  cursor: pointer;
+
   .image-place {
     width: 100%;
     padding-bottom: 100%;

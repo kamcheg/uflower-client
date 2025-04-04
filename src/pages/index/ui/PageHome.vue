@@ -3,6 +3,7 @@ import TemplateCatalog from '~/pages/index/ui/TemplateCatalog.vue'
 import { ProductCard } from '~/entities/product'
 import { products } from '~/mock'
 import { AddToFavorites } from '~/features/product'
+import { AddToCart } from '~/features/product/addToCart'
 </script>
 
 <template>
@@ -15,6 +16,9 @@ import { AddToFavorites } from '~/features/product'
       >
         <template #favorite-button>
           <AddToFavorites :id="p.id" />
+        </template>
+        <template #cart-button>
+          <AddToCart :id="p.id" />
         </template>
       </ProductCard>
     </TemplateCatalog>
@@ -31,6 +35,9 @@ import { AddToFavorites } from '~/features/product'
         <template #favorite-button>
           <AddToFavorites :id="p.id" />
         </template>
+        <template #cart-button>
+          <AddToCart :id="p.id" />
+        </template>
       </ProductCard>
     </TemplateCatalog>
 
@@ -45,6 +52,9 @@ import { AddToFavorites } from '~/features/product'
       >
         <template #favorite-button>
           <AddToFavorites :id="p.id" />
+        </template>
+        <template #cart-button>
+          <AddToCart :id="p.id" />
         </template>
       </ProductCard>
     </TemplateCatalog>
