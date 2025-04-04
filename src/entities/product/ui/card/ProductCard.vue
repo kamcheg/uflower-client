@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IProduct } from '~/entities/product'
 import { useCartStore } from '~/entities/cart'
+import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 
 defineProps<{
   data: IProduct
@@ -34,7 +35,7 @@ const cartStore = useCartStore()
     </div>
 
     <div class="price">
-      {{ data.price }} ₽
+      {{ toReadableNumber(data.price) }} ₽
     </div>
 
     <div
