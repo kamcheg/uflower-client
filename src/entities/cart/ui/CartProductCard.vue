@@ -42,11 +42,20 @@ function onUpdateQuantity(e: number | undefined) {
     </div>
 
     <div class="right">
-      <div class="total">
-        {{ toReadableNumber(data.price * data.quantity) }} ₽
+      <div class="right__price">
+        <div class="total">
+          {{ toReadableNumber(data.price * data.quantity) }} ₽
+        </div>
+        <div class="detail">
+          {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽
+        </div>
       </div>
-      <div class="detail">
-        {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽
+
+      <div
+        class="right__delete"
+        @click="cartStore.onRemoveProduct(data.id)"
+      >
+        <b>&#10005;</b> <span>Удалить</span>
       </div>
     </div>
   </div>
@@ -82,7 +91,7 @@ function onUpdateQuantity(e: number | undefined) {
 
     &__title {
       font-weight: 500;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
   }
 
@@ -91,14 +100,33 @@ function onUpdateQuantity(e: number | undefined) {
     width: 100px;
     flex-shrink: 0;
     text-align: right;
+    display: flex;
+    flex-direction: column;
 
-    .total {
-      font-size: 18px;
-      font-weight: 500;
+    &__price {
+      .total {
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .detail {
+        font-size: 12px;
+        color: #888888;
+      }
     }
-    .detail {
-      font-size: 12px;
-      color: #888888;
+
+    &__delete {
+      margin-top: auto;
+      font-size: 13px;
+      cursor: pointer;
+      color: #888383;
+
+      b {
+        font-size: 1.2em;
+      }
+
+      span {
+        padding-left: 4px;
+      }
     }
   }
 }
