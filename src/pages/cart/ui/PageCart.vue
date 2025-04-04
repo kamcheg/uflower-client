@@ -18,6 +18,8 @@ onMounted(async () => {
     <div class="container">
       <h1>Корзина</h1>
 
+      <pre>{{ cartStore.products }}</pre>
+
       <div class="page-cart__container">
         <div class="catalog">
           <CartProductCard

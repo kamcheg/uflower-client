@@ -25,7 +25,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
         return {
           ...currentProduct,
-          quantity: item.quantity,
+          ...item,
         }
       })
       .filter(i => !!i)
@@ -48,6 +48,8 @@ export const useCartStore = defineStore('cartStore', () => {
     items.value.push({
       productId: id,
       quantity: 1,
+      note: '',
+      isNeedNote: false,
     })
 
     await fetchProduct(id)
@@ -61,6 +63,13 @@ export const useCartStore = defineStore('cartStore', () => {
     const current = items.value.find(i => i.productId === id)
     if (current) {
       current.quantity = quantity
+    }
+  }
+
+  function onChangeNote(id: ICartItem['productId'], value: ICartItem['note']) {
+    const current = items.value.find(i => i.productId === id)
+    if (current) {
+      current.note = value
     }
   }
 
@@ -104,5 +113,6 @@ export const useCartStore = defineStore('cartStore', () => {
     onAddProduct,
     onRemoveProduct,
     changeQuantity,
+    onChangeNote,
   }
 })

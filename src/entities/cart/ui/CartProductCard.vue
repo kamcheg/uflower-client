@@ -2,6 +2,7 @@
 import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 import type { ICartProduct } from '~/entities/cart/model/types'
 import { useCartStore } from '~/entities/cart'
+import CartDelete from '~/entities/cart/ui/CartDelete.vue'
 
 const props = defineProps<{
   data: ICartProduct
@@ -21,42 +22,54 @@ function onUpdateQuantity(e: number | undefined) {
 
 <template>
   <div class="product-card">
-    <div class="image-border">
-      <img
-        :src="data.image"
-        alt=""
-      >
-    </div>
-
-    <div class="info">
-      <div class="info__title">
-        {{ data.name }}
+    <div class="product-card__main">
+      <div class="image-border">
+        <img
+          :src="data.image"
+          alt=""
+        >
       </div>
 
-      <ElInputNumber
-        :model-value="data.quantity"
-        :min="1"
-        :max="15"
-        @update:model-value="onUpdateQuantity"
+      <div class="info">
+        <div class="info__title">
+          {{ data.name }}
+        </div>
+
+        <ElInputNumber
+          :model-value="data.quantity"
+          :min="1"
+          :max="15"
+          @update:model-value="onUpdateQuantity"
+        />
+      </div>
+
+      <div class="right">
+        <div class="right__price">
+          <div class="total">
+            {{ toReadableNumber(data.price * data.quantity) }} ₽
+          </div>
+          <div class="detail">
+            {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽
+          </div>
+        </div>
+
+        <CartDelete
+          class="right__delete"
+          @click="cartStore.onRemoveProduct(data.id)"
+        />
+      </div>
+    </div>
+
+    <div class="note-block">
+      <ElInput
+        :model-value="data.note"
+        :rows="3"
+        type="textarea"
+        placeholder="Введите текст записки"
+        @update:model-value="e => { cartStore.onChangeNote(data.id, e) }"
       />
-    </div>
 
-    <div class="right">
-      <div class="right__price">
-        <div class="total">
-          {{ toReadableNumber(data.price * data.quantity) }} ₽
-        </div>
-        <div class="detail">
-          {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽
-        </div>
-      </div>
-
-      <div
-        class="right__delete"
-        @click="cartStore.onRemoveProduct(data.id)"
-      >
-        <b>&#10005;</b> <span>Удалить</span>
-      </div>
+      <CartDelete title="Записка не нужна" />
     </div>
   </div>
 </template>
@@ -67,7 +80,10 @@ function onUpdateQuantity(e: number | undefined) {
   box-shadow: 0 6px 20px 6px #3540471a;
   background: #fff;
   border-radius: 16px;
-  display: flex;
+
+  &__main {
+    display: flex;
+  }
 
   .image-border {
     width: 120px;
@@ -116,18 +132,13 @@ function onUpdateQuantity(e: number | undefined) {
 
     &__delete {
       margin-top: auto;
-      font-size: 13px;
-      cursor: pointer;
-      color: #888383;
-
-      b {
-        font-size: 1.2em;
-      }
-
-      span {
-        padding-left: 4px;
-      }
     }
+  }
+
+  .note-block {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
   }
 }
 </style>
