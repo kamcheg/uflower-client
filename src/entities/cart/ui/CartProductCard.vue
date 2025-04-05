@@ -36,11 +36,23 @@ function onUpdateQuantity(e: number | undefined) {
         </div>
 
         <ElInputNumber
+          size="small"
           :model-value="data.quantity"
           :min="1"
           :max="15"
           @update:model-value="onUpdateQuantity"
         />
+
+        <div />
+
+        <ElButton
+          v-if="!data.isNeedNote"
+          size="small"
+          style="margin-top: 12px;"
+          @click="cartStore.onChangeNoteStatus(data.id, true)"
+        >
+          Добавить записку
+        </ElButton>
       </div>
 
       <div class="right">
@@ -60,7 +72,10 @@ function onUpdateQuantity(e: number | undefined) {
       </div>
     </div>
 
-    <div class="note-block">
+    <div
+      v-if="data.isNeedNote"
+      class="note-block"
+    >
       <ElInput
         :model-value="data.note"
         :rows="3"
@@ -69,7 +84,11 @@ function onUpdateQuantity(e: number | undefined) {
         @update:model-value="e => { cartStore.onChangeNote(data.id, e) }"
       />
 
-      <CartDelete title="Записка не нужна" />
+      <CartDelete
+        style="margin-top: 6px;"
+        title="Записка не нужна"
+        @click="cartStore.onChangeNoteStatus(data.id, false)"
+      />
     </div>
   </div>
 </template>
@@ -107,7 +126,7 @@ function onUpdateQuantity(e: number | undefined) {
 
     &__title {
       font-weight: 500;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
   }
 

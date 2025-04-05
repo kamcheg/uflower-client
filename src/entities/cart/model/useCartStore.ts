@@ -73,6 +73,19 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   }
 
+  function onChangeNoteStatus(id: ICartItem['productId'], flag: boolean) {
+    const current = items.value.find(i => i.productId === id)
+    if (!current) {
+      return
+    }
+
+    current.isNeedNote = flag
+
+    if (!flag) {
+      current.note = ''
+    }
+  }
+
   async function fetchCartProducts() {
     if (!items.value.length) {
       return
@@ -114,5 +127,6 @@ export const useCartStore = defineStore('cartStore', () => {
     onRemoveProduct,
     changeQuantity,
     onChangeNote,
+    onChangeNoteStatus,
   }
 })
