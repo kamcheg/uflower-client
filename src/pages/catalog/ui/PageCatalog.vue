@@ -1,6 +1,5 @@
 <script setup lang="ts">
 // import {DCaret} from "@element-plus/icons-vue";
-import axios from 'axios'
 import { filterInjectionKey } from '../config/filterSymbol'
 import { useFilter } from '../model/composables'
 import { ProductCard } from '~/entities/product'
@@ -12,33 +11,16 @@ import ButtonSize from '~/pages/catalog/ui/filter-btns/ButtonSize.vue'
 import type { IProduct } from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
+import { products as mockProducts } from '~/mock'
 
 /* INIT */
 const filter = useFilter()
 provide(filterInjectionKey, filter)
 
 /* DATA */
-const products = ref<IProduct[]>([])
+const products = ref<IProduct[]>(mockProducts)
 
-onMounted(() => {
-  fetchProducts()
-})
-
-/* METHODS */
-async function fetchProducts() {
-  try {
-    products.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
-      params: {
-        price_gte: filter.price.value.min || undefined,
-        price_lte: filter.price.value.max || undefined,
-      },
-    })
-      .then(e => e.data)
-  }
-  catch (e) {
-    console.log('err', e)
-  }
-}
+function fetchProducts() {}
 </script>
 
 <template>

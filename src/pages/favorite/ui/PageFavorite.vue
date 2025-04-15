@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import axios from 'axios'
 import { type IProduct, ProductCard } from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { useFavoritesStore } from '~/entities/favorites'
 import { AddToCart } from '~/features/product/addToCart'
+import { products as mockProducts } from '~/mock'
 
 /* INIT */
 const favoritesStore = useFavoritesStore()
@@ -17,12 +17,9 @@ async function fetch() {
   }
 
   try {
-    products.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
-      params: {
-        id: favoritesStore.list,
-      },
-    })
-      .then(e => e.data)
+    products.value = favoritesStore.list
+      .map(i => mockProducts.find(mockProduct => mockProduct.id === i))
+      .filter(i => !!i) as IProduct[]
   }
   catch (e) {
     console.log(e)
@@ -55,9 +52,9 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .catalog {
-    margin-top: 24px;
-    display: grid;
+  margin-top: 24px;
+  display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-    grid-gap: 24px;
+  grid-gap: 24px;
 }
 </style>
