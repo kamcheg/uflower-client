@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
 import type { ICartItem, ICartProduct } from '~/entities/cart/model/types'
 import type { IProduct } from '~/entities/product'
+import { products as mockProducts } from '~/mock'
 
 export const useCartStore = defineStore('cartStore', () => {
   /* DATA */
@@ -92,12 +92,9 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     try {
-      localProducts.value = await axios.get<IProduct[]>('http://localhost:4000/products', {
-        params: {
-          id: items.value.map(i => i.productId),
-        },
-      })
-        .then(r => r.data)
+      localProducts.value = items.value
+        .map(i => mockProducts.find(mockProduct => mockProduct.id === i.productId))
+        .filter(i => !!i)
     }
     catch (e) {
       console.log(e)
@@ -106,8 +103,9 @@ export const useCartStore = defineStore('cartStore', () => {
 
   async function fetchProduct(id: IProduct['id']) {
     try {
-      const pr = await axios.get<IProduct>('http://localhost:4000/products/' + id)
-        .then(r => r.data)
+      const pr = mockProducts.find(mockProduct => mockProduct.id === id)
+      if (!pr) return
+
       localProducts.value.push(pr)
     }
     catch (e) {
