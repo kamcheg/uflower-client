@@ -4,10 +4,6 @@ import { ProductCard } from '~/entities/product'
 import { products } from '~/mock'
 import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
-import {fetchProducts} from "../model/api";
-
-const { data } = await useAsyncData('item', fetchProducts)
-
 </script>
 
 <template>

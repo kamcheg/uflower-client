@@ -1,5 +1,5 @@
 import type {IPaginatedData} from "~/shared/types";
-import type {IProductListDto} from "~/pages/index/model/dtos";
+import type {IProductListDto} from "~/pages/catalog/model/dtos";
 import type {IProduct} from "~/entities/product";
 
 export function productListAdapter(event: IProductListDto): IPaginatedData<IProduct> {
