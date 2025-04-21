@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { filterInjectionKey } from '../config/filterSymbol'
-import { useFilter } from '../model/composables'
+import { filterInjectionKey } from '../page-modules/catalog/config/filterSymbol'
+import { useFilter } from '../page-modules/catalog/model/composables'
 import { ProductCard } from '~/entities/product'
-import ButtonComposition from '~/pages/catalog/ui/filter-btns/ButtonComposition.vue'
-import ButtonPrice from '~/pages/catalog/ui/filter-btns/ButtonPrice.vue'
-import ButtonReason from '~/pages/catalog/ui/filter-btns/ButtonReason.vue'
-import ButtonRecipient from '~/pages/catalog/ui/filter-btns/ButtonRecipient.vue'
-import ButtonSize from '~/pages/catalog/ui/filter-btns/ButtonSize.vue'
+import ButtonComposition from '~/page-modules/catalog/ui/filter-btns/ButtonComposition.vue'
+import ButtonPrice from '~/page-modules/catalog/ui/filter-btns/ButtonPrice.vue'
+import ButtonReason from '~/page-modules/catalog/ui/filter-btns/ButtonReason.vue'
+import ButtonRecipient from '~/page-modules/catalog/ui/filter-btns/ButtonRecipient.vue'
+import ButtonSize from '~/page-modules/catalog/ui/filter-btns/ButtonSize.vue'
 import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
-import {fetchProducts} from "../../catalog/model/api";
+import {fetchProducts} from "../page-modules/catalog/model/api";
 
 /* INIT */
 const filter = useFilter()

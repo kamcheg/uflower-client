@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TemplateCatalog from '~/pages/index/ui/TemplateCatalog.vue'
+import TemplateCatalog from '~/page-modules/index/ui/TemplateCatalog.vue'
 import { ProductCard } from '~/entities/product'
 import { products } from '~/mock'
 import { AddToFavorites } from '~/features/product'
