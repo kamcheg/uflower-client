@@ -3,15 +3,16 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
 import type { IFlowerType } from '../../model'
-import { flowerTypes } from '~/mock'
 import {apiInstance} from "~/shared/lib/axios";
 
-const url = '/filters/flower-types?page=1&pageSize=100'
+// region DEFINES
+const emit = defineEmits<{
+  (name: 'apply'): void
+}>()
+// endregion DEFINES
 
 // region FETCH
-onMounted(() => {
-  apiInstance.get(url)
-})
+onMounted(fetchItems)
 // endregion FETCH
 
 /* INIT */
@@ -20,16 +21,27 @@ const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
 /* DATA */
 const open = ref(false)
 const selected = ref<IFlowerType['id'][]>([])
+const flowerTypes = ref<IFlowerType[]>([])
 
 /* METHODS */
 function onApply() {
   filter.composition.value = [...selected.value]
   open.value = false
+  emit('apply')
 }
 function onReset() {
   filter.composition.value = []
   selected.value = []
   open.value = false
+}
+
+async function fetchItems() {
+  try {
+    const res = await apiInstance.get<{items: {id: number, name: string}[]}>('/filters/flower-types?page=1&pageSize=1000')
+    flowerTypes.value = res.data.items || []
+  } catch (e) {
+    // TODO err
+  }
 }
 </script>
 
