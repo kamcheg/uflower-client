@@ -15,7 +15,7 @@ const emit = defineEmits<{
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
 
 // region FETCH
-const {data: flowerTypes} = useAsyncData<IFlowerType[]>('flowerTypes', fetchItems, {
+const {data: flowerTypes, error} = useAsyncData<IFlowerType[]>('flowerTypes', fetchItems, {
   server: false
 })
 // endregion FETCH
@@ -45,50 +45,52 @@ async function fetchItems() {
 </script>
 
 <template>
-  <ElBadge
-    v-bind="$attrs"
-    :is-dot="!!filter.composition.value.length"
-  >
-    <ElButton
-      @click="open = true"
+  <template v-if="!error">
+    <ElBadge
+      v-bind="$attrs"
+      :is-dot="!!filter.composition.value.length"
     >
-      Цветы<ElIcon class="el-icon--right">
+      <ElButton
+        @click="open = true"
+      >
+        Цветы<ElIcon class="el-icon--right">
         <ArrowDown />
       </ElIcon>
-    </ElButton>
-  </ElBadge>
+      </ElButton>
+    </ElBadge>
 
-  <ClientOnly>
-    <ElDrawer
-      v-model="open"
-      title="Фильтр: цветы"
-      size="400px"
-      direction="btt"
-    >
-      <ElCheckboxGroup
-        v-model="selected"
-        class="flower-types"
+    <ClientOnly>
+      <ElDrawer
+        v-model="open"
+        title="Фильтр: цветы"
+        size="400px"
+        direction="btt"
       >
-        <ElCheckbox
-          v-for="type of flowerTypes"
-          :key="type.id"
-          :label="type.name"
-          :value="type.id"
-        />
-      </ElCheckboxGroup>
+        <ElCheckboxGroup
+          v-model="selected"
+          class="flower-types"
+        >
+          <ElCheckbox
+            v-for="type of flowerTypes"
+            :key="type.id"
+            :label="type.name"
+            :value="type.id"
+          />
+        </ElCheckboxGroup>
 
-      <template #footer>
-        <div>
-          <ElButton @click="onReset">
-            Очистить
-          </ElButton>
-          <ElButton @click="onApply">
-            Применить
-          </ElButton>
-        </div>
-      </template>
-    </ElDrawer>
-  </ClientOnly>
+        <template #footer>
+          <div>
+            <ElButton @click="onReset">
+              Очистить
+            </ElButton>
+            <ElButton @click="onApply">
+              Применить
+            </ElButton>
+          </div>
+        </template>
+      </ElDrawer>
+    </ClientOnly>
+  </template>
 </template>
 
 <style scoped lang="scss">
