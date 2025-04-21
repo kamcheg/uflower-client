@@ -15,7 +15,7 @@ import { fetchProducts } from "~/page-modules/catalog/model/api";
 const filter = useFilter()
 provide(filterInjectionKey, filter)
 
-const { data } = await useAsyncData('catalog-products', fetchProducts)
+const { data, refresh } = await useAsyncData('catalog-products', fetchProducts)
 
 // onMounted(() => fetchProducts)
 </script>
@@ -23,6 +23,7 @@ const { data } = await useAsyncData('catalog-products', fetchProducts)
 <template>
   <div>
     <ButtonComposition
+      @apply="refresh"
     />
 
     <ButtonPrice
