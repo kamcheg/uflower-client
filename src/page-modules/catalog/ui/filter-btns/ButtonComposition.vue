@@ -3,7 +3,7 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
 import type { IFlowerType } from '../../model'
-import {apiInstance} from "~/shared/lib/axios";
+import { apiInstance } from "~/shared/lib/axios";
 
 // region DEFINES
 const emit = defineEmits<{
@@ -11,17 +11,18 @@ const emit = defineEmits<{
 }>()
 // endregion DEFINES
 
-// region FETCH
-onMounted(fetchItems)
-// endregion FETCH
-
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
+
+// region FETCH
+const {data: flowerTypes} = useAsyncData<IFlowerType[]>('flowerTypes', fetchItems, {
+  server: false
+})
+// endregion FETCH
 
 /* DATA */
 const open = ref(false)
 const selected = ref<IFlowerType['id'][]>([])
-const flowerTypes = ref<IFlowerType[]>([])
 
 /* METHODS */
 function onApply() {
@@ -36,12 +37,10 @@ function onReset() {
 }
 
 async function fetchItems() {
-  try {
-    const res = await apiInstance.get<{items: {id: number, name: string}[]}>('/filters/flower-types?page=1&pageSize=1000')
-    flowerTypes.value = res.data.items || []
-  } catch (e) {
-    // TODO err
-  }
+  type TDto = { items: {id: number, name: string}[] }
+
+  return await apiInstance.get<TDto>('/filters/flower-types?page=1&pageSize=1000')
+    .then(r=> r.data.items || [])
 }
 </script>
 
