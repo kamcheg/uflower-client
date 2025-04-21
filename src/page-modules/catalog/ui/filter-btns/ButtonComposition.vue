@@ -4,6 +4,15 @@ import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
 import type { IFlowerType } from '../../model'
 import { flowerTypes } from '~/mock'
+import {apiInstance} from "~/shared/lib/axios";
+
+const url = '/filters/flower-types?page=1&pageSize=100'
+
+// region FETCH
+onMounted(() => {
+  apiInstance.get(url)
+})
+// endregion FETCH
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
