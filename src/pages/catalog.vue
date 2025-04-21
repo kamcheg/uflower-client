@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { filterInjectionKey } from '../page-modules/catalog/config/filterSymbol'
-import { useFilter } from '../page-modules/catalog/model/composables'
+import { useFilter } from '~/page-modules/catalog/model/composables'
 import { ProductCard } from '~/entities/product'
 import ButtonComposition from '~/page-modules/catalog/ui/filter-btns/ButtonComposition.vue'
 import ButtonPrice from '~/page-modules/catalog/ui/filter-btns/ButtonPrice.vue'
@@ -9,13 +9,15 @@ import ButtonRecipient from '~/page-modules/catalog/ui/filter-btns/ButtonRecipie
 import ButtonSize from '~/page-modules/catalog/ui/filter-btns/ButtonSize.vue'
 import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
-import {fetchProducts} from "../page-modules/catalog/model/api";
+import { fetchProducts } from "~/page-modules/catalog/model/api";
 
 /* INIT */
 const filter = useFilter()
 provide(filterInjectionKey, filter)
 
 const { data } = await useAsyncData('item', fetchProducts)
+
+// onMounted(() => fetchProducts)
 </script>
 
 <template>
