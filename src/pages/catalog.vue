@@ -15,7 +15,7 @@ import { fetchProducts } from "~/page-modules/catalog/model/api";
 const filter = useFilter()
 provide(filterInjectionKey, filter)
 
-const { data } = await useAsyncData('item', fetchProducts)
+const { data } = await useAsyncData('catalog-products', fetchProducts)
 
 // onMounted(() => fetchProducts)
 </script>
