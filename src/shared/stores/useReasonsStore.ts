@@ -5,7 +5,6 @@ import {apiInstance} from "~/shared/lib/axios";
 type TDto = {
   id: number
   title: string
-  image: string
 }
 
 export const useReasonsStore = defineStore('reasons', () => {
@@ -14,10 +13,9 @@ export const useReasonsStore = defineStore('reasons', () => {
   async function fetch() {
     try {
       const res = await apiInstance.get<TDto[]>('reasons')
-      reasons.value = res.data.map((i) => ({
+      reasons.value = res.data.map((i): IReason => ({
         id: i.id,
         name: i.title,
-        image: i.image
       }))
     } catch {
       console.log('Не удалось загрузить размеры!')
