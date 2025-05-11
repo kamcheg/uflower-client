@@ -2,7 +2,7 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
-import type { IFlowerType } from '../../model'
+import type { IFlowerType } from '@/shared/types/common'
 import { apiInstance } from "~/shared/lib/axios";
 
 // region DEFINES

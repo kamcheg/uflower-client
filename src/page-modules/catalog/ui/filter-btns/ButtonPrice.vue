@@ -2,7 +2,7 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
-import type { IPrice } from '../../model'
+import type { IPrice } from '@/shared/types/common'
 
 const emit = defineEmits<{
   (name: 'apply'): void

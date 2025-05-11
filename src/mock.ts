@@ -1,4 +1,4 @@
-import type { IFlowerType, IReason, IRecipient, ISize } from '~/page-modules/catalog/model'
+import type { IReason, IRecipient, ISize } from '@/shared/types/common'
 import type { IProduct } from '~/entities/product'
 
 export const products: IProduct[] = [
@@ -291,34 +291,6 @@ export const products: IProduct[] = [
     image: 'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/92f/8yae0t8zo4c6lkfm78bg33xc7gfjz15u.jpeg&w=312&h=312',
   },
   // Добавьте остальные объекты по аналогии
-]
-
-export const flowerTypes: IFlowerType[] = [
-  { id: 1, name: 'Розы' },
-  { id: 2, name: 'Гипсофила' },
-  { id: 3, name: 'Ранункулюс' },
-  { id: 4, name: 'Роза кустовая' },
-  { id: 5, name: 'Ирис' },
-  { id: 6, name: 'Сирень' },
-  { id: 7, name: 'Роза пионовидная' },
-  { id: 8, name: 'Лилии' },
-  { id: 9, name: 'Тюльпаны' },
-  { id: 10, name: 'Альстромерия' },
-  { id: 11, name: 'Лизиантусы' },
-  { id: 12, name: 'Тюльпаны пионовидные' },
-  { id: 13, name: 'Анемоны' },
-  { id: 14, name: 'Ландыши' },
-  { id: 15, name: 'Фрезия' },
-  { id: 16, name: 'Гиацинт' },
-  { id: 17, name: 'Мимозы' },
-  { id: 18, name: 'Хризантемы' },
-  { id: 19, name: 'Герберы' },
-  { id: 20, name: 'Орхидея' },
-  { id: 21, name: 'Эустома' },
-  { id: 22, name: 'Гвоздики' },
-  { id: 23, name: 'Подсолнух' },
-  { id: 24, name: 'Гортензия' },
-  { id: 25, name: 'Ромашки' },
 ]
 
 export const reasons: IReason[] = [

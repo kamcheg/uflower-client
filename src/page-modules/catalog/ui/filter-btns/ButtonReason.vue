@@ -2,7 +2,7 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
-import type { IReason } from '../../model'
+import type { IReason } from '@/shared/types/common'
 import { reasons } from '~/mock'
 
 /* INIT */
