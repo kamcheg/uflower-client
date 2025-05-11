@@ -1,5 +1,8 @@
 import axios from 'axios'
 
 export const apiInstance = axios.create({
-  baseURL: 'https://kamcheg-flows-store-backend-04ed.twc1.net/api/v1'
+  baseURL: 'http://localhost:4000',
+  headers: {
+    ['Brand-Slug']: 'zizi'
+  }
 })

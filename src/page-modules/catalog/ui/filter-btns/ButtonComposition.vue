@@ -39,7 +39,7 @@ function onReset() {
 async function fetchItems() {
   type TDto = { items: {id: number, name: string}[] }
 
-  return await apiInstance.get<TDto>('/filters/flower-types?page=1&pageSize=1000')
+  return await apiInstance.get<TDto>('/flower-types')
     .then(r=> r.data.items || [])
 }
 </script>

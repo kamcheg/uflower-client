@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { filterInjectionKey } from '../page-modules/catalog/config/filterSymbol'
+import { filterInjectionKey } from '~/page-modules/catalog/config'
 import { useFilter } from '~/page-modules/catalog/model/composables'
 import { ProductCard } from '~/entities/product'
 import ButtonComposition from '~/page-modules/catalog/ui/filter-btns/ButtonComposition.vue'
@@ -15,16 +15,12 @@ import { fetchProducts } from "~/page-modules/catalog/model/api";
 const filter = useFilter()
 provide(filterInjectionKey, filter)
 
-const { data, refresh } = await useAsyncData('catalog-products', fetchProducts)
-
-// onMounted(() => fetchProducts)
+const { data } = await useAsyncData('catalog-products', fetchProducts, { server: false })
 </script>
 
 <template>
   <div>
-    <ButtonComposition
-      @apply="refresh"
-    />
+    <ButtonComposition />
 
     <ButtonPrice
       style="margin-left: 10px;"
@@ -45,7 +41,7 @@ const { data, refresh } = await useAsyncData('catalog-products', fetchProducts)
 
   <div class="catalog">
     <ProductCard
-      v-for="i of data?.data || []"
+      v-for="i of data || []"
       :key="i.id"
       :data="i"
     >

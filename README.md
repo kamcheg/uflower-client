@@ -1,75 +1,26 @@
-# Nuxt Minimal Starter
+# Админка проекта цветочного магазина.
+node - v20.18.3
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# Стандартизация проекта
 
-## Setup
+## DTO
+| Операция         | Request DTO (тело запроса)      | Response DTO (ответ)            |
+|------------------|---------------------------------|----------------------------------|
+| **GET all**      | —                               | `ColorListResponseDto` или `List<ColorResponseDto>` |
+| **GET one**      | —                 | `ColorResponseDto`              |
+| **POST (create)**| `CreateColorRequestDto`         | `ColorResponseDto`              |
+| **PUT/PATCH**    | `UpdateColorRequestDto`         | `ColorResponseDto`              |
 
-Make sure to install dependencies:
+## Adapters
+- transformServerProductToClient - getOne, getAll
+- transformClientProductToServer - create, update
 
-```bash
-# npm
-npm install
+## Api naming
+- getAll - fetchAllProducts
+- getOne - fetchOneProduct
+- create - createProduct
+- update - updateProduct
+- delete - deleteProduct
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Folder structure
+TODO
