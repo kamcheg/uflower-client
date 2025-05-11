@@ -3,7 +3,9 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
 import type { IReason } from '@/shared/types/common'
-import { reasons } from '~/mock'
+import {useReasonsStore} from "~/shared/stores/useReasonsStore";
+
+const {reasons} = useReasonsStore()
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
