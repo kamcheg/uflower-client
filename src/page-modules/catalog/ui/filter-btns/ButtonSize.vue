@@ -3,7 +3,9 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
 import type { ISize } from '@/shared/types/common'
-import { sizes } from '~/mock'
+import {useSizesStore} from "~/shared/stores/useSizesStore";
+
+const {sizes} = useSizesStore()
 
 /* INIT */
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!

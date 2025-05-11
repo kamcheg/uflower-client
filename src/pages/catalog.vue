@@ -10,12 +10,28 @@ import ButtonSize from '~/page-modules/catalog/ui/filter-btns/ButtonSize.vue'
 import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
 import { fetchProducts } from "~/page-modules/catalog/model/api";
+import type {IFilters} from "~/page-modules/catalog/model/types";
 
 /* INIT */
 const filter = useFilter()
 provide(filterInjectionKey, filter)
 
-const { data } = await useAsyncData('catalog-products', fetchProducts, { server: false })
+const body = computed<IFilters>(() => ({ // TODO
+  composition: filter.composition.value,
+  price: filter.price.value,
+  reasons: filter.reasons.value,
+  recipients: filter.recipients.value,
+  sizes: filter.sizes.value,
+}))
+const { data, refresh } = await useAsyncData(
+  'catalog-products',
+  () => fetchProducts(body.value),
+  { server: false }
+)
+
+watch(body, () => {
+  refresh()
+}, { deep: true })
 </script>
 
 <template>
@@ -38,6 +54,8 @@ const { data } = await useAsyncData('catalog-products', fetchProducts, { server:
       style="margin-left: 10px;"
     />
   </div>
+
+  <pre>{{filter}}</pre>
 
   <div class="catalog">
     <ProductCard

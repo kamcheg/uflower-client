@@ -1,3 +1,13 @@
+<script lang="ts" setup>
+import {useSizesStore} from "~/shared/stores/useSizesStore";
+
+const sizesStore = useSizesStore()
+
+onServerPrefetch(async () => {
+  await sizesStore.fetch()
+})
+</script>
+
 <template>
   <NuxtLayout>
     <NuxtPage />
