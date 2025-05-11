@@ -3,7 +3,7 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import { filterInjectionKey } from '../../config'
 import type { useFilter } from '../../model/composables'
 import type { IFlowerType } from '@/shared/types/common'
-import { apiInstance } from "~/shared/lib/axios";
+import {useFlowerTypesStore} from "~/shared/stores/useFlowerTypesStore";
 
 // region DEFINES
 const emit = defineEmits<{
@@ -12,13 +12,8 @@ const emit = defineEmits<{
 // endregion DEFINES
 
 /* INIT */
+const {flowerTypes} = useFlowerTypesStore()
 const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
-
-// region FETCH
-const {data: flowerTypes, error} = useAsyncData<IFlowerType[]>('flowerTypes', fetchItems, {
-  server: false
-})
-// endregion FETCH
 
 /* DATA */
 const open = ref(false)
@@ -35,62 +30,53 @@ function onReset() {
   selected.value = []
   open.value = false
 }
-
-async function fetchItems() {
-  type TDto = { items: {id: number, name: string}[] }
-
-  return await apiInstance.get<TDto>('/flower-types')
-    .then(r=> r.data.items || [])
-}
 </script>
 
 <template>
-  <template v-if="!error">
-    <ElBadge
-      v-bind="$attrs"
-      :is-dot="!!filter.composition.value.length"
+  <ElBadge
+    v-bind="$attrs"
+    :is-dot="!!filter.composition.value.length"
+  >
+    <ElButton
+      @click="open = true"
     >
-      <ElButton
-        @click="open = true"
-      >
-        Цветы<ElIcon class="el-icon--right">
-        <ArrowDown />
-      </ElIcon>
-      </ElButton>
-    </ElBadge>
+      Цветы<ElIcon class="el-icon--right">
+      <ArrowDown />
+    </ElIcon>
+    </ElButton>
+  </ElBadge>
 
-    <ClientOnly>
-      <ElDrawer
-        v-model="open"
-        title="Фильтр: цветы"
-        size="400px"
-        direction="btt"
+  <ClientOnly>
+    <ElDrawer
+      v-model="open"
+      title="Фильтр: цветы"
+      size="400px"
+      direction="btt"
+    >
+      <ElCheckboxGroup
+        v-model="selected"
+        class="flower-types"
       >
-        <ElCheckboxGroup
-          v-model="selected"
-          class="flower-types"
-        >
-          <ElCheckbox
-            v-for="type of flowerTypes"
-            :key="type.id"
-            :label="type.name"
-            :value="type.id"
-          />
-        </ElCheckboxGroup>
+        <ElCheckbox
+          v-for="type of flowerTypes"
+          :key="type.id"
+          :label="type.name"
+          :value="type.id"
+        />
+      </ElCheckboxGroup>
 
-        <template #footer>
-          <div>
-            <ElButton @click="onReset">
-              Очистить
-            </ElButton>
-            <ElButton @click="onApply">
-              Применить
-            </ElButton>
-          </div>
-        </template>
-      </ElDrawer>
-    </ClientOnly>
-  </template>
+      <template #footer>
+        <div>
+          <ElButton @click="onReset">
+            Очистить
+          </ElButton>
+          <ElButton @click="onApply">
+            Применить
+          </ElButton>
+        </div>
+      </template>
+    </ElDrawer>
+  </ClientOnly>
 </template>
 
 <style scoped lang="scss">
