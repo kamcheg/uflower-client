@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { filterInjectionKey } from '../../config'
-import type { useFilter } from '../../model/composables'
 import type { IRecipient } from '@/shared/types/common'
 import {useRecipientsStore} from "~/shared/stores/useRecipientsStore";
+import type {IFilters} from "~/page-modules/catalog/model/types";
 
 const {recipients} = useRecipientsStore()
-
-/* INIT */
-const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
+const model = defineModel<IFilters['recipients']>({required: true})
 
 /* DATA */
 const open = ref(false)
@@ -16,11 +13,11 @@ const selected = ref<IRecipient['id'][]>([])
 
 /* METHODS */
 function onApply() {
-  filter.recipients.value = [...selected.value]
+  model.value = [...selected.value]
   open.value = false
 }
 function onReset() {
-  filter.recipients.value = []
+  model.value = []
   selected.value = []
   open.value = false
 }
@@ -29,7 +26,7 @@ function onReset() {
 <template>
   <ElBadge
     v-bind="$attrs"
-    :is-dot="!!filter.recipients.value.length"
+    :is-dot="!!model.length"
   >
     <ElButton
       @click="open = true"

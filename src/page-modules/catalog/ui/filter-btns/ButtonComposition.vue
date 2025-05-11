@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { filterInjectionKey } from '../../config'
-import type { useFilter } from '../../model/composables'
 import type { IFlowerType } from '@/shared/types/common'
 import {useFlowerTypesStore} from "~/shared/stores/useFlowerTypesStore";
+import type {IFilters} from "~/page-modules/catalog/model/types";
 
-// region DEFINES
-const emit = defineEmits<{
-  (name: 'apply'): void
-}>()
-// endregion DEFINES
+const model = defineModel<IFilters['composition']>({required: true})
 
 /* INIT */
 const {flowerTypes} = useFlowerTypesStore()
-const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
 
 /* DATA */
 const open = ref(false)
@@ -21,12 +15,11 @@ const selected = ref<IFlowerType['id'][]>([])
 
 /* METHODS */
 function onApply() {
-  filter.composition.value = [...selected.value]
+  model.value = [...selected.value]
   open.value = false
-  emit('apply')
 }
 function onReset() {
-  filter.composition.value = []
+  model.value = []
   selected.value = []
   open.value = false
 }
@@ -35,7 +28,7 @@ function onReset() {
 <template>
   <ElBadge
     v-bind="$attrs"
-    :is-dot="!!filter.composition.value.length"
+    :is-dot="!!model.length"
   >
     <ElButton
       @click="open = true"

@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { filterInjectionKey } from '../../config'
-import type { useFilter } from '../../model/composables'
 import type { IPrice } from '@/shared/types/common'
+import type {IFilters} from "~/page-modules/catalog/model/types";
 
-const emit = defineEmits<{
-  (name: 'apply'): void
-}>()
-
-/* INIT */
-const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
+const model = defineModel<IFilters['price']>({required: true})
 
 /* DATA */
 const current = ref<IPrice>({
@@ -33,12 +27,11 @@ function onCheck(event: IPrice) {
 }
 
 function onApply() {
-  filter.price.value = { ...current.value }
+  model.value = { ...current.value }
   open.value = false
-  emit('apply')
 }
 function onReset() {
-  filter.price.value = {
+  model.value = {
     min: null,
     max: null,
   }
@@ -47,14 +40,13 @@ function onReset() {
     max: null,
   }
   open.value = false
-  emit('apply')
 }
 </script>
 
 <template>
   <ElBadge
     v-bind="$attrs"
-    :is-dot="!!filter.price.value.min || !!filter.price.value.max"
+    :is-dot="!!model.min || !!model.max"
   >
     <ElButton
       @click="open = true"

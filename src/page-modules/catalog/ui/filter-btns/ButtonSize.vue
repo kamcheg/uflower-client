@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { filterInjectionKey } from '../../config'
-import type { useFilter } from '../../model/composables'
 import type { ISize } from '@/shared/types/common'
 import {useSizesStore} from "~/shared/stores/useSizesStore";
+import type {IFilters} from "~/page-modules/catalog/model/types";
 
 const {sizes} = useSizesStore()
 
-/* INIT */
-const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
+const model = defineModel<IFilters['sizes']>({required: true})
 
 /* DATA */
 const open = ref(false)
@@ -16,12 +14,12 @@ const selected = ref<ISize['id'][]>([])
 
 /* METHODS */
 function onApply() {
-  filter.sizes.value = [...selected.value]
+  model.value = [...selected.value]
   open.value = false
 }
 
 function onReset() {
-  filter.sizes.value = []
+  model.value = []
   selected.value = []
   open.value = false
 }
@@ -39,7 +37,7 @@ function onCheck(id: ISize['id']) {
 <template>
   <ElBadge
     v-bind="$attrs"
-    :is-dot="!!filter.sizes.value.length"
+    :is-dot="!!model.length"
   >
     <ElButton
       @click="open = true"

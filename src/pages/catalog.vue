@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { filterInjectionKey } from '~/page-modules/catalog/config'
-import { useFilter } from '~/page-modules/catalog/model/composables'
 import { ProductCard } from '~/entities/product'
 import ButtonComposition from '~/page-modules/catalog/ui/filter-btns/ButtonComposition.vue'
 import ButtonPrice from '~/page-modules/catalog/ui/filter-btns/ButtonPrice.vue'
@@ -12,72 +10,95 @@ import { AddToCart } from '~/features/product/addToCart'
 import { fetchProducts } from "~/page-modules/catalog/model/api";
 import type {IFilters} from "~/page-modules/catalog/model/types";
 
-/* INIT */
-const filter = useFilter()
-provide(filterInjectionKey, filter)
+/* DATA */
+const filters = ref<IFilters>({
+  composition: [],
+  price: {
+    min: null,
+    max: null,
+  },
+  reasons: [],
+  recipients: [],
+  sizes: [],
+})
 
-const body = computed<IFilters>(() => ({ // TODO
-  composition: filter.composition.value,
-  price: filter.price.value,
-  reasons: filter.reasons.value,
-  recipients: filter.recipients.value,
-  sizes: filter.sizes.value,
-}))
 const { data, refresh } = await useAsyncData(
   'catalog-products',
-  () => fetchProducts(body.value),
+  () => fetchProducts(filters.value),
   { server: false }
 )
 
-watch(body, () => {
+watch(filters, () => {
   refresh()
 }, { deep: true })
 </script>
 
 <template>
-  <div>
-    <ButtonComposition />
-
-    <ButtonPrice
-      style="margin-left: 10px;"
-    />
-
-    <ButtonReason
-      style="margin-left: 10px;"
-    />
-
-    <ButtonRecipient
-      style="margin-left: 10px;"
-    />
-
-    <ButtonSize
-      style="margin-left: 10px;"
-    />
-  </div>
-
-  <pre>{{filter}}</pre>
-
   <div class="catalog">
-    <ProductCard
-      v-for="i of data || []"
-      :key="i.id"
-      :data="i"
-    >
-      <template #favorite-button>
-        <AddToFavorites :id="i.id" />
-      </template>
-      <template #cart-button>
-        <AddToCart :id="i.id" />
-      </template>
-    </ProductCard>
+    <div class="catalog__filters">
+      <ButtonComposition v-model="filters.composition" />
+
+      <ButtonPrice
+        v-model="filters.price"
+        style="margin-left: 10px;"
+      />
+
+      <ButtonReason
+        v-model="filters.reasons"
+        style="margin-left: 10px;"
+      />
+
+      <ButtonRecipient
+        v-model="filters.recipients"
+        style="margin-left: 10px;"
+      />
+
+      <ButtonSize
+        v-model="filters.sizes"
+        style="margin-left: 10px;"
+      />
+    </div>
+
+    <div class="catalog__container">
+      <ProductCard
+        v-for="i of data || []"
+        :key="i.id"
+        :data="i"
+      >
+        <template #favorite-button>
+          <AddToFavorites :id="i.id" />
+        </template>
+        <template #cart-button>
+          <AddToCart :id="i.id" />
+        </template>
+      </ProductCard>
+    </div>
+
+    <div class="catalog__pagination-wrapper">
+      <ElPagination
+        :page-size="20"
+        :pager-count="5"
+        layout="prev, pager, next"
+        :total="1000"
+        background
+      />
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .catalog {
-  margin-top: 24px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-gap: 24px;
+  &__container {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 24px;
+  }
+
+  &__pagination-wrapper {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

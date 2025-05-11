@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ArrowDown } from '@element-plus/icons-vue'
-import { filterInjectionKey } from '../../config'
-import type { useFilter } from '../../model/composables'
 import type { IReason } from '@/shared/types/common'
 import {useReasonsStore} from "~/shared/stores/useReasonsStore";
+import type {IFilters} from "~/page-modules/catalog/model/types";
 
 const {reasons} = useReasonsStore()
 
-/* INIT */
-const filter = inject<ReturnType<typeof useFilter>>(filterInjectionKey)!
+const model = defineModel<IFilters['reasons']>({required: true})
 
 /* DATA */
 const open = ref(false)
@@ -16,11 +14,11 @@ const selected = ref<IReason['id'][]>([])
 
 /* METHODS */
 function onApply() {
-  filter.reasons.value = [...selected.value]
+  model.value = [...selected.value]
   open.value = false
 }
 function onReset() {
-  filter.reasons.value = []
+  model.value = []
   selected.value = []
   open.value = false
 }
@@ -29,7 +27,7 @@ function onReset() {
 <template>
   <ElBadge
     v-bind="$attrs"
-    :is-dot="!!filter.reasons.value.length"
+    :is-dot="!!model.length"
   >
     <ElButton
       @click="open = true"
