@@ -1,11 +1,25 @@
-export interface IPaginatedData<T> {
+export interface IPaginatedDataResponseDto<T> {
   pagination: {
     lastPage: number // Максимальное кол-во страниц
-    perPage: number // Максимальное количество элементов которые будут находиться в data
     page: number // Текущая страница
     total: number // Общее количество элементов
   }
   data: T[]
+}
+
+export interface IPaginatedData<T> {
+  pagination: {
+    lastPage: number // Максимальное кол-во страниц
+    page: number // Текущая страница
+    total: number // Общее количество элементов
+  }
+  data: T[]
+}
+
+export interface IPagination {
+  page: number
+  total: number
+  limit: number
 }
 
 export interface IPrice {

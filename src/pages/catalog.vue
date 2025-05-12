@@ -9,6 +9,7 @@ import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
 import { fetchProducts } from "~/page-modules/catalog/model/api";
 import type {IFilters} from "~/page-modules/catalog/model/types";
+import type {IPagination} from "~/shared/types/common";
 
 /* DATA */
 const filters = ref<IFilters>({
@@ -21,14 +22,25 @@ const filters = ref<IFilters>({
   recipients: [],
   sizes: [],
 })
+const pagination = ref<IPagination>({
+  page: 1,
+  total: 1,
+  limit: 8,
+})
 
 const { data, refresh } = await useAsyncData(
   'catalog-products',
-  () => fetchProducts(filters.value),
+  () => fetchProducts(filters.value, pagination.value),
   { server: false }
 )
+watch(data, () => {
+  const total = data.value?.pagination?.total
+  if (total !== undefined) {
+    pagination.value.total = total
+  }
+})
 
-watch(filters, () => {
+watch([filters, pagination], () => {
   refresh()
 }, { deep: true })
 </script>
@@ -61,7 +73,7 @@ watch(filters, () => {
 
     <div class="catalog__container">
       <ProductCard
-        v-for="i of data || []"
+        v-for="i of data?.data || []"
         :key="i.id"
         :data="i"
       >
@@ -76,10 +88,11 @@ watch(filters, () => {
 
     <div class="catalog__pagination-wrapper">
       <ElPagination
-        :page-size="20"
+        v-model:current-page="pagination.page"
+        :page-size="pagination.limit"
         :pager-count="5"
         layout="prev, pager, next"
-        :total="1000"
+        :total="pagination.total"
         background
       />
     </div>

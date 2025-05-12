@@ -290,7 +290,6 @@ export const products: IProduct[] = [
     price: 8700,
     image: 'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/92f/8yae0t8zo4c6lkfm78bg33xc7gfjz15u.jpeg&w=312&h=312',
   },
-  // Добавьте остальные объекты по аналогии
 ]
 
 export const reasons: IReason[] = [

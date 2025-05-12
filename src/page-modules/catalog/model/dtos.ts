@@ -1,22 +1,6 @@
-export interface ProductResponseDto {
-  id: number
-  createdAt: string
-  updatedAt: string
-  name: string
-  description: string
-  price: number
-  isActive: boolean
-  width: number
-  height: number
-  images: string[]
-  size: {
-    id: number
-    title: string
-    image: string
-  },
-  reasons: number[]
-  recipients: number[]
-  flowerTypes: number[]
-}
+import type {IPaginatedDataResponseDto} from "~/shared/types/common";
+import type {ProductResponseDto} from "~/shared/dtos/product.dto";
 
-export type ProductListResponseDto = ProductResponseDto[]
+export type {ProductResponseDto} from "~/shared/dtos/product.dto";
+
+export type ProductListResponseDto = IPaginatedDataResponseDto<ProductResponseDto>

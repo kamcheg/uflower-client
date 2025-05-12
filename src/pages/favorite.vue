@@ -4,6 +4,9 @@ import { AddToFavorites } from '~/features/product'
 import { useFavoritesStore } from '~/entities/favorites'
 import { AddToCart } from '~/features/product/addToCart'
 import { products as mockProducts } from '~/mock'
+import {apiInstance} from "~/shared/lib/axios";
+import type {ProductResponseDto} from "~/shared/dtos/product.dto";
+import {transformServerProductToClient} from "~/shared/adapters/product";
 
 /* INIT */
 const favoritesStore = useFavoritesStore()
@@ -17,9 +20,11 @@ async function fetch() {
   }
 
   try {
-    products.value = favoritesStore.list
-      .map(i => mockProducts.find(mockProduct => mockProduct.id === i))
-      .filter(i => !!i) as IProduct[]
+    const { data } = await apiInstance.get<ProductResponseDto[]>('/flowers/find-by-ids', {
+      params: { ids: favoritesStore.list }
+    })
+
+    products.value = data.map(p => transformServerProductToClient(p))
   }
   catch (e) {
     console.log(e)
