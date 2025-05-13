@@ -20,6 +20,7 @@ export interface IPagination {
   page: number
   total: number
   limit: number
+  lastPage: number
 }
 
 export interface IPrice {

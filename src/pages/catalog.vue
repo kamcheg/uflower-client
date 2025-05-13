@@ -26,19 +26,17 @@ const pagination = ref<IPagination>({
   page: 1,
   total: 1,
   limit: 8,
+  lastPage: 1,
 })
 
-const { data, refresh } = await useAsyncData(
+const { data, refresh, status } = await useAsyncData(
   'catalog-products',
   () => fetchProducts(filters.value, pagination.value),
-  { server: false }
 )
 watch(data, () => {
-  const total = data.value?.pagination?.total
-  if (total !== undefined) {
-    pagination.value.total = total
-  }
-})
+  pagination.value.total = data.value?.pagination?.total || 1
+  pagination.value.lastPage = data.value?.pagination?.lastPage || 1
+}, { immediate: true })
 
 watch([filters, pagination], () => {
   refresh()
@@ -46,7 +44,12 @@ watch([filters, pagination], () => {
 </script>
 
 <template>
-  <div class="catalog">
+  <div v-if="status === 'error'" class="catalog-error">
+    <h1 class="catalog-error__title">Произошла ошибка!</h1>
+    <h2 class="catalog-error__subtitle">Не удалось загрузить данные!</h2>
+  </div>
+
+  <div v-else class="catalog">
     <div class="catalog__filters">
       <ButtonComposition v-model="filters.composition" />
 
@@ -86,7 +89,7 @@ watch([filters, pagination], () => {
       </ProductCard>
     </div>
 
-    <div class="catalog__pagination-wrapper">
+    <div v-if="pagination.lastPage > 1" class="catalog__pagination-wrapper">
       <ElPagination
         v-model:current-page="pagination.page"
         :page-size="pagination.limit"
@@ -113,5 +116,10 @@ watch([filters, pagination], () => {
     display: flex;
     justify-content: center;
   }
+}
+
+.catalog-error {
+  &__title { text-align: center; }
+  &__subtitle { text-align: center; }
 }
 </style>
