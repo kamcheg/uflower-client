@@ -10,6 +10,9 @@ import { AddToCart } from '~/features/product/addToCart'
 import { fetchProducts } from "~/page-modules/catalog/model/api";
 import type {IFilters} from "~/page-modules/catalog/model/types";
 import type {IPagination} from "~/shared/types/common";
+import {useLoadingStore} from "~/shared/stores/useLoadingStore";
+
+const loadingStore = useLoadingStore()
 
 /* DATA */
 const filters = ref<IFilters>({
@@ -31,12 +34,15 @@ const pagination = ref<IPagination>({
 
 const { data, refresh, status } = await useAsyncData(
   'catalog-products',
-  () => fetchProducts(filters.value, pagination.value),
+  () => fetchProducts(filters.value, pagination.value)
 )
 watch(data, () => {
   pagination.value.total = data.value?.pagination?.total || 1
   pagination.value.lastPage = data.value?.pagination?.lastPage || 1
 }, { immediate: true })
+watch(status, (val) => {
+  loadingStore.isLoading = val === 'pending'
+})
 
 watch([filters, pagination], () => {
   refresh()
