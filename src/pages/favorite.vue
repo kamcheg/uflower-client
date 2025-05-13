@@ -3,7 +3,6 @@ import { type IProduct, ProductCard } from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { useFavoritesStore } from '~/entities/favorites'
 import { AddToCart } from '~/features/product/addToCart'
-import { products as mockProducts } from '~/mock'
 import {apiInstance} from "~/shared/lib/axios";
 import type {ProductResponseDto} from "~/shared/dtos/product.dto";
 import {transformServerProductToClient} from "~/shared/adapters/product";
@@ -12,32 +11,20 @@ import {transformServerProductToClient} from "~/shared/adapters/product";
 const favoritesStore = useFavoritesStore()
 
 /* DATA */
-const products = ref<IProduct[]>([])
-
-async function fetch() {
-  if (favoritesStore.list.length === 0) {
-    return
-  }
-
-  try {
+const { data: products } = await useAsyncData<IProduct[]>(
+  'favorite-products',
+  async () => {
     const { data } = await apiInstance.get<ProductResponseDto[]>('/flowers/find-by-ids', {
       params: { ids: favoritesStore.list }
     })
 
-    products.value = data.map(p => transformServerProductToClient(p))
+    return data.map(p => transformServerProductToClient(p))
   }
-  catch (e) {
-    console.log(e)
-  }
-}
-
-onMounted(() => {
-  fetch()
-})
+)
 </script>
 
 <template>
-  <div v-if="products.length" class="catalog">
+  <div v-if="products?.length" class="catalog">
     <h1>Избранное</h1>
     <div class="catalog__container">
       <ProductCard
