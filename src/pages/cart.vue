@@ -15,7 +15,7 @@ onMounted(async () => {
 
 <template>
   <div
-    v-if="true"
+    v-if="cartStore.items.length"
     class="page-cart"
   >
     <!--    v-if="cartStore.products.length" -->
