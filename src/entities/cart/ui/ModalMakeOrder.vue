@@ -3,23 +3,25 @@ import { ElMessage } from 'element-plus'
 import {apiInstance} from "~/shared/lib/axios";
 import {useCartStore} from "~/entities/cart";
 
+const baseForm = {
+  name: '',
+  phone: '',
+  isMyOrder: false,
+  taker: {
+    name: '',
+    phone: '',
+  },
+  address: '',
+  comment: '',
+}
+
 /* INIT */
 const model = defineModel<boolean>()
 
 const cartStore = useCartStore()
 
 /* DATA */
-const form = ref({
-  name: 'Kamil',
-  phone: '89965110376',
-  isMyOrder: false,
-  taker: {
-    name: 'anna',
-    phone: '899834058',
-  },
-  address: 'makhachkala',
-  comment: 'none',
-})
+const form = ref(JSON.parse(JSON.stringify(baseForm)))
 
 /* METHODS */
 async function onSubmit() {
@@ -44,6 +46,7 @@ async function onSubmit() {
     })
     model.value = false
     cartStore.clear()
+    form.value = JSON.parse(JSON.stringify(baseForm))
   } catch (e) {
     ElMessage({
       message: 'Произошла ошибка!',
