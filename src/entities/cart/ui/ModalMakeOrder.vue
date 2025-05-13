@@ -38,15 +38,19 @@ async function onSubmit() {
         quantity: p.quantity,
       }))
     })
+    ElMessage({
+      message: 'Ваша заявка отправлена!',
+      type: 'success',
+    })
+    model.value = false
+    cartStore.clear()
   } catch (e) {
-    console.log('error')
+    ElMessage({
+      message: 'Произошла ошибка!',
+      type: 'error',
+    })
+    model.value = false
   }
-  ElMessage({
-    message: 'Ваша заявка отправлена!',
-    type: 'success',
-    // plain: true,
-  })
-  model.value = false
 }
 </script>
 

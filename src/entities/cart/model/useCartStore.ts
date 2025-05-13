@@ -105,6 +105,10 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   }
 
+  function clear() {
+    items.value = []
+  }
+
   return {
     items,
 
@@ -118,5 +122,6 @@ export const useCartStore = defineStore('cartStore', () => {
     changeQuantity,
     onChangeNote,
     onChangeNoteStatus,
+    clear
   }
 })
