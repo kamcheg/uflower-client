@@ -41,7 +41,7 @@ async function onSubmit() {
       }))
     })
     ElMessage({
-      message: 'Ваша заявка отправлена!',
+      message: 'Ваш заказ оформлен!',
       type: 'success',
     })
     model.value = false
