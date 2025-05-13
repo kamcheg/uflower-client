@@ -1,24 +1,46 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
+import {apiInstance} from "~/shared/lib/axios";
+import {useCartStore} from "~/entities/cart";
 
 /* INIT */
 const model = defineModel<boolean>()
 
+const cartStore = useCartStore()
+
 /* DATA */
 const form = ref({
-  name: '',
-  phone: '89',
+  name: 'Kamil',
+  phone: '89965110376',
   isMyOrder: false,
   taker: {
-    name: '',
-    phone: '89',
+    name: 'anna',
+    phone: '899834058',
   },
-  address: '',
-  comment: '',
+  address: 'makhachkala',
+  comment: 'none',
 })
 
 /* METHODS */
-function onSubmit() {
+async function onSubmit() {
+  try {
+    await apiInstance.post('/orders', {
+      customerName: form.value.name,
+      customerPhone: form.value.phone,
+      address: form.value.address,
+      isDeliverToCustomer: form.value.isMyOrder,
+      recipientName: form.value.taker.name,
+      recipientPhone: form.value.taker.phone,
+      comment: form.value.comment,
+      orderFlowers: cartStore.products.map(p => ({
+        flowerId: p.id,
+        price: p.price,
+        quantity: p.quantity,
+      }))
+    })
+  } catch (e) {
+    console.log('error')
+  }
   ElMessage({
     message: 'Ваша заявка отправлена!',
     type: 'success',
