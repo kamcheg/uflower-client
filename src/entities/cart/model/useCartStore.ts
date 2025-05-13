@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import type { ICartItem, ICartProduct } from '~/entities/cart/model/types'
 import type { IProduct } from '~/entities/product'
-import { products as mockProducts } from '~/mock'
+import type {ProductResponseDto} from "~/shared/dtos/product.dto";
+import {transformServerProductToClient} from "~/shared/adapters/product";
+import {apiInstance} from "~/shared/lib/axios";
 
 export const useCartStore = defineStore('cartStore', () => {
   /* DATA */
@@ -11,13 +13,13 @@ export const useCartStore = defineStore('cartStore', () => {
     secure: true, // Только для HTTPS
     sameSite: 'strict', // Политика безопасности
   })
-  const localProducts = ref<IProduct[]>([])
+  const _localProducts = ref<IProduct[]>([])
 
   /* COMPUTED */
   const products = computed<ICartProduct[]>((): ICartProduct[] => {
     return items.value
       .map((item) => {
-        const currentProduct = localProducts.value.find(lp => lp.id === item.productId)
+        const currentProduct = _localProducts.value.find(lp => lp.id === item.productId)
 
         if (!currentProduct) {
           return null
@@ -51,8 +53,6 @@ export const useCartStore = defineStore('cartStore', () => {
       note: '',
       isNeedNote: false,
     })
-
-    await fetchProduct(id)
   }
 
   function onRemoveProduct(id: ICartItem['productId']) {
@@ -92,21 +92,13 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     try {
-      localProducts.value = items.value
-        .map(i => mockProducts.find(mockProduct => mockProduct.id === i.productId))
-        .filter(i => !!i)
-    }
-    catch (e) {
-      console.log(e)
-    }
-  }
+      const {data} = await apiInstance.get<ProductResponseDto[]>('/flowers/find-by-ids', {
+        params: {
+          ids: items.value.map(i => i.productId)
+        }
+      })
 
-  async function fetchProduct(id: IProduct['id']) {
-    try {
-      const pr = mockProducts.find(mockProduct => mockProduct.id === id)
-      if (!pr) return
-
-      localProducts.value.push(pr)
+      _localProducts.value = data.map(p => transformServerProductToClient(p))
     }
     catch (e) {
       console.log(e)
