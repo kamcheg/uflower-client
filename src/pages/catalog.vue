@@ -39,14 +39,12 @@ const { data, refresh, status } = await useAsyncData(
 watch(data, () => {
   pagination.value.total = data.value?.pagination?.total || 1
   pagination.value.lastPage = data.value?.pagination?.lastPage || 1
-}, { immediate: true })
+}, { immediate: true, once: true })
 watch(status, (val) => {
   loadingStore.isLoading = val === 'pending'
 })
-
-watch([filters, pagination], () => {
-  refresh()
-}, { deep: true })
+watch(filters, () => refresh(), { deep: true })
+watch(pagination, () => refresh(), { deep: true })
 </script>
 
 <template>
