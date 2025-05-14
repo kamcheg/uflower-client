@@ -11,20 +11,31 @@ import {transformServerProductToClient} from "~/shared/adapters/product";
 const favoritesStore = useFavoritesStore()
 
 /* DATA */
-const { data: products } = await useAsyncData<IProduct[]>(
+const { data: products, status } = await useAsyncData<IProduct[]>(
   'favorite-products',
   async () => {
     const { data } = await apiInstance.get<ProductResponseDto[]>('/flowers/find-by-ids', {
       params: { ids: favoritesStore.list }
     })
 
-    return data.map(p => transformServerProductToClient(p))
+    const products = data.map(p => transformServerProductToClient(p))
+
+    // Удаляю из избранного если товар с id не найден в базе
+    favoritesStore.list = favoritesStore.list.filter(id => (products || []).find(pr => pr.id === id))
+
+    return products
   }
 )
 </script>
 
 <template>
-  <div v-if="products?.length" class="catalog">
+  <div v-if="status === 'error'" class="page-favorite-empty">
+    <div class="container">
+      <h1>Произошла ошибка!<br/>Не удалось загрузить данные!</h1>
+    </div>
+  </div>
+
+  <div v-else-if="products?.length" class="catalog">
     <h1>Избранное</h1>
     <div class="catalog__container">
       <ProductCard
