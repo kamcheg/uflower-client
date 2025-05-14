@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db": "json-server --watch db.json --port 4000 --delay 600",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
