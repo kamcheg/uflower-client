@@ -4,6 +4,7 @@ import type { IProduct } from '~/entities/product'
 import type {ProductResponseDto} from "~/shared/dtos/product.dto";
 import {transformServerProductToClient} from "~/shared/adapters/product";
 import {apiInstance} from "~/shared/lib/axios";
+import Decimal from 'decimal.js'
 
 export const useCartStore = defineStore('cartStore', () => {
   /* DATA */
@@ -35,8 +36,8 @@ export const useCartStore = defineStore('cartStore', () => {
 
   const totalPrice = computed(() => {
     return products.value.reduce((acc, item) => {
-      return acc + item.quantity * item.price
-    }, 0)
+      return acc.plus(new Decimal(item.quantity).times(item.price))
+    }, new Decimal(0)).toNumber()
   })
 
   const productsCounter = computed(() => {

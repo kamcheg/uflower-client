@@ -3,6 +3,7 @@ import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 import type { ICartProduct } from '~/entities/cart/model/types'
 import { useCartStore } from '~/entities/cart'
 import CartDelete from '~/entities/cart/ui/CartDelete.vue'
+import Decimal from "decimal.js";
 
 const props = defineProps<{
   data: ICartProduct
@@ -18,6 +19,12 @@ function onUpdateQuantity(e: number | undefined) {
 
   cartStore.changeQuantity(props.data.id, e)
 }
+
+const total = computed<number>(() => {
+  return new Decimal(props.data.price)
+    .times(Decimal(props.data.quantity))
+    .toNumber()
+})
 </script>
 
 <template>
@@ -58,7 +65,7 @@ function onUpdateQuantity(e: number | undefined) {
       <div class="right">
         <div class="right__price">
           <div class="total">
-            {{ toReadableNumber(data.price * data.quantity) }} ₽
+            {{ toReadableNumber(total) }} ₽
           </div>
           <div class="detail">
             {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽

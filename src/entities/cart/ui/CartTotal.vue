@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 import { useCartStore } from '~/entities/cart'
+import Decimal from 'decimal.js'
 
 const emit = defineEmits<{
   (name: 'order'): void
@@ -9,6 +10,12 @@ const emit = defineEmits<{
 /* INIT */
 const cartStore = useCartStore()
 const deliveryPrice = ref(300)
+
+const priceWithDelivery = computed<number>(() => {
+  return new Decimal(cartStore.totalPrice)
+    .plus(new Decimal(deliveryPrice.value))
+    .toNumber()
+})
 </script>
 
 <template>
@@ -36,7 +43,7 @@ const deliveryPrice = ref(300)
         Итого:
       </div>
       <div class="price__val">
-        {{ toReadableNumber(cartStore.totalPrice + deliveryPrice) }} ₽
+        {{ toReadableNumber(priceWithDelivery) }} ₽
       </div>
     </div>
 
