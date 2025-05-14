@@ -3,10 +3,24 @@ import { useCartStore } from '~/entities/cart'
 import { useFavoritesStore } from '~/entities/favorites'
 import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
 import IconCart from '~/shared/components/icons/IconCart.vue'
+import {fetchAbout, type IResponse} from "~/app/layouts/default/model/api";
 
 /* INIT */
 const cartStore = useCartStore()
 const favoritesStore = useFavoritesStore()
+
+const { data } = await useAsyncData<IResponse>(
+  'about',
+  () => fetchAbout(),
+)
+
+const schedule = computed(() => {
+  if (!data.value?.schedule?.from || !data.value?.schedule?.to) {
+    return ''
+  }
+
+  return `Ежедневно с ${data.value?.schedule?.from} до ${data.value?.schedule?.to}`
+})
 </script>
 
 <template>
@@ -16,7 +30,7 @@ const favoritesStore = useFavoritesStore()
         to="/"
         class="logo-place"
       >
-        MyFlower
+        <img :src="data?.logo" alt="logo">
       </NuxtLink>
     </div>
 
@@ -44,12 +58,12 @@ const favoritesStore = useFavoritesStore()
     </div>
 
     <div class="right">
-      <div class="phone">
+      <div v-if="data" class="phone">
         <div class="number">
-          +7(999)-666-88-77
+          {{ data?.sitePhone }}
         </div>
         <div class="schedule">
-          Ежедневно с 09:00 до 21:00
+          {{ schedule }}
         </div>
       </div>
 
@@ -127,7 +141,7 @@ const favoritesStore = useFavoritesStore()
       margin-right: 24px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
 
       .number {
       }
