@@ -20,8 +20,8 @@ export function productListAdapter(event: ProductListResponseDto): IPaginatedDat
 export function toQueryParams(filters: IFilters) {
   return {
     composition: filters.composition,
-    priceMin: filters.price.min,
-    priceMax: filters.price.max,
+    priceMin: filters.price.min ?? undefined,
+    priceMax: filters.price.max ?? undefined,
     reasons: filters.reasons,
     recipients: filters.recipients,
     sizes: filters.sizes
