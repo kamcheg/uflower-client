@@ -36,10 +36,11 @@ const { data, refresh, status } = await useAsyncData(
   'catalog-products',
   () => fetchProducts(filters.value, pagination.value)
 )
+// TODO DOUBLE REQUEST
 watch(data, () => {
   pagination.value.total = data.value?.pagination?.total || 1
   pagination.value.lastPage = data.value?.pagination?.lastPage || 1
-}, { immediate: true, once: true })
+}, { immediate: true })
 watch(status, (val) => {
   loadingStore.isLoading = val === 'pending'
 })
