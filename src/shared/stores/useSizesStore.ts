@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type {ISize} from "~/shared/types/common";
-import {apiInstance} from "~/shared/lib/axios";
+import axios from "axios";
 
 type TDto = {
   id: number
@@ -13,7 +13,7 @@ export const useSizesStore = defineStore('sizes', () => {
 
   async function fetch() {
     try {
-      const res = await apiInstance.get<TDto[]>('sizes')
+      const res = await axios.get<TDto[]>('sizes')
       sizes.value = res.data.map((i) => ({
         id: i.id,
         name: i.title,

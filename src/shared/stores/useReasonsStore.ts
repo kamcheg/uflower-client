@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type {IReason} from "~/shared/types/common";
-import {apiInstance} from "~/shared/lib/axios";
+import axios from "axios";
 
 type TDto = {
   id: number
@@ -12,7 +12,7 @@ export const useReasonsStore = defineStore('reasons', () => {
 
   async function fetch() {
     try {
-      const res = await apiInstance.get<TDto[]>('reasons')
+      const res = await axios.get<TDto[]>('reasons')
       reasons.value = res.data.map((i): IReason => ({
         id: i.id,
         name: i.title,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
-import {apiInstance} from "~/shared/lib/axios";
+import axios from "axios";
 import {useCartStore} from "~/entities/cart";
 
 const baseForm = {
@@ -26,7 +26,7 @@ const form = ref(JSON.parse(JSON.stringify(baseForm)))
 /* METHODS */
 async function onSubmit() {
   try {
-    await apiInstance.post('/orders', {
+    await axios.post('/orders', {
       customerName: form.value.name,
       customerPhone: form.value.phone,
       address: form.value.address,

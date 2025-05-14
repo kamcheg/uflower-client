@@ -17,8 +17,16 @@ export default defineNuxtConfig({
   dir: {
     public: 'app/public',
     layouts: 'app/layouts',
+    plugins: 'app/plugins',
   },
 
   srcDir: 'src',
   compatibilityDate: '2024-11-01',
+
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.VUE_APP_BASE_URL,
+      brandSlug: process.env.VUE_APP_BRAND_SLUG
+    }
+  }
 })

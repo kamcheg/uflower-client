@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {apiInstance} from "~/shared/lib/axios";
+import axios from "axios";
 import type {IRecipient} from "~/shared/types/common";
 
 type TDto = {
@@ -12,7 +12,7 @@ export const useRecipientsStore = defineStore('recipients', () => {
 
   async function fetch() {
     try {
-      const res = await apiInstance.get<TDto[]>('recipients')
+      const res = await axios.get<TDto[]>('recipients')
       recipients.value = res.data.map((i) => ({
         id: i.id,
         name: i.title,

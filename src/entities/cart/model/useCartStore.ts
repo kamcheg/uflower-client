@@ -3,7 +3,7 @@ import type { ICartItem, ICartProduct } from '~/entities/cart/model/types'
 import type { IProduct } from '~/entities/product'
 import type {ProductResponseDto} from "~/shared/dtos/product.dto";
 import {transformServerProductToClient} from "~/shared/adapters/product";
-import {apiInstance} from "~/shared/lib/axios";
+import axios from "axios";
 import Decimal from 'decimal.js'
 
 export const useCartStore = defineStore('cartStore', () => {
@@ -93,7 +93,8 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     try {
-      const {data} = await apiInstance.get<ProductResponseDto[]>('/flowers/find-by-ids', {
+      console.log('axios.defaults.baseURL', axios.defaults.baseURL)
+      const {data} = await axios.get<ProductResponseDto[]>('/flowers/find-by-ids', {
         params: {
           ids: items.value.map(i => i.productId)
         }

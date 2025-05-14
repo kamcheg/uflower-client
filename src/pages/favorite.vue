@@ -3,7 +3,7 @@ import { type IProduct, ProductCard } from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { useFavoritesStore } from '~/entities/favorites'
 import { AddToCart } from '~/features/product/addToCart'
-import {apiInstance} from "~/shared/lib/axios";
+import axios from "axios";
 import type {ProductResponseDto} from "~/shared/dtos/product.dto";
 import {transformServerProductToClient} from "~/shared/adapters/product";
 
@@ -14,7 +14,7 @@ const favoritesStore = useFavoritesStore()
 const { data: products, status } = await useAsyncData<IProduct[]>(
   'favorite-products',
   async () => {
-    const { data } = await apiInstance.get<ProductResponseDto[]>('/flowers/find-by-ids', {
+    const { data } = await axios.get<ProductResponseDto[]>('/flowers/find-by-ids', {
       params: { ids: favoritesStore.list }
     })
 
