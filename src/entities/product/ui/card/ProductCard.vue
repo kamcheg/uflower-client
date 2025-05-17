@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import type { IProduct } from '~/entities/product'
-import { useCartStore } from '~/entities/cart'
 import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
 
 defineProps<{
   data: IProduct
 }>()
-
-/* INIT */
-const cartStore = useCartStore()
 </script>
 
 <template>
@@ -45,15 +41,11 @@ const cartStore = useCartStore()
       {{ toReadableNumber(data.price) }} ₽
     </div>
 
-    <div
-      v-if="false"
-      class="btns"
-    >
+    <div class="btns">
       <ElButton
         class="btns__item"
-        @click="cartStore.onAddProduct(data.id)"
       >
-        Добавить в корзину
+        Подробнее
       </ElButton>
     </div>
   </div>
