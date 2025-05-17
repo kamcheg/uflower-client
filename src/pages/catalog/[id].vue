@@ -15,12 +15,10 @@ const setThumbsSwiper = (swiper) => {
 };
 
 const images = ref([
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/b40/6grrxyw9w36bc7ari2m3fuyry9thw7e3.jpeg&w=312&h=312',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/35b/mna8s67ae23f7lyoca4lv0bxw1x33y03.jpg&w=312&h=312',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/f78/9tmt9ep3bjxrrenni8go2cr91gh8j448.jpeg&w=312&h=312',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/e28/vcrotv8r24pq0rile42mg8ylh0pt2rf2.jpeg&w=312&h=312',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/077/jnbjqk6l1ld0ck3e1zukb2hepzbzh7l6.jpg&w=312&h=312',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/iblock/444/zgvtm4joltj0bwlh0juykmpuk0kshwrl.jpg&w=312&h=312',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/ijttcvdz15q0ejhhxac582ksvig1zf8v.JPG&w=592&h=592',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/wwe4ejw3bhcp5v6gdq5es5u23m9vy60f.JPG&w=592&h=592',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/hb686kk0am3jevahnkmk7w8vr0sld4n3.JPG&w=592&h=592',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/7p5h0ppqpgkjqniopl6cby7hsqbfp80h.JPG&w=592&h=592',
 ])
 </script>
 
@@ -48,7 +46,7 @@ const images = ref([
         <swiper
           @swiper="setThumbsSwiper"
           :spaceBetween="10"
-          :slidesPerView="5"
+          :slidesPerView="images.length >= 5 ? 5 : images.length"
           :freeMode="true"
           :watchSlidesProgress="true"
           :modules="modules"
@@ -123,7 +121,7 @@ const images = ref([
 }
 
 .slider-wrapper {
-  width: 600px;
+  width: 520px;
   flex-shrink: 0;
 
   .swiper {
@@ -171,6 +169,7 @@ const images = ref([
   }
 
   .mySwiper {
+    width: 400px;
     height: 20%;
     box-sizing: border-box;
     padding: 10px 0;
