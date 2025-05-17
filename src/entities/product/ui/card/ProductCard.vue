@@ -34,6 +34,13 @@ const cartStore = useCartStore()
       {{ data.name }}
     </div>
 
+    <div
+      class="description"
+      :title="data.description"
+    >
+      {{ data.description }}
+    </div>
+
     <div class="price">
       {{ toReadableNumber(data.price) }} ₽
     </div>
@@ -90,6 +97,16 @@ const cartStore = useCartStore()
     white-space: nowrap; /* Запрещает перенос текста */
     overflow: hidden; /* Скрывает лишний текст */
     text-overflow: ellipsis; /* Добавляет троеточие */
+  }
+
+  .description {
+    margin-top: 8px;
+    max-width: 100%;
+    white-space: nowrap; /* Запрещает перенос текста */
+    overflow: hidden; /* Скрывает лишний текст */
+    text-overflow: ellipsis; /* Добавляет троеточие */
+    font-size: 14px;
+    color: rgb(107, 113, 112);
   }
 
   .price {

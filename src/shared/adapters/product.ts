@@ -5,6 +5,7 @@ export function transformServerProductToClient(dto: ProductResponseDto): IProduc
   return {
     id: dto.id,
     name: dto.name,
+    description: dto.description,
     price: dto.price,
     image: dto.images?.[0]
   }
