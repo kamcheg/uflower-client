@@ -74,7 +74,7 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
         class="right-link"
       >
         <ElBadge
-          :offset="[-10, 5]"
+          :offset="[-3, 3]"
           :value="favoritesStore.list.length || undefined"
         >
           <ElButton
