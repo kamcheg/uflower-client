@@ -116,7 +116,7 @@ function onReset() {
 
 <style scoped lang="scss">
 .price-range {
-    width: 400px;
+    max-width: 400px;
     margin: 32px auto 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -124,7 +124,7 @@ function onReset() {
 }
 
 .options-list {
-    width: 400px;
+    max-width: 400px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;

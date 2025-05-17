@@ -54,6 +54,7 @@ function onReset() {
           :key="reason.id"
           :value="reason.id"
           :label="reason.name"
+          class="options-list__item"
         />
       </ElCheckboxGroup>
 
@@ -73,15 +74,23 @@ function onReset() {
 
 <style scoped lang="scss">
 .options-list {
-    width: 400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 24px;
-    grid-row-gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  grid-row-gap: 10px;
 
-    &__item {
-        cursor: pointer;
+  &__item {
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 50%;
+    margin-right: 0;
+    padding-right: 20px;
+  }
+  &:deep {
+    .el-checkbox__label {
+      white-space: wrap;
     }
+  }
 }
 </style>

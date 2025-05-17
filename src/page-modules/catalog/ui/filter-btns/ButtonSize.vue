@@ -90,29 +90,45 @@ function onCheck(id: ISize['id']) {
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .options-list {
-    width: 700px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
 
-    .option-item {
-        cursor: pointer;
-        border: 1px solid #eee;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
+  .option-item {
+    cursor: pointer;
+    border: 1px solid #eee;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 
-        &_active {
-            border-color: red;
-        }
+    img {
+      display: block;
+      width: 40px;
 
-        &__label {
-            margin-left: 12px;
-        }
+      @media screen and (max-width: $adaptive-size-sm) {
+        width: 35px;
+      }
     }
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      height: 60px;
+      font-size: 14px;
+    }
+
+    &_active {
+      border-color: red;
+    }
+
+    &__label {
+      margin-left: 12px;
+    }
+  }
 }
 </style>

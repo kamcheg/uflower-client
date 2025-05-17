@@ -55,6 +55,7 @@ function onReset() {
           :key="type.id"
           :label="type.name"
           :value="type.id"
+          class="flower-types__item"
         />
       </ElCheckboxGroup>
 
@@ -73,8 +74,30 @@ function onReset() {
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
 .flower-types {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  grid-row-gap: 10px;
+
+  &__item {
+    flex-shrink: 0;
+    width: 25%;
+    margin-right: 0;
+    padding-right: 20px;
+
+    @media screen and (max-width: $adaptive-size-md) {
+      width: 33.3%;
+    }
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      width: 50%;
+    }
+  }
+  &:deep {
+    .el-checkbox__label {
+      white-space: wrap;
+    }
+  }
 }
 </style>
