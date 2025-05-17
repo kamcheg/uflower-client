@@ -21,6 +21,8 @@ const schedule = computed(() => {
 
   return `Ежедневно с ${data.value?.schedule?.from} до ${data.value?.schedule?.to}`
 })
+
+const isSmallScreen = useMediaQuery('(max-width: 576px)')
 </script>
 
 <template>
@@ -67,33 +69,36 @@ const schedule = computed(() => {
         </div>
       </div>
 
-      <NuxtLink to="/favorite">
+      <NuxtLink
+        to="/favorite"
+        class="right-link"
+      >
         <ElBadge
           :offset="[-10, 5]"
           :value="favoritesStore.list.length || undefined"
         >
           <ElButton
             circle
-            size="large"
+            :size="isSmallScreen ? 'default' : 'large'"
           >
-            <IconFavorite style="width: 16px;" />
+            <IconFavorite class="right-link__icon" />
           </ElButton>
         </ElBadge>
       </NuxtLink>
 
       <NuxtLink
         to="/cart"
-        style="margin-left: 12px;"
+        class="right-link"
       >
         <ElBadge
-          :offset="[-10, 5]"
+          :offset="[-3, 3]"
           :value="cartStore.productsCounter || undefined"
         >
           <ElButton
             circle
-            size="large"
+            :size="isSmallScreen ? 'default' : 'large'"
           >
-            <IconCart style="width: 16px;" />
+            <IconCart class="right-link__icon" />
           </ElButton>
         </ElBadge>
       </NuxtLink>
@@ -102,6 +107,8 @@ const schedule = computed(() => {
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .header {
   border-bottom: 1px solid #eee;
   background: #fff;
@@ -110,16 +117,30 @@ const schedule = computed(() => {
   align-items: center;
   padding: 0 20px;
 
+  @media screen and (max-width: $adaptive-size-sm) {
+    padding: 0 10px;
+  }
+
   .center {
     .nav {
       margin-left: 120px;
+      display: flex;
+      flex-wrap: wrap;
+      grid-gap: 20px;
+
+      @media screen and (max-width: $adaptive-size-lg) {
+        margin-left: 60px;
+      }
+
+      @media screen and (max-width: $adaptive-size-sm) {
+        margin-left: 30px;
+        margin-right: 10px;
+        grid-gap: 8px;
+        grid-row-gap: 3px;
+      }
 
       &__item {
         font-weight: 500;
-
-        &:not(:first-child) {
-          margin-left: 20px;
-        }
       }
     }
   }
@@ -129,6 +150,14 @@ const schedule = computed(() => {
       display: block;
       font-size: 30px;
       font-weight: 700;
+
+      img {
+        @media screen and (max-width: $adaptive-size-sm) {
+          display: block;
+          max-height: 70px;
+          max-width: 100px;
+        }
+      }
     }
   }
 
@@ -143,13 +172,32 @@ const schedule = computed(() => {
       flex-direction: column;
       align-items: flex-end;
 
-      .number {
+      @media screen and (max-width: $adaptive-size-lg) {
+        display: none;
       }
 
       .schedule {
         margin-bottom: 2px;
         font-size: 10px;
         color: #8f8f8f;
+      }
+    }
+  }
+
+  .right-link {
+    &:not(:first-child) {
+      margin-left: 10px;
+
+      @media screen and (max-width: $adaptive-size-sm) {
+        margin-left: 6px;
+      }
+    }
+
+    &__icon {
+      width: 16px;
+
+      @media screen and (max-width: $adaptive-size-sm) {
+        width: 14px;
       }
     }
   }

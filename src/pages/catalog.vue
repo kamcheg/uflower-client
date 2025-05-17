@@ -28,7 +28,7 @@ const filters = ref<IFilters>({
 const pagination = ref<IPagination>({
   page: 1,
   total: 1,
-  limit: 8,
+  limit: 12,
   lastPage: 1,
 })
 
@@ -55,65 +55,71 @@ watch(pagination, () => refresh(), { deep: true })
   </div>
 
   <div v-else class="catalog">
-    <div class="catalog__filters">
-      <ButtonComposition v-model="filters.composition" />
+    <div class="container">
+      <div class="catalog__filters">
+        <ButtonComposition v-model="filters.composition" />
+        <ButtonPrice v-model="filters.price" />
+        <ButtonReason v-model="filters.reasons" />
+        <ButtonRecipient v-model="filters.recipients" />
+        <ButtonSize v-model="filters.sizes" />
+      </div>
 
-      <ButtonPrice
-        v-model="filters.price"
-        style="margin-left: 10px;"
-      />
+      <div class="catalog__container">
+        <ProductCard
+          v-for="i of data?.data || []"
+          :key="i.id"
+          :data="i"
+        >
+          <template #favorite-button>
+            <AddToFavorites :id="i.id" />
+          </template>
+          <template #cart-button>
+            <AddToCart :id="i.id" />
+          </template>
+        </ProductCard>
+      </div>
 
-      <ButtonReason
-        v-model="filters.reasons"
-        style="margin-left: 10px;"
-      />
-
-      <ButtonRecipient
-        v-model="filters.recipients"
-        style="margin-left: 10px;"
-      />
-
-      <ButtonSize
-        v-model="filters.sizes"
-        style="margin-left: 10px;"
-      />
-    </div>
-
-    <div class="catalog__container">
-      <ProductCard
-        v-for="i of data?.data || []"
-        :key="i.id"
-        :data="i"
-      >
-        <template #favorite-button>
-          <AddToFavorites :id="i.id" />
-        </template>
-        <template #cart-button>
-          <AddToCart :id="i.id" />
-        </template>
-      </ProductCard>
-    </div>
-
-    <div v-if="pagination.lastPage > 1" class="catalog__pagination-wrapper">
-      <ElPagination
-        v-model:current-page="pagination.page"
-        :page-size="pagination.limit"
-        :pager-count="5"
-        layout="prev, pager, next"
-        :total="pagination.total"
-        background
-      />
+      <div v-if="pagination.lastPage > 1" class="catalog__pagination-wrapper">
+        <ElPagination
+          v-model:current-page="pagination.page"
+          :page-size="pagination.limit"
+          :pager-count="5"
+          layout="prev, pager, next"
+          :total="pagination.total"
+          background
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .catalog {
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 5px;
+  }
+
   &__container {
     margin-top: 24px;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-gap: 24px;
+    grid-gap: 20px;
+
+    @media screen and (max-width: $adaptive-size-lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media screen and (max-width: $adaptive-size-md) {
+      grid-gap: 10px;
+    }
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   &__pagination-wrapper {
