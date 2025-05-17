@@ -152,11 +152,9 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
       font-weight: 700;
 
       img {
-        @media screen and (max-width: $adaptive-size-sm) {
-          display: block;
-          max-height: 70px;
-          max-width: 100px;
-        }
+        display: block;
+        max-height: 50px;
+        max-width: 100px;
       }
     }
   }
