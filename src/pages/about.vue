@@ -2,11 +2,15 @@
 import {fetchAbout, type IResponse} from "~/shared/api/fetchAbout";
 import {getSchedule} from "~/shared/lib/utils/getSchedule";
 
-useHead({
-  script: [
-    { src: 'https://api-maps.yandex.ru/v3/?apikey=c6ef95d2-f35a-4a78-9430-3e7530926756&lang=ru_RU', type: 'text/javascript' },
-  ],
-})
+import {
+  YandexMap,
+  YandexMapDefaultSchemeLayer,
+  YandexMapDefaultFeaturesLayer,
+  YandexMapDefaultMarker,
+} from 'vue-yandex-maps';
+import type { YMap } from '@yandex/ymaps3-types';
+
+const map = shallowRef<null | YMap>(null);
 
 const { data } = await useAsyncData<IResponse>(
   'about',
@@ -29,35 +33,34 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
         </div>
       </div>
 
-      <h1>c6ef95d2-f35a-4a78-9430-3e7530926756</h1>
-
-      <div class="preview contact-info">
-        <div class="map"></div>
+      <div v-if="data.shops.length > 0" class="preview contact-info">
+        <div class="map">
+          <YandexMap
+            v-model="map"
+            :settings="{
+              location: {
+                center: data.shops[0]?.coords || [37.617644, 55.755819],
+                zoom: 9,
+              },
+            }"
+            width="100%"
+            height="100%"
+          >
+            <YandexMapDefaultSchemeLayer/>
+            <YandexMapDefaultFeaturesLayer/>
+            <YandexMapDefaultMarker
+              v-for="shop of data.shops"
+              :key="shop.id"
+              :settings="{ coordinates: shop.coords }"
+            />
+          </YandexMap>
+        </div>
 
         <div class="desc">
-          <template v-if="data.shops.length === 1">
-            <p class="desc__item">
-              <b>Наш адрес:</b> г. Махачкала, Улица Титова, 144 к3
-            </p>
-
-            <!--  TODO  -->
-            <p class="desc__item">
-              <b>Номер телефона:</b> {{ data.sitePhone }}
-            </p>
-
-            <p class="desc__item">
-              <b>Электронный адрес:</b> {{ data.email }}
-            </p>
-
-            <p class="desc__item">
-              <b>График работы:</b> {{ schedule }}
-            </p>
-          </template>
-
-          <div v-else class="shops">
-            <p class="shops__title">Наши магазины</p>
+          <div class="shops">
+            <p class="shops__title">{{data.shops.length === 1 ? 'Наш магазин' : 'Наши магазины'}}</p>
             <div
-              v-for="(shop, index) of data.shops"
+              v-for="shop of data.shops"
               :key="shop.id"
               class="shop-info"
             >
@@ -89,7 +92,6 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
     height: fit-content;
     min-height: 440px;
     overflow: hidden;
-    pointer-events: none;
     position: relative;
     width: 100%;
     padding: 100px;
@@ -114,7 +116,6 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
     grid-template-columns: 1fr 1fr;
 
     .map {
-      background: red;
       flex-shrink: 0;
     }
 

@@ -1,7 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-  modules: ['@pinia/nuxt', '@nuxt/eslint', '@element-plus/nuxt', '@vueuse/nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxt/eslint',
+    '@element-plus/nuxt',
+    '@vueuse/nuxt',
+    'vue-yandex-maps/nuxt'
+  ],
   devtools: { enabled: true },
 
   app: {
@@ -12,6 +18,10 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap' },
       ],
     },
+  },
+
+  yandexMaps: {
+    apikey: 'fe5ec8c5-05a9-48c7-ab2d-9f764852b76a',
   },
 
   dir: {
