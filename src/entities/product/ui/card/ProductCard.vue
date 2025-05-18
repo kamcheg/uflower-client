@@ -54,6 +54,8 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .product-card {
   .image-place {
     width: 100%;
@@ -91,6 +93,10 @@ defineProps<{
     white-space: nowrap; /* Запрещает перенос текста */
     overflow: hidden; /* Скрывает лишний текст */
     text-overflow: ellipsis; /* Добавляет троеточие */
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      font-size: 14px;
+    }
   }
 
   .description {
@@ -101,6 +107,10 @@ defineProps<{
     text-overflow: ellipsis; /* Добавляет троеточие */
     font-size: 14px;
     color: rgb(107, 113, 112);
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      font-size: 12px;
+    }
   }
 
   .price {

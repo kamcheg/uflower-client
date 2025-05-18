@@ -36,20 +36,22 @@ const { data: products, status } = await useAsyncData<IProduct[]>(
   </div>
 
   <div v-else-if="products?.length" class="catalog">
-    <h1>Избранное</h1>
-    <div class="catalog__container">
-      <ProductCard
-        v-for="i of products"
-        :key="i.id"
-        :data="i"
-      >
-        <template #favorite-button>
-          <AddToFavorites :id="i.id" />
-        </template>
-        <template #cart-button>
-          <AddToCart :id="i.id" />
-        </template>
-      </ProductCard>
+    <div class="container">
+      <h1>Избранное</h1>
+      <div class="catalog__container">
+        <ProductCard
+          v-for="i of products"
+          :key="i.id"
+          :data="i"
+        >
+          <template #favorite-button>
+            <AddToFavorites :id="i.id" />
+          </template>
+          <template #cart-button>
+            <AddToCart :id="i.id" />
+          </template>
+        </ProductCard>
+      </div>
     </div>
   </div>
 
@@ -73,12 +75,32 @@ const { data: products, status } = await useAsyncData<IProduct[]>(
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .catalog {
+  h1 {
+    @media screen and (max-width: $adaptive-size-sm) {
+      font-size: 26px;
+    }
+  }
+
   &__container {
     margin-top: 24px;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    grid-gap: 24px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 20px;
+
+    @media screen and (max-width: $adaptive-size-lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media screen and (max-width: $adaptive-size-md) {
+      grid-gap: 10px;
+    }
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 }
 
