@@ -17,7 +17,7 @@ defineProps<{
     </div>
 
     <NuxtLink
-      to="/catalog"
+      to="/"
       class="template-link"
     >
       Перейти в каталог<ElIcon class="template-link__icon"><Right /></ElIcon>

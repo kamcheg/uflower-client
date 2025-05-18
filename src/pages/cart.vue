@@ -50,7 +50,7 @@ onMounted(async () => {
       </h1>
 
       <ElLink
-        href="/catalog"
+        href="/"
         type="primary"
       >
         Перейти в каталог

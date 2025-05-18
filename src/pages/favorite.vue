@@ -65,7 +65,7 @@ const { data: products, status } = await useAsyncData<IProduct[]>(
       </h1>
 
       <ElLink
-        href="/catalog"
+        href="/"
         type="primary"
       >
         Перейти в каталог

@@ -39,12 +39,7 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
         >
           Главная
         </ElLink>
-        <ElLink
-          href="/catalog"
-          class="nav__item"
-        >
-          Каталог
-        </ElLink>
+
         <ElLink
           href="/about"
           class="nav__item"
