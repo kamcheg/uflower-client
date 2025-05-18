@@ -48,3 +48,9 @@ export interface ISize {
   name: string
   image: string
 }
+
+export interface ISchedule {
+  from: string
+  to: string
+  isAlwaysOpened: boolean
+}

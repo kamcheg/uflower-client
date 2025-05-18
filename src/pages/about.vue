@@ -1,54 +1,78 @@
 <script setup lang="ts">
+import {fetchAbout, type IResponse} from "~/shared/api/fetchAbout";
+import {getSchedule} from "~/shared/lib/utils/getSchedule";
 
+useHead({
+  script: [
+    { src: 'https://api-maps.yandex.ru/v3/?apikey=c6ef95d2-f35a-4a78-9430-3e7530926756&lang=ru_RU', type: 'text/javascript' },
+  ],
+})
+
+const { data } = await useAsyncData<IResponse>(
+  'about',
+  () => fetchAbout(),
+)
+
+const schedule = computed(() => getSchedule(data.value?.schedule))
 </script>
 
 <template>
-  <div class="page-about">
+  <div v-if="!data" />
+  <div v-else class="page-about">
     <div class="container">
       <div class="preview">
         <div class="title">
           Мы рады видеть вас на MyFlower
-        </div>
-        <div class="postscript">
-          8 лет мы создаём композиции и сервис с душой для вас
         </div>
         <div class="description">
           Команда MyFlower работает, чтобы вы могли дарить эмоции: светлые и яркие, романтичные и страстные, нежные и откровенные - такие же разные и неповторимые как и вы!
         </div>
       </div>
 
-      <div
-        class="preview contact-info"
-      >
-        <div class="map">
-          <iframe
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A8dccaf7729aa6b7b9839c17e51ccbe03378e9b51c1eeff705e198282357e5896&amp;source=constructor"
-            width="100%"
-            height="100%"
-            frameborder="0"
-          />
-        </div>
+      <h1>c6ef95d2-f35a-4a78-9430-3e7530926756</h1>
+
+      <div class="preview contact-info">
+        <div class="map"></div>
 
         <div class="desc">
-          <p class="desc__item">
-            <b>Наш адрес:</b> г. Махачкала, Улица Титова, 144 к3
-          </p>
+          <template v-if="data.shops.length === 1">
+            <p class="desc__item">
+              <b>Наш адрес:</b> г. Махачкала, Улица Титова, 144 к3
+            </p>
 
-          <p class="desc__item">
-            <b>Номер телефона:</b> +7 (999) 666-88-77
-          </p>
+            <!--  TODO  -->
+            <p class="desc__item">
+              <b>Номер телефона:</b> {{ data.sitePhone }}
+            </p>
 
-          <p class="desc__item">
-            <b>Электронный адрес:</b> myflower@mail.ru
-          </p>
+            <p class="desc__item">
+              <b>Электронный адрес:</b> {{ data.email }}
+            </p>
 
-          <p class="desc__item">
-            <b>График работы:</b>  ежедневно с 09:00 до 21:00
-          </p>
+            <p class="desc__item">
+              <b>График работы:</b> {{ schedule }}
+            </p>
+          </template>
 
-          <div class="social">
-            <div class="social__title">
-              Наши соц. сети
+          <div v-else class="shops">
+            <p class="shops__title">Наши магазины</p>
+            <div
+              v-for="(shop, index) of data.shops"
+              :key="shop.id"
+              class="shop-info"
+            >
+              <p class="desc__item">
+                <b>Адрес:</b> {{ shop.address }}
+              </p>
+
+              <!--  TODO  -->
+              <p class="desc__item">
+                <b>Номер телефона:</b> {{ shop.phone }}
+              </p>
+
+              <p class="desc__item">
+                <b>График работы:</b> {{ schedule }}
+              </p>
             </div>
           </div>
         </div>
@@ -75,11 +99,6 @@
       font-size: 44px;
       margin-bottom: 16px;
     }
-    .postscript {
-      text-align: center;
-      font-size: 20px;
-      margin-bottom: 24px;
-    }
     .description {
       text-align: center;
       font-size: 24px;
@@ -95,6 +114,8 @@
     grid-template-columns: 1fr 1fr;
 
     .map {
+      background: red;
+      flex-shrink: 0;
     }
 
     .desc {
@@ -109,16 +130,21 @@
           font-weight: 600;
         }
       }
+    }
+  }
 
-      .social {
-        display: none;
-        margin-top: 100px;
+  .shops {
+    &__title {
+      font-size: 22px;
+      font-weight: 600;
+    }
 
-        &__title {
-          font-size: 20px;
-          font-weight: 700;
-        }
-      }
+    .shop-info {
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      margin-top: 12px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
     }
   }
 }

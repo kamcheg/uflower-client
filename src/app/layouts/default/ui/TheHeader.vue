@@ -3,7 +3,8 @@ import { useCartStore } from '~/entities/cart'
 import { useFavoritesStore } from '~/entities/favorites'
 import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
 import IconCart from '~/shared/components/icons/IconCart.vue'
-import {fetchAbout, type IResponse} from "~/app/layouts/default/model/api";
+import {fetchAbout, type IResponse} from "~/shared/api/fetchAbout";
+import {getSchedule} from "~/shared/lib/utils/getSchedule";
 
 /* INIT */
 const cartStore = useCartStore()
@@ -14,13 +15,7 @@ const { data } = await useAsyncData<IResponse>(
   () => fetchAbout(),
 )
 
-const schedule = computed(() => {
-  if (!data.value?.schedule?.from || !data.value?.schedule?.to) {
-    return ''
-  }
-
-  return `Ежедневно с ${data.value?.schedule?.from} до ${data.value?.schedule?.to}`
-})
+const schedule = computed(() => getSchedule(data.value?.schedule))
 
 const isSmallScreen = useMediaQuery('(max-width: 576px)')
 </script>
