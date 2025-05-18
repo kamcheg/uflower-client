@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import {fetchAbout, type IResponse} from "~/shared/api/fetchAbout";
 import {getSchedule} from "~/shared/lib/utils/getSchedule";
-
+import type { YMap } from '@yandex/ymaps3-types';
 import {
   YandexMap,
   YandexMapDefaultSchemeLayer,
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
 } from 'vue-yandex-maps';
-import type { YMap } from '@yandex/ymaps3-types';
 
 const map = shallowRef<null | YMap>(null);
 
-const { data } = await useAsyncData<IResponse>(
+const { data, error } = await useAsyncData<IResponse>(
   'about',
   () => fetchAbout(),
 )
@@ -21,6 +20,14 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
 </script>
 
 <template>
+  <div v-if="error">
+    <h1
+      style="text-align: center; padding-top: 60px;"
+    >
+      Не удалось загрузить данные!<br />
+      Попробуйте перезагрузить страницу.
+    </h1>
+  </div>
   <div v-if="data" class="page-about">
     <div class="container">
       <div class="card-about preview">
