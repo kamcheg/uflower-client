@@ -1,9 +1,19 @@
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
 import axios from "axios";
-import {useCartStore} from "~/entities/cart";
+import { useCartStore } from "~/entities/cart";
+import { useVuelidate } from '@vuelidate/core'
+import { vMaska } from "maska/vue"
+import { phoneValidator } from "~/shared/lib/validate/validators";
+import { validationErrors } from "~/shared/lib/validate/errors";
+import { required, helpers } from '@vuelidate/validators'
+import {phoneMask} from "~/shared/lib/utils/phoneNormalizer";
+/* INIT */
+const model = defineModel<boolean>()
+const cartStore = useCartStore()
 
-const baseForm = {
+/* DATA */
+const form = ref({
   name: '',
   phone: '',
   isMyOrder: false,
@@ -13,18 +23,43 @@ const baseForm = {
   },
   address: '',
   comment: '',
-}
+})
 
-/* INIT */
-const model = defineModel<boolean>()
+/* VUELIDATE */
+const v$ = useVuelidate(computed(() => {
+  const result = {
+    name: {
+      required: helpers.withMessage(validationErrors.required, required),
+    },
+    phone: {
+      required: helpers.withMessage(validationErrors.required, required),
+      correctPhone: helpers.withMessage(validationErrors.phone, phoneValidator)
+    },
+    address: {
+      required: helpers.withMessage(validationErrors.required, required),
+    },
+    taker: {
+      name: {},
+      phone: {}
+    }
+  }
 
-const cartStore = useCartStore()
+  if (!form.value.isMyOrder) {
+    result.taker.name = { required: helpers.withMessage(validationErrors.required, required) }
+    result.taker.phone = {
+      required: helpers.withMessage(validationErrors.required, required),
+      correctPhone: helpers.withMessage(validationErrors.phone, phoneValidator)
+    }
+  }
 
-/* DATA */
-const form = ref(JSON.parse(JSON.stringify(baseForm)))
+  return result
+}), form)
 
 /* METHODS */
 async function onSubmit() {
+  v$.value.$touch()
+  if (v$.value.$invalid) { return }
+
   try {
     await axios.post('/orders', {
       customerName: form.value.name,
@@ -46,7 +81,8 @@ async function onSubmit() {
     })
     model.value = false
     cartStore.clear()
-    form.value = JSON.parse(JSON.stringify(baseForm))
+    v$.value.$reset()
+    // form.value = JSON.parse(JSON.stringify(baseForm))
   } catch (e) {
     ElMessage({
       message: 'Произошла ошибка!',
@@ -68,6 +104,7 @@ async function onSubmit() {
       <ElFormItem
         label-position="top"
         label="Ваше имя"
+        :error="v$.name.$errors.length ? String(v$.name.$errors[0].$message) : undefined"
       >
         <ElInput v-model="form.name" />
       </ElFormItem>
@@ -75,8 +112,12 @@ async function onSubmit() {
       <ElFormItem
         label-position="top"
         label="Ваш телефон"
+        :error="v$.phone.$errors.length ? String(v$.phone.$errors[0].$message) : undefined"
       >
-        <ElInput v-model="form.phone" />
+        <ElInput
+          v-model="form.phone"
+          v-maska="phoneMask"
+        />
       </ElFormItem>
 
       <ElFormItem
@@ -105,6 +146,7 @@ async function onSubmit() {
         <ElFormItem
           label-position="top"
           label="Имя получателя"
+          :error="v$.taker.name.$errors.length ? String(v$.taker.name.$errors[0].$message) : undefined"
         >
           <ElInput v-model="form.taker.name" />
         </ElFormItem>
@@ -112,14 +154,19 @@ async function onSubmit() {
         <ElFormItem
           label-position="top"
           label="Телефон получателя"
+          :error="v$.taker.phone.$errors.length ? String(v$.taker.phone.$errors[0].$message) : undefined"
         >
-          <ElInput v-model="form.taker.phone" />
+          <ElInput
+            v-model="form.taker.phone"
+            v-maska="phoneMask"
+          />
         </ElFormItem>
       </template>
 
       <ElFormItem
         label-position="top"
         label="Адрес доставки"
+        :error="v$.address.$errors.length ? String(v$.address.$errors[0].$message) : undefined"
       >
         <ElInput v-model="form.address" />
       </ElFormItem>
