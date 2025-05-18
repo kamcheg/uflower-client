@@ -29,6 +29,10 @@ const total = computed<number>(() => {
 
 <template>
   <div class="product-card">
+    <div class="product-card__mobile-title">
+      {{ data.name }}
+    </div>
+
     <div class="product-card__main">
       <div class="image-border">
         <img
@@ -70,6 +74,17 @@ const total = computed<number>(() => {
           <div class="detail">
             {{ data.quantity }} x {{ toReadableNumber(data.price) }} ₽
           </div>
+
+          <div class="right__mobile-counter-wrapper">
+            <ElInputNumber
+              size="small"
+              :model-value="data.quantity"
+              :min="1"
+              :max="15"
+              class="right__mobile-counter"
+              @update:model-value="onUpdateQuantity"
+            />
+          </div>
         </div>
 
         <CartDelete
@@ -77,6 +92,16 @@ const total = computed<number>(() => {
           @click="cartStore.onRemoveProduct(data.id)"
         />
       </div>
+    </div>
+
+    <div v-if="!data.isNeedNote" class="product-card-footer">
+      <ElButton
+        size="small"
+        style="margin-top: 12px;"
+        @click="cartStore.onChangeNoteStatus(data.id, true)"
+      >
+        Добавить записку
+      </ElButton>
     </div>
 
     <div
@@ -101,17 +126,30 @@ const total = computed<number>(() => {
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .product-card {
   padding: 32px;
   box-shadow: 0 6px 20px 6px #3540471a;
   background: #fff;
   border-radius: 16px;
 
+  &__mobile-title {
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: none;
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      display: block;
+    }
+  }
+
   &__main {
     display: flex;
   }
 
   .image-border {
+    flex-shrink: 0;
     width: 120px;
     height: 120px;
     display: flex;
@@ -130,6 +168,10 @@ const total = computed<number>(() => {
 
   .info {
     margin-left: 24px;
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      display: none;
+    }
 
     &__title {
       font-weight: 500;
@@ -159,12 +201,35 @@ const total = computed<number>(() => {
     &__delete {
       margin-top: auto;
     }
+
+    &__mobile-counter-wrapper {
+      display: none;
+
+      @media screen and (max-width: $adaptive-size-sm) {
+        display: block;
+      }
+    }
+
+    &__mobile-counter {
+      width: 77px;
+      margin-top: 8px;
+    }
   }
 
   .note-block {
     margin-top: 24px;
     padding-top: 24px;
     border-top: 1px solid #eee;
+  }
+
+  &-footer {
+    display: none;
+    border-top: 1px solid #eee;
+    margin-top: 24px;
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      display: block;
+    }
   }
 }
 </style>

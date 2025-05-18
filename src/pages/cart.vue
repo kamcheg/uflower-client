@@ -18,7 +18,6 @@ onMounted(async () => {
     v-if="cartStore.items.length"
     class="page-cart"
   >
-    <!--    v-if="cartStore.products.length" -->
     <div class="container">
       <h1>Корзина</h1>
 
@@ -61,10 +60,16 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
+@import "@/app/styles/_vars";
+
 .page-cart {
   &__container {
     margin-top: 24px;
     display: flex;
+
+    @media screen and (max-width: $adaptive-size-lg) {
+      display: block;
+    }
 
     .catalog {
       flex-grow: 1;
@@ -78,6 +83,12 @@ onMounted(async () => {
     width: 350px;
     margin-left: 32px;
     align-self: flex-start;
+
+    @media screen and (max-width: $adaptive-size-lg) {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 24px;
+    }
   }
 }
 

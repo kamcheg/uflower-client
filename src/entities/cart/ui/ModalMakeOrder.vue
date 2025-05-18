@@ -12,6 +12,8 @@ import {phoneMask} from "~/shared/lib/utils/phoneNormalizer";
 const model = defineModel<boolean>()
 const cartStore = useCartStore()
 
+const isSmallScreen = useMediaQuery('(max-width: 576px)')
+
 /* DATA */
 const form = ref({
   name: '',
@@ -97,7 +99,7 @@ async function onSubmit() {
   <ElDrawer
     v-model="model"
     title="Заполните данные. Менеджер свяжется с вами для подтверждения заказа в течении 5 минут."
-    size="500px"
+    :size="isSmallScreen ? '100%' : '500px'"
     direction="rtl"
   >
     <ElForm @submit.prevent>
@@ -124,21 +126,26 @@ async function onSubmit() {
         label-position="top"
         label="Кому доставить"
       >
-        <el-radio-group v-model="form.isMyOrder">
-          <el-radio
-            :value="true"
-            size="large"
-            border
-          >
-            Доставить мне
-          </el-radio>
-          <el-radio
-            :value="false"
-            size="large"
-            border
-          >
-            Доставить получателю
-          </el-radio>
+        <el-radio-group v-model="form.isMyOrder" class="m-radio-group">
+          <div>
+            <el-radio
+              :value="true"
+              size="large"
+              border
+            >
+              Доставить мне
+            </el-radio>
+          </div>
+          <div>
+
+            <el-radio
+              :value="false"
+              size="large"
+              border
+            >
+              Доставить получателю
+            </el-radio>
+          </div>
         </el-radio-group>
       </ElFormItem>
 
@@ -195,4 +202,9 @@ async function onSubmit() {
 </template>
 
 <style scoped lang="scss">
+.m-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 4px;
+}
 </style>
