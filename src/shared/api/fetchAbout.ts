@@ -1,33 +1,35 @@
 import axios from "axios";
 
 interface IDto {
-  "id": number
-  "createdAt": string
-  "updatedAt": string
-  "name": string
-  "slug": string
-  "email": string
-  "schedule": {
-    "from": string
-    "to": string
-    "isAlwaysOpened": boolean
+  id: number
+  aboutTitle: string
+  aboutDescription: string
+  name: string
+  slug: string
+  email: string
+  schedule: {
+    from: string
+    to: string
+    isAlwaysOpened: boolean
   }
-  "sitePhone": string
-  "logo": string
+  sitePhone: string
+  logo: string
   shops: {
-    "id": number
-    "phone": string
-    "address": string
-    "schedule": {
-      "from": string
-      "to": string
-      "isAlwaysOpened": boolean
+    id: number
+    phone: string
+    address: string
+    schedule: {
+      from: string
+      to: string
+      isAlwaysOpened: boolean
     },
-    "coords": [number, number]
+    coords: [number, number]
   }[]
 }
 
 export interface IResponse {
+  aboutTitle: string
+  aboutDescription: string
   schedule: {
     from: string
     to: string
@@ -53,6 +55,8 @@ export async function fetchAbout(): Promise<IResponse> {
   const { data } = await axios.get<IDto>('/brands/about')
 
   return {
+    aboutTitle: data.aboutTitle,
+    aboutDescription: data.aboutDescription,
     schedule: {
       from: data.schedule?.from,
       to: data.schedule?.to,

@@ -21,15 +21,14 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
 </script>
 
 <template>
-  <div v-if="!data" />
-  <div v-else class="page-about">
+  <div v-if="data" class="page-about">
     <div class="container">
       <div class="preview">
         <div class="title">
-          Мы рады видеть вас на MyFlower
+          {{ data.aboutTitle }}
         </div>
         <div class="description">
-          Команда MyFlower работает, чтобы вы могли дарить эмоции: светлые и яркие, романтичные и страстные, нежные и откровенные - такие же разные и неповторимые как и вы!
+          {{ data.aboutDescription }}
         </div>
       </div>
 
