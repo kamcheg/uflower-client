@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import TemplateCatalog from '~/page-modules/index/ui/TemplateCatalog.vue'
-import { ProductCard } from '~/entities/product'
-import { products } from '~/mock'
+import {type IProduct, ProductCard} from '~/entities/product'
 import { AddToFavorites } from '~/features/product'
 import { AddToCart } from '~/features/product/addToCart'
+
+const products: IProduct[] = [];
 </script>
 
 <template>
