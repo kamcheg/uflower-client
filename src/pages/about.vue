@@ -8,6 +8,7 @@ import {
   YandexMapDefaultFeaturesLayer,
   YandexMapDefaultMarker,
 } from 'vue-yandex-maps';
+import {toPrettyPhone} from "~/shared/lib/utils/phoneNormalizer";
 
 const map = shallowRef<null | YMap>(null);
 
@@ -69,9 +70,8 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
               <b>Адрес:</b> {{ shop.address }}
             </p>
 
-            <!--  TODO  -->
             <p class="shop-info__item">
-              <b>Номер телефона:</b> {{ shop.phone }}
+              <b>Номер телефона:</b> {{ toPrettyPhone(shop.phone) }}
             </p>
 
             <p class="shop-info__item">

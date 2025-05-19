@@ -5,6 +5,7 @@ import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
 import IconCart from '~/shared/components/icons/IconCart.vue'
 import {fetchAbout, type IResponse} from "~/shared/api/fetchAbout";
 import {getSchedule} from "~/shared/lib/utils/getSchedule";
+import {toPrettyPhone} from "~/shared/lib/utils/phoneNormalizer";
 
 /* INIT */
 const cartStore = useCartStore()
@@ -52,7 +53,7 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
     <div class="right">
       <div v-if="data" class="phone">
         <div class="number">
-          {{ data?.sitePhone }}
+          {{ toPrettyPhone(data.sitePhone) }}
         </div>
         <div class="schedule">
           {{ schedule }}

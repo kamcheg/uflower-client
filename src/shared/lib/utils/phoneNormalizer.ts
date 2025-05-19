@@ -5,7 +5,7 @@ export function getRawPhoneNumber(phoneNumber: string) {
 }
 
 export function toPrettyPhone(digits: string) {
-  if (digits.length !== 10) {
+  if (!/^7\d{10}$/.test(digits)) {
     return '';
   }
 
