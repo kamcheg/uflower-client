@@ -34,7 +34,7 @@ const pagination = ref<IPagination>({
 
 const { data, refresh, status } = await useAsyncData(
   'catalog-products',
-  () => fetchProducts(filters.value, pagination.value)
+  () => fetchProducts(filters.value, pagination.value),
 )
 // TODO DOUBLE REQUEST
 watch(data, () => {

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IProduct } from '~/entities/product'
 import { toReadableNumber } from '~/shared/lib/utils/toReadableNumber'
+import IconFlame from "~/shared/components/icons/IconFlame.vue";
 
 defineProps<{
   data: IProduct
@@ -20,6 +21,11 @@ defineProps<{
       <div class="image-place__btns">
         <slot name="favorite-button" />
         <slot name="cart-button" />
+      </div>
+
+      <div v-if="data.inStock" class="hot-offer">
+        <IconFlame style="width: 16px;" />
+        <span>Собрали сегодня</span>
       </div>
     </div>
 
@@ -61,6 +67,23 @@ defineProps<{
     width: 100%;
     padding-bottom: 100%;
     position: relative;
+
+    .hot-offer {
+      padding: 2px 10px;
+      background: #f1a375;
+      border-radius: 8px;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+
+      span {
+        padding-left: 4px;
+      }
+    }
 
     &__inner {
       position: absolute;

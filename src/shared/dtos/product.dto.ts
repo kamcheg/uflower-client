@@ -4,6 +4,7 @@ export interface ProductResponseDto {
   updatedAt: string
   name: string
   description: string
+  inStock: boolean
   price: number
   isActive: boolean
   width: number
