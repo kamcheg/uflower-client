@@ -1,7 +1,7 @@
 export const phoneMask = '+7 ### ### ## ##'
 
 export function getRawPhoneNumber(phoneNumber: string) {
-  return phoneNumber.replace(/\D/g, '').slice(1)
+  return phoneNumber.replace(/\D/g, '')
 }
 
 export function toPrettyPhone(digits: string) {
@@ -9,5 +9,5 @@ export function toPrettyPhone(digits: string) {
     return '';
   }
 
-  return `+7 ${digits.slice(0, 3)} ${digits.slice(3, 6)}-${digits.slice(6, 8)}-${digits.slice(8)}`
+  return `+7 ${digits.slice(1, 4)} ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9)}`
 }

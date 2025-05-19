@@ -7,7 +7,7 @@ import { vMaska } from "maska/vue"
 import { phoneValidator } from "~/shared/lib/validate/validators";
 import { validationErrors } from "~/shared/lib/validate/errors";
 import { required, helpers } from '@vuelidate/validators'
-import {phoneMask} from "~/shared/lib/utils/phoneNormalizer";
+import {getRawPhoneNumber, phoneMask} from "~/shared/lib/utils/phoneNormalizer";
 /* INIT */
 const model = defineModel<boolean>()
 const cartStore = useCartStore()
@@ -65,11 +65,11 @@ async function onSubmit() {
   try {
     await axios.post('/orders', {
       customerName: form.value.name,
-      customerPhone: form.value.phone,
+      customerPhone: getRawPhoneNumber(form.value.phone),
       address: form.value.address,
       isDeliverToCustomer: form.value.isMyOrder,
       recipientName: form.value.taker.name,
-      recipientPhone: form.value.taker.phone,
+      recipientPhone: getRawPhoneNumber(form.value.taker.phone),
       comment: form.value.comment,
       orderFlowers: cartStore.products.map(p => ({
         flowerId: p.id,
