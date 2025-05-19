@@ -43,7 +43,7 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
             :settings="{
               location: {
                 center: data.shops[0]?.coords || [37.617644, 55.755819],
-                zoom: 9,
+                zoom: 13,
               },
             }"
             width="100%"
