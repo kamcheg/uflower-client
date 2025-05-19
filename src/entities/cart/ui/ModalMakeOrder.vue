@@ -8,6 +8,7 @@ import { phoneValidator } from "~/shared/lib/validate/validators";
 import { validationErrors } from "~/shared/lib/validate/errors";
 import { required, helpers } from '@vuelidate/validators'
 import {getRawPhoneNumber, phoneMask} from "~/shared/lib/utils/phoneNormalizer";
+import AddressAutocomplete from "~/shared/components/AddressAutocomplete.vue";
 /* INIT */
 const model = defineModel<boolean>()
 const cartStore = useCartStore()
@@ -93,6 +94,8 @@ async function onSubmit() {
     model.value = false
   }
 }
+
+const rrr = ref('г Махачкала, ул Хашаева')
 </script>
 
 <template>
@@ -175,7 +178,7 @@ async function onSubmit() {
         label="Адрес доставки"
         :error="v$.address.$errors.length ? String(v$.address.$errors[0].$message) : undefined"
       >
-        <ElInput v-model="form.address" />
+        <AddressAutocomplete v-model="form.address" />
       </ElFormItem>
 
       <ElFormItem
