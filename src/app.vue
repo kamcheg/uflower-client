@@ -24,5 +24,4 @@ onServerPrefetch(async () => {
 </template>
 
 <style lang="scss">
-@import "@/app/styles/main";
 </style>

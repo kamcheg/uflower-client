@@ -60,8 +60,6 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .page-cart {
   &__container {
     margin-top: 24px;

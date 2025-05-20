@@ -72,8 +72,6 @@ function onReset() {
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .options-list {
   display: flex;
   flex-wrap: wrap;

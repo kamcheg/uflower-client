@@ -85,8 +85,6 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .page-about {
   .card-about {
     background: #f6f6f6;

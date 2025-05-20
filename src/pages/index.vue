@@ -94,8 +94,6 @@ watch(pagination, () => refresh(), { deep: true })
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .catalog {
   &__filters {
     display: flex;

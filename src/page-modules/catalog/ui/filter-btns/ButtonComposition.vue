@@ -74,7 +74,6 @@ function onReset() {
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
 .flower-types {
   display: flex;
   flex-wrap: wrap;

@@ -90,8 +90,6 @@ function onCheck(id: ISize['id']) {
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .options-list {
   max-width: 700px;
   margin: 0 auto;

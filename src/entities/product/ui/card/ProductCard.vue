@@ -60,8 +60,6 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .product-card {
   .image-place {
     width: 100%;

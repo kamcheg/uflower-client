@@ -126,8 +126,6 @@ const total = computed<number>(() => {
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .product-card {
   padding: 32px;
   box-shadow: 0 6px 20px 6px #3540471a;

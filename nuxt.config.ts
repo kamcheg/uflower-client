@@ -30,6 +30,19 @@ export default defineNuxtConfig({
     apikey: 'fe5ec8c5-05a9-48c7-ab2d-9f764852b76a',
   },
 
+  css: [
+    '@/app/styles/main.scss'  // обычные глобальные стили, если есть
+  ],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/app/styles/index.scss" as *;`
+        }
+      }
+    }
+  },
+
   dir: {
     public: 'app/public',
     layouts: 'app/layouts',

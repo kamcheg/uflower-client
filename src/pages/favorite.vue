@@ -75,8 +75,6 @@ const { data: products, status } = await useAsyncData<IProduct[]>(
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .catalog {
   h1 {
     @media screen and (max-width: $adaptive-size-sm) {

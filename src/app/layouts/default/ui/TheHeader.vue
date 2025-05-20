@@ -98,8 +98,6 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
 </template>
 
 <style scoped lang="scss">
-@import "@/app/styles/_vars";
-
 .header {
   border-bottom: 1px solid #eee;
   background: #fff;
