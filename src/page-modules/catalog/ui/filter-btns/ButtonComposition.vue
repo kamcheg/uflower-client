@@ -93,10 +93,8 @@ function onReset() {
       width: 50%;
     }
   }
-  &:deep {
-    .el-checkbox__label {
-      white-space: wrap;
-    }
+  &:deep(.el-checkbox__label) {
+    white-space: wrap;
   }
 }
 </style>
