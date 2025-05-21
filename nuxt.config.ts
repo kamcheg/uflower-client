@@ -12,7 +12,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   gtag: {
-    id: 'G-EH8ERRNZDN'
+    id: 'G-EH8ERRNZDN',
+    enabled: process.env.NODE_ENV === 'production'
   },
 
   app: {
