@@ -6,12 +6,18 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@element-plus/nuxt',
     '@vueuse/nuxt',
-    'vue-yandex-maps/nuxt'
+    'vue-yandex-maps/nuxt',
+    'nuxt-gtag'
   ],
   devtools: { enabled: true },
 
+  gtag: {
+    id: 'G-EH8ERRNZDN'
+  },
+
   app: {
     head: {
+      title: 'Magas Flowers',
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
