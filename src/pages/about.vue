@@ -23,9 +23,14 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
 onMounted(() => {
   axios.get('/auth/profile')
 })
+const { data: daata } = await useAsyncData<IResponse>(
+  'profilee',
+  () => axios.get('/auth/profile').then(r => r.data)
+)
 </script>
 
 <template>
+  <h1>data: {{daata}}</h1>
   <div v-if="error">
     <h1
       style="text-align: center; padding-top: 60px;"
