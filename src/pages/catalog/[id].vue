@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { Navigation, Thumbs, FreeMode, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
+import type { Swiper as SwiperClass } from 'swiper/types';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const modules = [FreeMode, Navigation, Thumbs]
 
-const thumbsSwiper = ref(null);
+const thumbsSwiper = ref<SwiperClass | null>(null);
 
-const setThumbsSwiper = (swiper) => {
+const setThumbsSwiper = (swiper: SwiperClass) => {
   thumbsSwiper.value = swiper;
 };
 
