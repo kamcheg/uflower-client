@@ -1,36 +1,23 @@
 <script setup lang="ts">
 import IconCart from '~/shared/components/icons/IconCart.vue'
 import type { IProduct } from '~/entities/product'
-import { useCartStore } from '~/entities/cart'
+import {useCart} from "~/features/product/addToCart/model/useCart";
 
 const props = defineProps<{
   id: IProduct['id']
 }>()
 
-/* INIT */
-const cartStore = useCartStore()
-
-/* COMPUTED */
-const isInCart = computed(() => {
-  return cartStore.items.find(i => i.productId === props.id)
-})
-
-/* METHODS */
-function onToggle() {
-  if (isInCart.value) {
-    cartStore.onRemoveProduct(props.id)
-  }
-  else {
-    cartStore.onAddProduct(props.id)
-  }
-}
+const {
+  isInCart,
+  onToggleCart
+} = useCart(props.id)
 </script>
 
 <template>
   <ElButton
     circle
     :class="{ active: isInCart }"
-    @click="onToggle"
+    @click="onToggleCart"
   >
     <IconCart style="width: 16px;" />
   </ElButton>

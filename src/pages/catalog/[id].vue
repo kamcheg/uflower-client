@@ -9,6 +9,7 @@ import {fetchOneProduct, type IProductDetail} from "~/page-modules/catalog-id/mo
 import {toReadableNumber} from "~/shared/lib/utils/toReadableNumber";
 import { useRoute } from 'vue-router'
 import {useFavorite} from "~/features/product/addToFavorites/model/useFavorite";
+import {useCart} from "~/features/product/addToCart/model/useCart";
 
 const route = useRoute()
 
@@ -16,6 +17,11 @@ const {
   isInFavorite,
   onToggleFavorite
 } = useFavorite(+route.params.id)
+
+const {
+  isInCart,
+  onToggleCart
+} = useCart(+route.params.id)
 
 const { data } = await useAsyncData<IProductDetail>(
   'product-' + route.params.id,
@@ -109,13 +115,24 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
             >
               {{ isInFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }}
             </ElButton>
+
             <ElButton
+              v-if="!isInCart"
               type="primary"
               plain
               class="btns__item"
+              @click="onToggleCart"
             >
               Добавить в корзину
             </ElButton>
+            <a v-else href="/cart" style="margin-left: 6px;">
+              <ElButton
+                type="primary"
+                plain
+              >
+                Перейти в корзину
+              </ElButton>
+            </a>
           </div>
         </div>
       </div>
