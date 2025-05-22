@@ -16,9 +16,9 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
 
 const images = ref([
   'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/ijttcvdz15q0ejhhxac582ksvig1zf8v.JPG&w=592&h=592',
-  // 'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/wwe4ejw3bhcp5v6gdq5es5u23m9vy60f.JPG&w=592&h=592',
-  // 'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/hb686kk0am3jevahnkmk7w8vr0sld4n3.JPG&w=592&h=592',
-  // 'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/7p5h0ppqpgkjqniopl6cby7hsqbfp80h.JPG&w=592&h=592',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/wwe4ejw3bhcp5v6gdq5es5u23m9vy60f.JPG&w=592&h=592',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/hb686kk0am3jevahnkmk7w8vr0sld4n3.JPG&w=592&h=592',
+  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/7p5h0ppqpgkjqniopl6cby7hsqbfp80h.JPG&w=592&h=592',
 ])
 </script>
 
