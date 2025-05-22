@@ -27,6 +27,9 @@ const { data } = await useAsyncData<IProductDetail>(
   'product-' + route.params.id,
   () => fetchOneProduct(String(route.params.id)),
 )
+useHead({
+  title: `Букет "${data.value?.name}"`
+})
 
 const modules = [FreeMode, Navigation, Thumbs]
 
