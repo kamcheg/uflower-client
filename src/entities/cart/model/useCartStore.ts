@@ -93,7 +93,6 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     try {
-      console.log('axios.defaults.baseURL', axios.defaults.baseURL)
       const {data} = await axios.get<ProductResponseDto[]>('/flowers/find-by-ids', {
         params: {
           ids: items.value.map(i => i.productId)
