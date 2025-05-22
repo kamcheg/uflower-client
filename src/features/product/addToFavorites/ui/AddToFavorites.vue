@@ -2,42 +2,29 @@
 import type { IProduct } from '~/entities/product'
 import { useFavoritesStore } from '~/entities/favorites'
 import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
+import {useFavorite} from "~/features/product/addToFavorites/model/useFavorite";
 
 const props = defineProps<{
   id: IProduct['id']
 }>()
 
-/* INIT */
-const favoritesStore = useFavoritesStore()
-
-/* COMPUTED */
-const isInFavorite = computed(() => {
-  return favoritesStore.list.includes(props.id)
-})
-
-/* METHODS */
-function onToggle() {
-  if (isInFavorite.value) {
-    favoritesStore.list = favoritesStore.list.filter(id => id !== props.id)
-  }
-  else {
-    favoritesStore.list.push(props.id)
-  }
-}
+const {
+  isInFavorite,
+  onToggleFavorite
+} = useFavorite(props.id)
 </script>
 
 <template>
   <ElButton
     circle
     :class="{ active: isInFavorite }"
-    @click="onToggle"
+    @click="onToggleFavorite"
   >
     <IconFavorite style="width: 16px;" />
   </ElButton>
 </template>
 
 <style scoped lang="scss">
-// TODO
 .active {
   color: #fff;
   background: rgb(255, 134, 116);

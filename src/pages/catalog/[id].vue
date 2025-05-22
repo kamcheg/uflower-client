@@ -5,6 +5,23 @@ import type { Swiper as SwiperClass } from 'swiper/types';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import {fetchOneProduct, type IProductDetail} from "~/page-modules/catalog-id/model/api";
+import {toReadableNumber} from "~/shared/lib/utils/toReadableNumber";
+import { useRoute } from 'vue-router'
+import {useFavorite} from "~/features/product/addToFavorites/model/useFavorite";
+
+const route = useRoute()
+
+const {
+  isInFavorite,
+  onToggleFavorite
+} = useFavorite(+route.params.id)
+
+const { data } = await useAsyncData<IProductDetail>(
+  'product-' + route.params.id,
+  () => fetchOneProduct(String(route.params.id)),
+  { server: false }
+)
 
 const modules = [FreeMode, Navigation, Thumbs]
 
@@ -13,22 +30,18 @@ const thumbsSwiper = ref<SwiperClass | null>(null);
 const setThumbsSwiper = (swiper: SwiperClass) => {
   thumbsSwiper.value = swiper;
 };
-
-const images = ref([
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/ijttcvdz15q0ejhhxac582ksvig1zf8v.JPG&w=592&h=592',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/wwe4ejw3bhcp5v6gdq5es5u23m9vy60f.JPG&w=592&h=592',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/hb686kk0am3jevahnkmk7w8vr0sld4n3.JPG&w=592&h=592',
-  'https://uflor.ru/api-v2/thumbnail/?src=/upload/resize_cache/watermark/1/7p5h0ppqpgkjqniopl6cby7hsqbfp80h.JPG&w=592&h=592',
-])
 </script>
 
 <template>
-  <div class="page-product">
+  <div v-if="!data" class="page-product">
+    Произошла ошибка!
+  </div>
+  <div v-else class="page-product">
     <div class="container">
       <el-breadcrumb separator="/" class="page-product__breadcrumb">
         <el-breadcrumb-item :to="{ path: '/' }">Каталог</el-breadcrumb-item>
         <el-breadcrumb-item>
-          Букет "Миром правит любовь"
+          Букет "{{ data.name }}"
         </el-breadcrumb-item>
       </el-breadcrumb>
 
@@ -45,42 +58,46 @@ const images = ref([
             :modules="modules"
             class="mySwiper2"
           >
-            <swiper-slide v-for="(image, index) of images" :key="index">
+            <swiper-slide v-for="(image, index) of data.images" :key="index">
               <img :src="image" />
             </swiper-slide>
           </swiper>
           <swiper
-            v-if="images.length > 1"
+            v-if="data.images.length > 1"
             @swiper="setThumbsSwiper"
             :spaceBetween="10"
-            :slidesPerView="images.length >= 5 ? 5 : images.length"
+            :slidesPerView="data.images.length >= 5 ? 5 : data.images.length"
             :freeMode="true"
             :watchSlidesProgress="true"
             :modules="modules"
             class="mySwiper"
           >
-            <swiper-slide v-for="(image, index) of images" :key="index">
+            <swiper-slide v-for="(image, index) of data.images" :key="index">
               <img :src="image" />
             </swiper-slide>
           </swiper>
         </div>
 
         <div class="info">
-          <p class="info__title">Букет "Миром правит любовь"</p>
+          <p class="info__title">Букет "{{ data.name }}"</p>
 
           <p class="info__description">
-            Цветочная композиция «Микс гиацинтов с мимозой в коробке» — идеальный подарок для любого повода.
+            {{ data.description }}
           </p>
 
           <p class="info__price">
-            19 200 ₽
+            {{ toReadableNumber(data.price) }} ₽
           </p>
 
-          <div class="ingredients">
+          <div v-if="data.ingredients.length > 0" class="ingredients">
             <p class="ingredients__title">Состав:</p>
-            <p class="ingredients__item">Тюльпан желтый, оранжевый - 25 шт</p>
-            <p class="ingredients__item">Упаковка дизайнерская пленка</p>
-            <p class="ingredients__item">Лента атласная</p>
+            <p
+              v-for="(ing, index) of data.ingredients"
+              :key="index"
+              class="ingredients__item"
+            >
+              {{ ing.value }}<span v-if="ing.quantity"> - {{ ing.quantity }} шт</span>
+            </p>
           </div>
 
           <div class="btns">
@@ -88,8 +105,9 @@ const images = ref([
               type="primary"
               plain
               class="btns__item"
+              @click="onToggleFavorite"
             >
-              Добавить в избранное
+              {{ isInFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }}
             </ElButton>
             <ElButton
               type="primary"
