@@ -9,7 +9,6 @@ import {
   YandexMapDefaultMarker,
 } from 'vue-yandex-maps';
 import {toPrettyPhone} from "~/shared/lib/utils/phoneNormalizer";
-import axios from "axios";
 
 const map = shallowRef<null | YMap>(null);
 
@@ -19,22 +18,11 @@ const { data, error } = await useAsyncData<IResponse>(
 )
 
 const schedule = computed(() => getSchedule(data.value?.schedule))
-
-onMounted(() => {
-  axios.get('/auth/profile')
-})
-const { data: daata } = await useAsyncData<IResponse>(
-  'profilee',
-  () => axios.get('/auth/profile').then(r => r.data)
-)
 </script>
 
 <template>
-  <h1>data: {{daata}}</h1>
-  <div v-if="error">
-    <h1
-      style="text-align: center; padding-top: 60px;"
-    >
+  <div v-if="error || !data">
+    <h1 style="text-align: center; padding-top: 60px;">
       Не удалось загрузить данные!<br />
       Попробуйте перезагрузить страницу.
     </h1>
