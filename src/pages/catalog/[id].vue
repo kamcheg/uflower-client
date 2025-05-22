@@ -53,6 +53,8 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
         </el-breadcrumb-item>
       </el-breadcrumb>
 
+      <p class="bouquet-name" style="font-size: 28px; margin-bottom: 32px;">Букет "{{ data.name }}"</p>
+
       <div class="page-product__main">
         <div class="slider-wrapper">
           <swiper
@@ -87,14 +89,10 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
         </div>
 
         <div class="info">
-          <p class="info__title">Букет "{{ data.name }}"</p>
+          <p class="bouquet-name">Букет "{{ data.name }}"</p>
 
           <p class="info__description">
             {{ data.description }}
-          </p>
-
-          <p class="info__price">
-            {{ toReadableNumber(data.price) }} ₽
           </p>
 
           <div v-if="data.ingredients.length > 0" class="ingredients">
@@ -107,6 +105,10 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
               {{ ing.value }}<span v-if="ing.quantity"> - {{ ing.quantity }} шт</span>
             </p>
           </div>
+
+          <p class="info__price">
+            {{ toReadableNumber(data.price) }} ₽
+          </p>
 
           <div class="btns">
             <ElButton
@@ -151,19 +153,37 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
   &__main {
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: $adaptive-size-lg) {
+      display: block;
+    }
+  }
+
+  .bouquet-name {
+    font-size: 32px;
+    font-weight: 700;
   }
 
   .info {
     margin-left: 48px;
 
-    &__title {
-      font-size: 32px;
-      font-weight: 700;
+    .bouquet-name {
+      @media screen and (max-width: $adaptive-size-sm) {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: $adaptive-size-lg) {
+      margin-left: 0;
     }
 
     &__description {
       margin-top: 20px;
       font-size: 24px;
+
+      @media screen and (max-width: $adaptive-size-sm) {
+        font-size: 20px;
+      }
     }
 
     &__price {
@@ -198,6 +218,10 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
   width: 520px;
   flex-shrink: 0;
 
+  @media screen and (max-width: $adaptive-size-sm) {
+    width: 100%;
+  }
+
   .swiper {
     width: 100%;
     height: 100%;
@@ -223,7 +247,6 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
 
   .swiper {
     width: 100%;
-    //height: 300px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -247,6 +270,10 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
     height: 20%;
     box-sizing: border-box;
     padding: 10px 0;
+
+    @media screen and (max-width: $adaptive-size-sm) {
+      width: 100%;
+    }
 
     img {
       border-radius: 8px;
