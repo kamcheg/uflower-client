@@ -21,6 +21,7 @@ const { data, error } = await useAsyncData<IResponse>(
 const schedule = computed(() => getSchedule(data.value?.schedule))
 
 onMounted(() => {
+  alert('err')
   axios.get('/auth/profile')
 })
 </script>
