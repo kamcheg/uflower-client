@@ -9,22 +9,15 @@ import {
   YandexMapDefaultMarker,
 } from 'vue-yandex-maps';
 import {toPrettyPhone} from "~/shared/lib/utils/phoneNormalizer";
-import axios from "axios";
 
 const map = shallowRef<null | YMap>(null);
 
 const { data, error } = await useAsyncData<IResponse>(
   'about',
-  () => fetchAbout(),
-  { server: false }
+  () => fetchAbout()
 )
 
 const schedule = computed(() => getSchedule(data.value?.schedule))
-
-onMounted(() => {
-  alert('err')
-  axios.get('/auth/profile')
-})
 </script>
 
 <template>
