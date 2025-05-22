@@ -16,6 +16,7 @@ const map = shallowRef<null | YMap>(null);
 const { data, error } = await useAsyncData<IResponse>(
   'about',
   () => fetchAbout(),
+  { server: false }
 )
 
 const schedule = computed(() => getSchedule(data.value?.schedule))
