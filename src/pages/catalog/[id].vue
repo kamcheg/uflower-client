@@ -26,7 +26,6 @@ const {
 const { data } = await useAsyncData<IProductDetail>(
   'product-' + route.params.id,
   () => fetchOneProduct(String(route.params.id)),
-  { server: false }
 )
 
 const modules = [FreeMode, Navigation, Thumbs]
@@ -130,7 +129,7 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
                 type="primary"
                 plain
               >
-                Перейти в корзину
+                Товар в корзине
               </ElButton>
             </a>
           </div>

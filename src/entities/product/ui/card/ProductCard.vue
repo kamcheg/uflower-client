@@ -47,7 +47,7 @@ defineProps<{
       {{ toReadableNumber(data.price) }} ₽
     </div>
 
-    <a v-if="false" :href="'/catalog/' + data.id">
+    <a :href="'/catalog/' + data.id">
       <div class="btns">
         <ElButton
           class="btns__item"
