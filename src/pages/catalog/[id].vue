@@ -34,6 +34,12 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
   thumbsSwiper.value = swiper;
 };
 
+const thumbSliderWidth = computed(() => {
+  if (!data.value) { return '' }
+
+  return Math.min(20 * data.value.images.length, 80) + '%'
+})
+
 function getTitle(name: string) {
   return `Букет "${name}"`
 }
@@ -293,7 +299,7 @@ function getTitle(name: string) {
     padding: 10px 0;
 
     @media screen and (max-width: $adaptive-size-sm) {
-      width: 100%;
+      width: v-bind(thumbSliderWidth);
     }
 
     img {
