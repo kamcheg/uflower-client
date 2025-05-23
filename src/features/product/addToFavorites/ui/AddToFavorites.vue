@@ -4,9 +4,12 @@ import { useFavoritesStore } from '~/entities/favorites'
 import IconFavorite from '~/shared/components/icons/IconFavorite.vue'
 import {useFavorite} from "~/features/product/addToFavorites/model/useFavorite";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   id: IProduct['id']
-}>()
+  size?: 'default' | 'large'
+}>(), {
+  size: 'default'
+})
 
 const {
   isInFavorite,
@@ -17,6 +20,7 @@ const {
 <template>
   <ElButton
     circle
+    :size="size"
     :class="{ active: isInFavorite }"
     @click="onToggleFavorite"
   >

@@ -8,15 +8,10 @@ import 'swiper/css/pagination';
 import {fetchOneProduct, type IProductDetail} from "~/page-modules/catalog-id/model/api";
 import {toReadableNumber} from "~/shared/lib/utils/toReadableNumber";
 import { useRoute } from 'vue-router'
-import {useFavorite} from "~/features/product/addToFavorites/model/useFavorite";
 import {useCart} from "~/features/product/addToCart/model/useCart";
+import {AddToFavorites} from "~/features/product";
 
 const route = useRoute()
-
-const {
-  isInFavorite,
-  onToggleFavorite
-} = useFavorite(+route.params.id)
 
 const {
   isInCart,
@@ -57,7 +52,7 @@ function getTitle(name: string) {
         </el-breadcrumb-item>
       </el-breadcrumb>
 
-      <p class="bouquet-name" style="font-size: 28px; margin-bottom: 32px;">{{ getTitle(data.name) }}</p>
+      <p class="bouquet-name_mobile">{{ getTitle(data.name) }}</p>
 
       <div class="page-product__main">
         <div class="slider-wrapper">
@@ -71,7 +66,13 @@ function getTitle(name: string) {
             :thumbs="{ swiper: thumbsSwiper }"
             :modules="modules"
             class="mySwiper2"
+            style="position: relative"
           >
+            <AddToFavorites
+              :id="data.id"
+              size="large"
+              style="position: absolute; top: 16px; right: 16px; z-index: 1;"
+            />
             <swiper-slide v-for="(image, index) of data.images" :key="index">
               <img :src="image" />
             </swiper-slide>
@@ -93,7 +94,7 @@ function getTitle(name: string) {
         </div>
 
         <div class="info">
-          <p class="bouquet-name">{{ getTitle(data.name) }}</p>
+          <p class="bouquet-name_desktop">{{ getTitle(data.name) }}</p>
 
           <p class="info__description">
             {{ data.description }}
@@ -101,13 +102,15 @@ function getTitle(name: string) {
 
           <div v-if="data.ingredients.length > 0" class="ingredients">
             <p class="ingredients__title">Состав:</p>
-            <p
-              v-for="(ing, index) of data.ingredients"
-              :key="index"
-              class="ingredients__item"
-            >
-              {{ ing.value }}<span v-if="ing.quantity"> - {{ ing.quantity }} шт</span>
-            </p>
+            <ul style="padding-left: 20px;">
+              <li
+                v-for="(ing, index) of data.ingredients"
+                :key="index"
+                class="ingredients__item"
+              >
+                {{ ing.value }}<span v-if="ing.quantity"> - {{ ing.quantity }} шт</span>
+              </li>
+            </ul>
           </div>
 
           <p class="info__price">
@@ -116,18 +119,10 @@ function getTitle(name: string) {
 
           <div class="btns">
             <ElButton
-              type="primary"
-              plain
-              class="btns__item"
-              @click="onToggleFavorite"
-            >
-              {{ isInFavorite ? 'Удалить из избранного' : 'Добавить в избранное' }}
-            </ElButton>
-
-            <ElButton
               v-if="!isInCart"
               type="primary"
               plain
+              size="large"
               class="btns__item"
               @click="onToggleCart"
             >
@@ -137,8 +132,9 @@ function getTitle(name: string) {
               <ElButton
                 type="primary"
                 plain
+                size="large"
               >
-                Товар в корзине
+                Перейти к оформлению
               </ElButton>
             </a>
           </div>
@@ -164,18 +160,27 @@ function getTitle(name: string) {
   }
 
   .bouquet-name {
-    font-size: 32px;
-    font-weight: 700;
+    &_mobile {
+      display: none;
+      font-size: 28px;
+      margin-bottom: 32px;
+      font-weight: 700;
+
+      @media screen and (max-width: $adaptive-size-lg) {
+        display: block;
+      }
+    }
+    &_desktop {
+      font-weight: 700;
+      font-size: 32px;
+      @media screen and (max-width: $adaptive-size-lg) {
+        display: none;
+      }
+    }
   }
 
   .info {
     margin-left: 48px;
-
-    .bouquet-name {
-      @media screen and (max-width: $adaptive-size-sm) {
-        display: none;
-      }
-    }
 
     @media screen and (max-width: $adaptive-size-lg) {
       margin-left: 0;
