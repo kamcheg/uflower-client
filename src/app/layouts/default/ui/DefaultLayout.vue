@@ -2,6 +2,7 @@
 import TheHeader from './TheHeader.vue'
 import AppLoading from '~/shared/components/AppLoading.vue'
 import { useLoadingStore } from '~/shared/stores/useLoadingStore'
+import TheFooter from "~/app/layouts/default/ui/TheFooter.vue";
 
 const loadingStore = useLoadingStore()
 </script>
@@ -17,11 +18,18 @@ const loadingStore = useLoadingStore()
       />
       <slot />
     </div>
+
+    <TheFooter v-if="false" class="default-layout__footer" />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .default-layout {
+  padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   &__header {
     position: fixed;
     z-index: 99;
@@ -33,9 +41,11 @@ const loadingStore = useLoadingStore()
 
   &__content {
     position: relative;
-    margin-top: 80px;
-    min-height: 100vh;
     padding: 24px 0;
+  }
+
+  &__footer {
+    margin-top: auto;
   }
 
   &__loading {

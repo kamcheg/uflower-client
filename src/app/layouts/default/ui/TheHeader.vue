@@ -22,7 +22,7 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
 </script>
 
 <template>
-  <div class="header">
+  <header class="header">
     <div class="left">
       <NuxtLink
         to="/"
@@ -94,12 +94,12 @@ const isSmallScreen = useMediaQuery('(max-width: 576px)')
         </ElBadge>
       </NuxtLink>
     </div>
-  </div>
+  </header>
 </template>
 
 <style scoped lang="scss">
 .header {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ccc;
   background: #fff;
   height: 80px;
   display: flex;
