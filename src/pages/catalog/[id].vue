@@ -146,6 +146,18 @@ function getTitle(name: string) {
 
 <style scoped lang="scss">
 .page-product {
+  .container {
+    @media screen and (max-width: $adaptive-size-lg) {
+      width: 668px;
+    }
+    @media screen and (max-width: $adaptive-size-md) {
+      width: 500px;
+    }
+    @media screen and (max-width: $adaptive-size-sm) {
+      width: 100%;
+    }
+  }
+
   &__breadcrumb {
     margin: 10px 0 32px;
   }
@@ -227,7 +239,7 @@ function getTitle(name: string) {
   width: 520px;
   flex-shrink: 0;
 
-  @media screen and (max-width: $adaptive-size-sm) {
+  @media screen and (max-width: $adaptive-size-lg) {
     width: 100%;
   }
 
