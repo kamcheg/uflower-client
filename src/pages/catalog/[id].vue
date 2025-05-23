@@ -119,11 +119,7 @@ function getTitle(name: string) {
             </ul>
           </div>
 
-          <p class="info__price">
-            {{ toReadableNumber(data.price) }} ₽
-          </p>
-
-          <div class="btns">
+          <div class="to-order">
             <ElButton
               v-if="!isInCart"
               type="primary"
@@ -134,7 +130,7 @@ function getTitle(name: string) {
             >
               Добавить в корзину
             </ElButton>
-            <a v-else href="/cart" style="margin-left: 6px;">
+            <a v-else href="/cart">
               <ElButton
                 type="primary"
                 plain
@@ -143,6 +139,10 @@ function getTitle(name: string) {
                 Перейти к оформлению
               </ElButton>
             </a>
+
+            <p class="price">
+              {{ toReadableNumber(data.price) }} ₽
+            </p>
           </div>
         </div>
       </div>
@@ -152,6 +152,7 @@ function getTitle(name: string) {
 
 <style scoped lang="scss">
 .page-product {
+  padding-bottom: 60px;
   .container {
     @media screen and (max-width: $adaptive-size-lg) {
       width: 668px;
@@ -213,14 +214,16 @@ function getTitle(name: string) {
       }
     }
 
-    &__price {
+    .to-order {
+      display: flex;
+      align-items: center;
       margin-top: 20px;
-      font-size: 32px;
-      font-weight: 500;
-    }
 
-    .btns {
-      margin-top: 32px;
+      .price {
+        margin-left: 32px;
+        font-size: 28px;
+        font-weight: 500;
+      }
     }
   }
 
