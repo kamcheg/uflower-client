@@ -28,7 +28,7 @@ const { data } = await useAsyncData<IProductDetail>(
   () => fetchOneProduct(String(route.params.id)),
 )
 useHead({
-  title: `Букет "${data.value?.name}"`
+  title: getTitle(data.value?.name || '')
 })
 
 const modules = [FreeMode, Navigation, Thumbs]
@@ -38,6 +38,10 @@ const thumbsSwiper = ref<SwiperClass | null>(null);
 const setThumbsSwiper = (swiper: SwiperClass) => {
   thumbsSwiper.value = swiper;
 };
+
+function getTitle(name: string) {
+  return `Букет "${name}"`
+}
 </script>
 
 <template>
@@ -49,11 +53,11 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
       <el-breadcrumb separator="/" class="page-product__breadcrumb">
         <el-breadcrumb-item :to="{ path: '/' }">Каталог</el-breadcrumb-item>
         <el-breadcrumb-item>
-          Букет "{{ data.name }}"
+          {{ getTitle(data.name) }}
         </el-breadcrumb-item>
       </el-breadcrumb>
 
-      <p class="bouquet-name" style="font-size: 28px; margin-bottom: 32px;">Букет "{{ data.name }}"</p>
+      <p class="bouquet-name" style="font-size: 28px; margin-bottom: 32px;">{{ getTitle(data.name) }}</p>
 
       <div class="page-product__main">
         <div class="slider-wrapper">
@@ -89,7 +93,7 @@ const setThumbsSwiper = (swiper: SwiperClass) => {
         </div>
 
         <div class="info">
-          <p class="bouquet-name">Букет "{{ data.name }}"</p>
+          <p class="bouquet-name">{{ getTitle(data.name) }}</p>
 
           <p class="info__description">
             {{ data.description }}
