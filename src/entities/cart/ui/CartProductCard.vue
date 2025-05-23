@@ -42,8 +42,10 @@ const total = computed<number>(() => {
       </div>
 
       <div class="info">
-        <div class="info__title">
-          {{ data.name }}
+        <div>
+          <ElLink :href="'/catalog/' + data.id" class="info__title">
+            {{ data.name }}
+          </ElLink>
         </div>
 
         <ElInputNumber
@@ -172,6 +174,7 @@ const total = computed<number>(() => {
     }
 
     &__title {
+      font-size: 16px;
       font-weight: 500;
       margin-bottom: 12px;
     }
