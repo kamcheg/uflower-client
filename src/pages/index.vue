@@ -15,6 +15,7 @@ import {useLoadingStore} from "~/shared/stores/useLoadingStore";
 const loadingStore = useLoadingStore()
 
 /* DATA */
+const productsExist = ref(false)
 const filters = ref<IFilters>({
   composition: [],
   price: {
@@ -34,7 +35,7 @@ const pagination = ref<IPagination>({
 
 const { data, refresh, status } = await useAsyncData(
   'catalog-products',
-  () => fetchProducts(filters.value, pagination.value)
+  async () => fetchProducts(filters.value, pagination.value)
 )
 // TODO DOUBLE REQUEST
 watch(data, () => {
@@ -46,6 +47,9 @@ watch(status, (val) => {
 })
 watch(filters, () => refresh(), { deep: true })
 watch(pagination, () => refresh(), { deep: true })
+watch(data, () => {
+  productsExist.value = !data.value?.pagination?.total
+}, { once: true })
 </script>
 
 <template>
@@ -64,31 +68,38 @@ watch(pagination, () => refresh(), { deep: true })
         <ButtonSize v-model="filters.sizes" />
       </div>
 
-      <div class="catalog__container">
-        <ProductCard
-          v-for="i of data?.data || []"
-          :key="i.id"
-          :data="i"
-        >
-          <template #favorite-button>
-            <AddToFavorites :id="i.id" />
-          </template>
-          <template #cart-button>
-            <AddToCart :id="i.id" />
-          </template>
-        </ProductCard>
+      <div v-if="!data?.data?.length" style="text-align:center; padding-top: 48px;">
+        <h1 v-if="productsExist">По вашим фильтрам товаров не&nbsp;найдено.</h1>
+        <h1 v-else>Произошла ошибка!</h1>
       </div>
 
-      <div v-if="pagination.lastPage > 1" class="catalog__pagination-wrapper">
-        <ElPagination
-          v-model:current-page="pagination.page"
-          :page-size="pagination.limit"
-          :pager-count="5"
-          layout="prev, pager, next"
-          :total="pagination.total"
-          background
-        />
-      </div>
+      <template v-else>
+        <div class="catalog__container">
+          <ProductCard
+            v-for="i of data?.data || []"
+            :key="i.id"
+            :data="i"
+          >
+            <template #favorite-button>
+              <AddToFavorites :id="i.id" />
+            </template>
+            <template #cart-button>
+              <AddToCart :id="i.id" />
+            </template>
+          </ProductCard>
+        </div>
+
+        <div v-if="pagination.lastPage > 1" class="catalog__pagination-wrapper">
+          <ElPagination
+            v-model:current-page="pagination.page"
+            :page-size="pagination.limit"
+            :pager-count="5"
+            layout="prev, pager, next"
+            :total="pagination.total"
+            background
+          />
+        </div>
+      </template>
     </div>
   </div>
 </template>
