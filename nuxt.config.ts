@@ -16,9 +16,10 @@ export default defineNuxtConfig({
     enabled: process.env.NODE_ENV === 'production'
   },
 
+  // TODO Magas Flowers
   app: {
     head: {
-      title: 'Доставка цветов в Махачкале. Заказать букет в Magas Flowers',
+      title: 'Доставка цветов в Махачкале. Заказать букет в Magas Flowers.',
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
@@ -28,7 +29,13 @@ export default defineNuxtConfig({
         {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1'
-        }
+        },
+        {
+          name: 'description',
+          content: 'Доставка цветов по Махачкале — букеты для любого повода. Быстро, красиво, круглосуточно. Закажите букет в Magas Flowers прямо сейчас!'
+        },
+        { property: 'og:title', content: 'Доставка цветов в Махачкале. Заказать букет в Magas Flowers.' },
+        { property: 'og:description', content: 'Доставка цветов по Махачкале — закажите букеты для любого повода в Magas Flowers' },
       ]
     },
   },
