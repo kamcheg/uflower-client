@@ -7,13 +7,22 @@ export default defineNuxtConfig({
     '@element-plus/nuxt',
     '@vueuse/nuxt',
     'vue-yandex-maps/nuxt',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@nuxtjs/sitemap'
   ],
   devtools: { enabled: true },
 
   gtag: {
     id: 'G-EH8ERRNZDN',
     enabled: process.env.NODE_ENV === 'production'
+  },
+
+  sitemap: {
+    siteUrl: 'https://magas-flowers.ru',
+    routes: () => {
+      return [1,2,3,4,5].map(i => '/catalog/'+ i)
+    }
+    // автоматическая генерация маршрутов
   },
 
   // TODO Magas Flowers
@@ -26,6 +35,10 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap' },
       ],
       meta: [
+        {
+          name: 'robots',
+          content: 'index, follow'
+        },
         {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1'
