@@ -102,7 +102,7 @@ export const useCartStore = defineStore('cartStore', () => {
       _localProducts.value = data.map(p => transformServerProductToClient(p))
     }
     catch (e) {
-      console.log(e)
+      throw e
     }
   }
 

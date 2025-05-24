@@ -106,6 +106,12 @@ function getTitle(name: string) {
             {{ data.description }}
           </p>
 
+          <div v-if="false" class="size">
+            <p>Размер: Стандарт</p>
+            <p style="margin-top: 4px;">Ширина: 30см</p>
+            <p style="margin-top: 4px;">Высота: 60см</p>
+          </div>
+
           <div v-if="data.ingredients.length > 0" class="ingredients">
             <p class="ingredients__title">Состав:</p>
             <ul style="padding-left: 20px;">
@@ -225,6 +231,13 @@ function getTitle(name: string) {
         font-weight: 500;
       }
     }
+  }
+
+  .size {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 10px;
+    margin-top: 24px;
   }
 
   .ingredients {

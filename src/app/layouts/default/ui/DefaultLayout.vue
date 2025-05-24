@@ -40,6 +40,7 @@ const loadingStore = useLoadingStore()
   }
 
   &__content {
+    flex-grow: 1;
     position: relative;
     padding: 24px 0;
   }
