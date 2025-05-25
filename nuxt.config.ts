@@ -18,11 +18,8 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
+    // @ts-ignore
     siteUrl: 'https://magas-flowers.ru',
-    routes: () => {
-      return [1,2,3,4,5].map(i => '/catalog/'+ i)
-    }
-    // автоматическая генерация маршрутов
   },
 
   // TODO Magas Flowers
