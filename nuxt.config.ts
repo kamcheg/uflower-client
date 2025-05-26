@@ -79,7 +79,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl: process.env.VUE_APP_BASE_URL,
-      brandSlug: process.env.VUE_APP_BRAND_SLUG
     }
   }
 })
