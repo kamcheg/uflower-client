@@ -1,11 +1,3 @@
-TODO list
-Favorite - ok
-catalog
-about
-home
-cart
-
-
 # Админка проекта цветочного магазина.
 node - v20.18.3
 

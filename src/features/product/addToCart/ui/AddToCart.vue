@@ -24,7 +24,6 @@ const {
 </template>
 
 <style scoped lang="scss">
-// TODO
 .active {
   color: #fff;
   background: rgb(255, 134, 116);

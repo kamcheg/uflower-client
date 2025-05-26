@@ -7,7 +7,6 @@ export interface ICartItem {
   isNeedNote: boolean
 }
 
-// TODO extend ICartItem
 export interface ICartProduct extends IProduct {
   quantity: ICartItem['quantity']
   note: ICartItem['note']
