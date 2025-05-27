@@ -69,7 +69,10 @@ watch(data, () => {
       </div>
 
       <div v-if="!data?.data?.length" style="text-align:center; padding-top: 48px;">
-        <h1 v-if="productsExist">По вашим фильтрам товаров не&nbsp;найдено.</h1>
+        <h3 v-if="productsExist">
+          На данный момент композиций в этой категории нет.<br/>
+          Вероятнее всего, сейчас не сезон, или их временно нет в наличии.
+        </h3>
         <h1 v-else>Произошла ошибка!</h1>
       </div>
 

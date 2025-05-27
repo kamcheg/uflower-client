@@ -5,6 +5,7 @@ import axios from "axios";
 type TDto = {
   id: number
   title: string
+  flowersLength: number
 }
 
 export const useFlowerTypesStore = defineStore('flowerTypes', () => {
@@ -16,6 +17,7 @@ export const useFlowerTypesStore = defineStore('flowerTypes', () => {
       flowerTypes.value = res.data.map((i): IFlowerType => ({
         id: i.id,
         name: i.title,
+        quantity: i.flowersLength
       }))
     } catch {
       console.log('Не удалось загрузить сорта цветов!')

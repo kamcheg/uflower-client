@@ -53,10 +53,14 @@ function onReset() {
         <ElCheckbox
           v-for="type of flowerTypes"
           :key="type.id"
-          :label="type.name"
           :value="type.id"
           class="flower-types__item"
-        />
+        >
+          {{ type.name }}
+          <span style="color: #ccc; font-size: 12px; padding-left: 10px;">
+            {{ type.quantity }}
+          </span>
+        </ElCheckbox>
       </ElCheckboxGroup>
 
       <template #footer>

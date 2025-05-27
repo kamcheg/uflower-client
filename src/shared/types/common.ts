@@ -31,6 +31,7 @@ export interface IPrice {
 export interface IFlowerType {
   id: number
   name: string
+  quantity: number
 }
 
 export interface IReason {
