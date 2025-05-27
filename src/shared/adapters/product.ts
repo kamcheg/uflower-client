@@ -7,7 +7,7 @@ export function transformServerProductToClient(dto: ProductResponseDto): IProduc
     name: dto.name,
     description: dto.description,
     price: dto.price,
-    image: dto.images?.[0],
+    image: dto.images?.[dto.mainImageIndex] || dto.images[0],
     inStock: dto.inStock
   }
 }

@@ -10,6 +10,7 @@ export interface ProductResponseDto {
   width: number
   height: number
   images: string[]
+  mainImageIndex: number
   size: {
     id: number
     title: string
