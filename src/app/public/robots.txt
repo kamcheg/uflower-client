@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://magas-flowers.ru/sitemap.xml
+#Sitemap: https://magas-flowers.ru/sitemap.xml
