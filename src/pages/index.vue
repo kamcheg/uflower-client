@@ -29,7 +29,7 @@ const filters = ref<IFilters>({
 const pagination = ref<IPagination>({
   page: 1,
   total: 1,
-  limit: 12,
+  limit: 24,
   lastPage: 1,
 })
 
