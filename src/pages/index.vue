@@ -48,8 +48,8 @@ watch(status, (val) => {
 watch(filters, () => refresh(), { deep: true })
 watch(pagination, () => refresh(), { deep: true })
 watch(data, () => {
-  productsExist.value = !data.value?.pagination?.total
-}, { once: true })
+  productsExist.value = !!data.value?.pagination?.total
+}, { once: true, immediate: true })
 </script>
 
 <template>
