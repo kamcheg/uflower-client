@@ -5,6 +5,7 @@ import axios from "axios";
 type TDto = {
   id: number
   title: string
+  flowersLength: number
 }
 
 export const useReasonsStore = defineStore('reasons', () => {
@@ -16,6 +17,7 @@ export const useReasonsStore = defineStore('reasons', () => {
       reasons.value = res.data.map((i): IReason => ({
         id: i.id,
         name: i.title,
+        quantity: i.flowersLength,
       }))
     } catch {
       console.log('Не удалось загрузить размеры!')

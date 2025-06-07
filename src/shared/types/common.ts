@@ -37,6 +37,7 @@ export interface IFlowerType {
 export interface IReason {
   id: number
   name: string
+  quantity: number
 }
 
 export interface IRecipient {
