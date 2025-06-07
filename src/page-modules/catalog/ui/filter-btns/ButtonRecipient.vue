@@ -52,9 +52,12 @@ function onReset() {
           v-for="reason of recipients"
           :key="reason.id"
           :value="reason.id"
-          :label="reason.name"
           class="options-list__item"
-        />
+        >
+          {{ reason.name }}&nbsp;<span style="color: #ccc; font-size: 12px; padding-left: 10px;">
+            {{ reason.quantity }}
+          </span>
+        </ElCheckbox>
       </ElCheckboxGroup>
 
       <template #footer>

@@ -43,6 +43,7 @@ export interface IReason {
 export interface IRecipient {
   id: number
   name: string
+  quantity: number
 }
 
 export interface ISize {
