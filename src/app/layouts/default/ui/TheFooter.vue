@@ -19,8 +19,10 @@ const schedule = computed(() => getSchedule(data.value?.schedule))
         class="logo-place"
       >
         <img :src="data?.logo" alt="logo">
-        <div class="logo-place__c">© 2025 UFLOR</div>
       </NuxtLink>
+      <a href="https://landing.uflower.ru/" target="_blank" class="logo-place__c">
+        © 2025 <span style="color: #409eff">Разработка сайта</span>
+      </a>
     </div>
     <div class="right">
       <div v-if="data" class="phone">

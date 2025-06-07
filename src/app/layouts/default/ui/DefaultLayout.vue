@@ -19,7 +19,9 @@ const loadingStore = useLoadingStore()
       <slot />
     </div>
 
-    <TheFooter v-if="false" class="default-layout__footer" />
+    <div class="default-layout__footer-wrapper">
+      <TheFooter class="default-layout__footer" />
+    </div>
   </div>
 </template>
 
@@ -43,6 +45,10 @@ const loadingStore = useLoadingStore()
     flex-grow: 1;
     position: relative;
     padding: 24px 0;
+  }
+
+  &__footer-wrapper {
+    padding-top: 40px;
   }
 
   &__footer {
