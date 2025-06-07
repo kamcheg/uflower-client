@@ -57,7 +57,7 @@ function onReset() {
           class="flower-types__item"
         >
           {{ type.name }}
-          <span v-if="false" style="color: #ccc; font-size: 12px; padding-left: 10px;">
+          <span style="color: #ccc; font-size: 12px; padding-left: 10px;">
             {{ type.quantity }}
           </span>
         </ElCheckbox>
